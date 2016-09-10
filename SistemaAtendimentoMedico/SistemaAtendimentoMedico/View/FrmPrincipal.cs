@@ -27,6 +27,14 @@ namespace SistemaAtendimentoMedico.View
         {
             InitializeComponent();
             InitializeTabPages();
+            InitializeList();
+        }
+
+        private void InitializeList()
+        {
+            Util.lstPacientes = FrmPaciente.PacienteDao.Select(null);
+            Util.lstEspecialidades = FrmEspecialidade.EspecialidadeDao.Select(null);
+            Util.lstMedicos = FrmMedico.MedicoDao.Select(null);
         }
 
         private void InitializeTabPages()
@@ -162,26 +170,26 @@ namespace SistemaAtendimentoMedico.View
                     }
                     else if (tabPage == tpEspecialidade)
                     {
-                        FrmEspecialidade.lstEspecialidades = FrmEspecialidade.EspecialidadeDao.Select(null);
+                        Util.lstEspecialidades = FrmEspecialidade.EspecialidadeDao.Select(null);
                         FrmEspecialidade.dgResultado.DataSource = null;
-                        FrmEspecialidade.dgResultado.DataSource = FrmEspecialidade.lstEspecialidades;
+                        FrmEspecialidade.dgResultado.DataSource = Util.lstEspecialidades;
                         FrmEspecialidade.formOnEndTask();
                     }
                     else if (tabPage == tpMedico)
                     {
                         //TODO: mascara IDEspecialidade
-                        FrmMedico.lstMedicos = FrmMedico.MedicoDao.Select(null);
+                        Util.lstMedicos = FrmMedico.MedicoDao.Select(null);
                         FrmMedico.dgResultado.DataSource = null;
-                        FrmMedico.dgResultado.DataSource = FrmMedico.lstMedicos;
+                        FrmMedico.dgResultado.DataSource = Util.lstMedicos;
                         Util.SetComboBox(FrmMedico.cbEspecialidade, FrmEspecialidade
                             .EspecialidadeDao.Select(null));
                         FrmMedico.formOnEndTask();
                     }
                     else if (tabPage == tpPaciente)
                     {
-                        FrmPaciente.lstPacientes = FrmPaciente.PacienteDao.Select(null);
+                        Util.lstPacientes = FrmPaciente.PacienteDao.Select(null);
                         FrmPaciente.dgResultado.DataSource = null;
-                        FrmPaciente.dgResultado.DataSource = FrmPaciente.lstPacientes;
+                        FrmPaciente.dgResultado.DataSource = Util.lstPacientes;
                         FrmPaciente.formOnEndTask();
                     }
                     else if (tabPage == tpMaterial)

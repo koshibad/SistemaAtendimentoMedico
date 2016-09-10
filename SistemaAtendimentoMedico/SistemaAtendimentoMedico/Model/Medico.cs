@@ -23,6 +23,21 @@ namespace SistemaAtendimentoMedico.Model
         public string Celular { get; set; }
         public string Email { get; set; }
         public DateTime DataNascimento { get; set; }
-        public int IDEspecialidade { get; set; }
+
+        private int _IDEspecialidade;
+        public int IDEspecialidade
+        {
+            get { return _IDEspecialidade; }
+            set
+            {
+                _IDEspecialidade = value;
+                if (Utils.Util.lstEspecialidades != null)
+                {
+                    var esp = Utils.Util.lstEspecialidades.FirstOrDefault(x => x.ID == value);
+                    if (esp != null) Especialidade = esp.Nome;
+                }
+            }
+        }
+        public string Especialidade { get; set; }
     }
 }

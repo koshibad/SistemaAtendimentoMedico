@@ -15,7 +15,6 @@ namespace SistemaAtendimentoMedico.View
 {
     public partial class FrmMedico : Form
     {
-        public List<Medico> lstMedicos = null;
         public MedicoDao MedicoDao = null;
 
         public FrmMedico()
@@ -99,13 +98,13 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 dgResultado.DataSource = null;
-                int index = lstMedicos.IndexOf(Medico);
-                lstMedicos.RemoveAt(index);
+                int index = Util.lstMedicos.IndexOf(Medico);
+                Util.lstMedicos.RemoveAt(index);
                 MedicoDao.Delete(Medico.ID.ToString());
 
                 MessageBox.Show(this, "Medico incluido com sucesso", "Medico");
 
-                dgResultado.DataSource = lstMedicos;
+                dgResultado.DataSource = Util.lstMedicos;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -158,11 +157,11 @@ namespace SistemaAtendimentoMedico.View
 
                 MedicoDao.Insert(Medico);
                 dgResultado.DataSource = null;
-                lstMedicos = MedicoDao.Select(null);
+                Util.lstMedicos = MedicoDao.Select(null);
 
                 MessageBox.Show(this, "Medico incluido com sucesso", "Medico");
 
-                dgResultado.DataSource = lstMedicos;
+                dgResultado.DataSource = Util.lstMedicos;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -176,7 +175,7 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 var Medico = (Medico)dgResultado.CurrentRow.DataBoundItem;
-                int index = lstMedicos.IndexOf(Medico);
+                int index = Util.lstMedicos.IndexOf(Medico);
                 validationInsertUpdate(Medico);
 
                 if (MedicoDao.Select(new List<Tuple<string, object, string>>(){
@@ -192,14 +191,14 @@ namespace SistemaAtendimentoMedico.View
                     }).Count > 0)
                     throw new Exception("Já existe Medico com o CRM informado");
 
-                lstMedicos.RemoveAt(index);
+                Util.lstMedicos.RemoveAt(index);
                 MedicoDao.Update(Medico);
-                lstMedicos.Add(Medico);
-                lstMedicos = lstMedicos.OrderBy(x => x.ID).ToList();
+                Util.lstMedicos.Add(Medico);
+                Util.lstMedicos = Util.lstMedicos.OrderBy(x => x.ID).ToList();
                 MessageBox.Show(this, "Medico alterado com sucesso", "Medico");
 
                 dgResultado.DataSource = null;
-                dgResultado.DataSource = lstMedicos;
+                dgResultado.DataSource = Util.lstMedicos;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -252,7 +251,7 @@ namespace SistemaAtendimentoMedico.View
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             dgResultado.DataSource = null;
-            dgResultado.DataSource = lstMedicos.Where(x =>
+            dgResultado.DataSource = Util.lstMedicos.Where(x =>
                 x.Nome.Contains(txtPesquisaNome.Text.Trim()) &&
                 x.CPF.Contains(txtPesquisaCpf.Text.Trim())).ToList();
         }

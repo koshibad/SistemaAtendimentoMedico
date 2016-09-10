@@ -121,6 +121,18 @@
     <Compile Include="View\FrmPaciente.Designer.cs">
       <DependentUpon>FrmPaciente.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FrmPesquisaMedico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmPesquisaMedico.Designer.cs">
+      <DependentUpon>FrmPesquisaMedico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FrmPesquisaPaciente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmPesquisaPaciente.Designer.cs">
+      <DependentUpon>FrmPesquisaPaciente.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FrmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +141,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\FrmAgendamento.resx">
+      <DependentUpon>FrmAgendamento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FrmConvenio.resx">
       <DependentUpon>FrmConvenio.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,6 +164,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmPaciente.resx">
       <DependentUpon>FrmPaciente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmPesquisaMedico.resx">
+      <DependentUpon>FrmPesquisaMedico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmPesquisaPaciente.resx">
+      <DependentUpon>FrmPesquisaPaciente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>

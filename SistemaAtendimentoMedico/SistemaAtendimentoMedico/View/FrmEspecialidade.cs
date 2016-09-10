@@ -16,12 +16,12 @@ namespace SistemaAtendimentoMedico.View
 {
     public partial class FrmEspecialidade : Form
     {
-        public List<Especialidade> lstEspecialidades = null;
         public EspecialidadeDao EspecialidadeDao = null;
 
         public FrmEspecialidade()
         {
             InitializeComponent();
+            cbTempoConsulta.DataSource = new List<int>() { 15, 30, 60 };
             EspecialidadeDao = new EspecialidadeDao();
         }
 
@@ -99,13 +99,13 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 dgResultado.DataSource = null;
-                int index = lstEspecialidades.IndexOf(Especialidade);
-                lstEspecialidades.RemoveAt(index);
+                int index = Util.lstEspecialidades.IndexOf(Especialidade);
+                Util.lstEspecialidades.RemoveAt(index);
                 EspecialidadeDao.Delete(Especialidade.ID.ToString());
 
                 MessageBox.Show(this, "Especialidade incluido com sucesso", "Especialidade");
 
-                dgResultado.DataSource = lstEspecialidades;
+                dgResultado.DataSource = Util.lstEspecialidades;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -122,6 +122,7 @@ namespace SistemaAtendimentoMedico.View
                 Especialidade.ValorConsulta = txtValorConsulta.Text.ValidarDecimal();
                 Especialidade.RemuneracaoConvenio = txtRemuneracaoConvenio.Text.ValidarPorcentagemDecimal();
                 Especialidade.RemuneracaoParticular = txtRemuneracaoParticular.Text.ValidarPorcentagemDecimal();
+                Especialidade.TempoConsulta = cbTempoConsulta.ValidarItemSelecionado("Tempo de Consulta");
             }
             catch (Exception)
             {
@@ -141,12 +142,12 @@ namespace SistemaAtendimentoMedico.View
                     throw new Exception("Já existe Especialidade com o Nome informado");
 
                 EspecialidadeDao.Insert(Especialidade);
-                lstEspecialidades = EspecialidadeDao.Select(null);
+                Util.lstEspecialidades = EspecialidadeDao.Select(null);
 
                 MessageBox.Show(this, "Especialidade incluida com sucesso", "Especialidade");
 
                 dgResultado.DataSource = null;
-                dgResultado.DataSource = lstEspecialidades;
+                dgResultado.DataSource = Util.lstEspecialidades;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -160,7 +161,7 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 var Especialidade = (Especialidade)dgResultado.CurrentRow.DataBoundItem;
-                int index = lstEspecialidades.IndexOf(Especialidade);
+                int index = Util.lstEspecialidades.IndexOf(Especialidade);
                 validationInsertUpdate(Especialidade);
 
                 if (EspecialidadeDao.Select(new List<Tuple<string, object, string>>(){
@@ -169,14 +170,14 @@ namespace SistemaAtendimentoMedico.View
                     }).Count > 0)
                     throw new Exception("Já existe Especialidade com o Nome informado");
 
-                lstEspecialidades.RemoveAt(index);
+                Util.lstEspecialidades.RemoveAt(index);
                 EspecialidadeDao.Update(Especialidade);
-                lstEspecialidades.Add(Especialidade);
-                lstEspecialidades = lstEspecialidades.OrderBy(x => x.ID).ToList();
+                Util.lstEspecialidades.Add(Especialidade);
+                Util.lstEspecialidades = Util.lstEspecialidades.OrderBy(x => x.ID).ToList();
                 MessageBox.Show(this, "Especialidade alterada com sucesso", "Especialidade");
 
                 dgResultado.DataSource = null;
-                dgResultado.DataSource = lstEspecialidades;
+                dgResultado.DataSource = Util.lstEspecialidades;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -209,6 +210,7 @@ namespace SistemaAtendimentoMedico.View
                 txtValorConsulta.Text = Especialidade.ValorConsulta.ToString();
                 txtRemuneracaoConvenio.Text = Especialidade.RemuneracaoConvenio.ToString();
                 txtRemuneracaoParticular.Text = Especialidade.RemuneracaoParticular.ToString();
+                cbTempoConsulta.SelectedItem = Especialidade.TempoConsulta;
             }
             catch (Exception ex)
             {
@@ -219,7 +221,7 @@ namespace SistemaAtendimentoMedico.View
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             dgResultado.DataSource = null;
-            dgResultado.DataSource = lstEspecialidades.Where(x =>
+            dgResultado.DataSource = Util.lstEspecialidades.Where(x =>
                 x.Nome.Contains(txtPesquisaNome.Text.Trim())).ToList();
         }
 

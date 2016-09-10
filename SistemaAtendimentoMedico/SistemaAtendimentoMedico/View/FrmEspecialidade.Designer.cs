@@ -48,6 +48,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtValorConsulta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.cbTempoConsulta = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.tsMenus.SuspendLayout();
             this.pnBusca.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgResultado)).BeginInit();
@@ -151,7 +153,7 @@
             // txtRemuneracaoConvenio
             // 
             this.txtRemuneracaoConvenio.Enabled = false;
-            this.txtRemuneracaoConvenio.Location = new System.Drawing.Point(461, 162);
+            this.txtRemuneracaoConvenio.Location = new System.Drawing.Point(461, 145);
             this.txtRemuneracaoConvenio.Margin = new System.Windows.Forms.Padding(4);
             this.txtRemuneracaoConvenio.MaxLength = 6;
             this.txtRemuneracaoConvenio.Name = "txtRemuneracaoConvenio";
@@ -162,7 +164,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(263, 166);
+            this.label6.Location = new System.Drawing.Point(263, 149);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(190, 17);
@@ -172,7 +174,7 @@
             // txtNome
             // 
             this.txtNome.Enabled = false;
-            this.txtNome.Location = new System.Drawing.Point(313, 93);
+            this.txtNome.Location = new System.Drawing.Point(313, 76);
             this.txtNome.Margin = new System.Windows.Forms.Padding(4);
             this.txtNome.MaxLength = 255;
             this.txtNome.Name = "txtNome";
@@ -182,7 +184,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(263, 97);
+            this.label2.Location = new System.Drawing.Point(263, 80);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 17);
@@ -255,7 +257,7 @@
             // txtRemuneracaoParticular
             // 
             this.txtRemuneracaoParticular.Enabled = false;
-            this.txtRemuneracaoParticular.Location = new System.Drawing.Point(461, 197);
+            this.txtRemuneracaoParticular.Location = new System.Drawing.Point(461, 180);
             this.txtRemuneracaoParticular.Margin = new System.Windows.Forms.Padding(4);
             this.txtRemuneracaoParticular.MaxLength = 6;
             this.txtRemuneracaoParticular.Name = "txtRemuneracaoParticular";
@@ -266,7 +268,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(263, 201);
+            this.label1.Location = new System.Drawing.Point(263, 184);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(191, 17);
@@ -276,7 +278,7 @@
             // txtValorConsulta
             // 
             this.txtValorConsulta.Enabled = false;
-            this.txtValorConsulta.Location = new System.Drawing.Point(461, 127);
+            this.txtValorConsulta.Location = new System.Drawing.Point(461, 110);
             this.txtValorConsulta.Margin = new System.Windows.Forms.Padding(4);
             this.txtValorConsulta.MaxLength = 10;
             this.txtValorConsulta.Name = "txtValorConsulta";
@@ -287,12 +289,34 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(263, 131);
+            this.label3.Location = new System.Drawing.Point(263, 114);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(129, 17);
             this.label3.TabIndex = 62;
             this.label3.Text = "Valor por Consulta:";
+            // 
+            // cbTempoConsulta
+            // 
+            this.cbTempoConsulta.BackColor = System.Drawing.Color.White;
+            this.cbTempoConsulta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTempoConsulta.Enabled = false;
+            this.cbTempoConsulta.FormattingEnabled = true;
+            this.cbTempoConsulta.Location = new System.Drawing.Point(461, 210);
+            this.cbTempoConsulta.Margin = new System.Windows.Forms.Padding(4);
+            this.cbTempoConsulta.Name = "cbTempoConsulta";
+            this.cbTempoConsulta.Size = new System.Drawing.Size(71, 24);
+            this.cbTempoConsulta.TabIndex = 66;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(263, 216);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(167, 17);
+            this.label7.TabIndex = 65;
+            this.label7.Text = "Tempo da Consulta (min)";
             // 
             // FrmEspecialidade
             // 
@@ -300,6 +324,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(999, 571);
+            this.Controls.Add(this.cbTempoConsulta);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.txtValorConsulta);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtRemuneracaoParticular);
@@ -348,5 +374,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtValorConsulta;
         private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.ComboBox cbTempoConsulta;
+        private System.Windows.Forms.Label label7;
     }
 }

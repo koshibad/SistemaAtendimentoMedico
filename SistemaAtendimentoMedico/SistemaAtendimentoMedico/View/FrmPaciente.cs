@@ -10,7 +10,6 @@ namespace SistemaAtendimentoMedico.View
 {
     public partial class FrmPaciente : Form
     {
-        public List<Paciente> lstPacientes = null;
         public PacienteDao PacienteDao = null;
 
         public FrmPaciente()
@@ -94,13 +93,13 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 dgResultado.DataSource = null;
-                int index = lstPacientes.IndexOf(paciente);
-                lstPacientes.RemoveAt(index);
+                int index = Util.lstPacientes.IndexOf(paciente);
+                Util.lstPacientes.RemoveAt(index);
                 PacienteDao.Delete(paciente.ID.ToString());
 
                 MessageBox.Show(this, "Paciente incluido com sucesso", "Paciente");
 
-                dgResultado.DataSource = lstPacientes;
+                dgResultado.DataSource = Util.lstPacientes;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -146,11 +145,11 @@ namespace SistemaAtendimentoMedico.View
 
                 PacienteDao.Insert(paciente);
                 dgResultado.DataSource = null;
-                lstPacientes = PacienteDao.Select(null);
+                Util.lstPacientes = PacienteDao.Select(null);
 
                 MessageBox.Show(this, "Paciente alterado com sucesso", "Paciente");
 
-                dgResultado.DataSource = lstPacientes;
+                dgResultado.DataSource = Util.lstPacientes;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -164,7 +163,7 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 var paciente = (Paciente)dgResultado.CurrentRow.DataBoundItem;
-                int index = lstPacientes.IndexOf(paciente);
+                int index = Util.lstPacientes.IndexOf(paciente);
                 validationInsertUpdate(paciente);
 
                 if (PacienteDao.Select(new List<Tuple<string, object, string>>(){
@@ -174,13 +173,13 @@ namespace SistemaAtendimentoMedico.View
                     throw new Exception("Já existe paciente com o CPF informado");
 
                 dgResultado.DataSource = null;
-                lstPacientes.RemoveAt(index);
+                Util.lstPacientes.RemoveAt(index);
                 PacienteDao.Update(paciente);
-                lstPacientes.Add(paciente);
-                lstPacientes = lstPacientes.OrderBy(x => x.ID).ToList();
+                Util.lstPacientes.Add(paciente);
+                Util.lstPacientes = Util.lstPacientes.OrderBy(x => x.ID).ToList();
                 MessageBox.Show(this, "Paciente alterado com sucesso", "Paciente");
 
-                dgResultado.DataSource = lstPacientes;
+                dgResultado.DataSource = Util.lstPacientes;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -237,7 +236,7 @@ namespace SistemaAtendimentoMedico.View
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             dgResultado.DataSource = null;
-            dgResultado.DataSource = lstPacientes.Where(x =>
+            dgResultado.DataSource = Util.lstPacientes.Where(x =>
                 x.Nome.Contains(txtPesquisaNome.Text.Trim()) &&
                 x.CPF.Contains(txtPesquisaCpf.Text.Trim())).ToList();
         }

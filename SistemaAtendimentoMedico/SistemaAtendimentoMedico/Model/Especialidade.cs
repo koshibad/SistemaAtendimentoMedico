@@ -13,5 +13,6 @@ namespace SistemaAtendimentoMedico.Model
         public double ValorConsulta { get; set; }
         public double RemuneracaoConvenio { get; set; }
         public double RemuneracaoParticular { get; set; }
+        public int TempoConsulta { get; set; }
     }
 }

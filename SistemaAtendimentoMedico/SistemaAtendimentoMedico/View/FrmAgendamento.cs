@@ -17,10 +17,16 @@ namespace SistemaAtendimentoMedico.View
     {
         public List<Agendamento> lstAgendamentos = null;
         public AgendamentoDao AgendamentoDao = null;
+        private Paciente pacienteSelecionado = null;
+        private Medico medicoSelecionado = null;
 
         public FrmAgendamento()
         {
             InitializeComponent();
+
+            dtpData.MinDate = DateTime.Now;
+            cbTipoConsulta.DataSource = null;
+            cbTipoConsulta.DataSource = new List<string>() { "Convenio", "Particular" };
             AgendamentoDao = new AgendamentoDao();
         }
 
@@ -35,6 +41,9 @@ namespace SistemaAtendimentoMedico.View
         {
             pnBusca.Enabled = enabled;
             dgResultado.Enabled = enabled;
+
+            pnPesquisaPessoas.Enabled = !enabled;
+            pnPesquisaPessoas.Visible = !enabled;
         }
 
         private void formOnEndTask()
@@ -44,7 +53,15 @@ namespace SistemaAtendimentoMedico.View
             tbInserir.Visible = false;
             tbSalvar.Visible = false;
             tbCancelar.Visible = false;
-            Util.EnableAllControls(this, false);
+            EnableComponentsEditables(false);
+        }
+
+        private void EnableComponentsEditables(bool enabled)
+        {
+            dtpData.Enabled = enabled;
+            cbHorario.Enabled = enabled;
+            cbTipoConsulta.Enabled = enabled;
+            cbConvenio.Enabled = enabled;
         }
 
         private void tbNovo_Click(object sender, System.EventArgs e)
@@ -54,7 +71,7 @@ namespace SistemaAtendimentoMedico.View
             tbInserir.Visible = true;
             tbCancelar.Visible = true;
             Util.ClearAllControls(this);
-            Util.EnableAllControls(this, true);
+            EnableComponentsEditables(true);
         }
 
         private void tbAlterar_Click(object sender, System.EventArgs e)
@@ -73,7 +90,7 @@ namespace SistemaAtendimentoMedico.View
             enableSearchComponents(false);
             tbSalvar.Visible = true;
             tbCancelar.Visible = true;
-            Util.EnableAllControls(this, true);
+            EnableComponentsEditables(true);
         }
 
         private void tbCancelar_Click(object sender, System.EventArgs e)
@@ -117,19 +134,8 @@ namespace SistemaAtendimentoMedico.View
         {
             try
             {
-                Agendamento.CPF = txtCpf.Text.ValidarTextoVazio("CPF");
-                Agendamento.Nome = txtNome.Text.ValidarTextoVazio("Nome");
-                Agendamento.UF = txtUF.Text.ValidarTextoVazio("UF");
-                Agendamento.Municipio = txtMunicipio.Text.ValidarTextoVazio("Municipio");
-                Agendamento.CEP = txtCep.Text.ValidarNumeros(8, "CEP");
-                Agendamento.Logradouro = txtLogradouro.Text.ValidarTextoVazio("Logradouro");
-                Agendamento.Numero = txtNumero.Text.ValidarNumero();
-                Agendamento.Complemento = txtComplemento.Text;
-                Agendamento.Bairro = txtBairro.Text.ValidarTextoVazio("Bairro");
-                Agendamento.Telefone = txtTelefone.Text.ValidarNumeros(10, "telefone");
-                Agendamento.Celular = txtCelular.Text.ValidarNumeros(10, "celular", false);
-                Agendamento.Email = txtEmail.Text.ValidarEmail();
-                Agendamento.DataNascimento = txtDataNasc.Text.ValidarData();
+                Agendamento.CPF = txtCpfPaciente.Text.ValidarTextoVazio("CPF");
+                Agendamento.Nome = txtNomePaciente.Text.ValidarTextoVazio("Nome");
             }
             catch (Exception)
             {
@@ -218,19 +224,8 @@ namespace SistemaAtendimentoMedico.View
                 var Agendamento = dgResultado.CurrentRow.DataBoundItem as Agendamento;
                 if (Agendamento == null) return;
 
-                txtCpf.Text = Agendamento.CPF;
-                txtNome.Text = Agendamento.Nome;
-                txtLogradouro.Text = Agendamento.Logradouro;
-                txtUF.Text = Agendamento.UF;
-                txtMunicipio.Text = Agendamento.Municipio;
-                txtNumero.Text = Agendamento.Numero.ToString();
-                txtCep.Text = Agendamento.CEP;
-                txtComplemento.Text = Agendamento.Complemento;
-                txtBairro.Text = Agendamento.Bairro;
-                txtTelefone.Text = Agendamento.Telefone;
-                txtCelular.Text = Agendamento.Celular;
-                txtEmail.Text = Agendamento.Email;
-                txtDataNasc.Text = Agendamento.DataNascimento.ToShortDateString();
+                txtCpfPaciente.Text = Agendamento.CPF;
+                txtNomePaciente.Text = Agendamento.Nome;
             }
             catch (Exception ex)
             {
@@ -250,6 +245,31 @@ namespace SistemaAtendimentoMedico.View
         {
             if (dgResultado.DataSource != null && dgResultado.Columns.Count > 0)
                 dgResultado.Columns[0].Visible = false;
+        }
+
+        private void btnPesquisarPaciente_Click(object sender, EventArgs e)
+        {
+            FrmPesquisaPaciente FrmPesquisaPaciente = new FrmPesquisaPaciente();
+            FrmPesquisaPaciente.ShowDialog();
+            pacienteSelecionado = FrmPesquisaPaciente.paciente;
+            if (pacienteSelecionado != null)
+            {
+                txtCpfPaciente.Text = pacienteSelecionado.CPF;
+                txtNomePaciente.Text = pacienteSelecionado.Nome;
+            }
+        }
+
+        private void btnPesquisarMedico_Click(object sender, EventArgs e)
+        {
+            FrmPesquisaMedico FrmPesquisaMedico = new FrmPesquisaMedico();
+            FrmPesquisaMedico.ShowDialog();
+            medicoSelecionado = FrmPesquisaMedico.Medico;
+            if (medicoSelecionado != null)
+            {
+                txtCrmMedico.Text = medicoSelecionado.CRM;
+                txtEspecialidadeMedico.Text = medicoSelecionado.Especialidade;
+                txtNomeMedico.Text = medicoSelecionado.Nome;
+            }
         }
     }
 }

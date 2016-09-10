@@ -5,11 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using SistemaAtendimentoMedico.View;
 using System.Windows.Forms;
+using SistemaAtendimentoMedico.Model;
 
 namespace SistemaAtendimentoMedico.Utils
 {
     public class Util
     {
+        public static List<Paciente> lstPacientes = null;
+        public static List<Especialidade> lstEspecialidades = null;
+        public static List<Medico> lstMedicos = null;
+
         public static void ClearAllControls(Form form)
         {
             foreach (var control in form.Controls)
