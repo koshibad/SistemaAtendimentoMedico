@@ -75,7 +75,7 @@ namespace SistemaAtendimentoMedico.Data
                     Convenio p = new Convenio();
                     p.ID = Convert.ToInt32(reader["ID"]);
                     p.CNPJ = reader["CNPJ"].ToString();
-                    p.RegistroANS = Convert.ToInt32(reader["RegistroANS"]);
+                    p.RegistroANS = reader["RegistroANS"].ToString();
                     p.UF = reader["UF"].ToString();
                     p.NomeFantasia = reader["NomeFantasia"].ToString();
                     p.RazaoSocial = reader["RazaoSocial"].ToString();

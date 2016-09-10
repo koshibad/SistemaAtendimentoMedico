@@ -38,7 +38,7 @@ namespace SistemaAtendimentoMedico.View
             dgResultado.Enabled = enabled;
         }
 
-        private void formOnEndTask()
+        public void formOnEndTask()
         {
             visibilityMainButtons(true);
             enableSearchComponents(true);
@@ -119,6 +119,7 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 Especialidade.Nome = txtNome.Text.ValidarTextoVazio("Nome");
+                Especialidade.ValorConsulta = txtValorConsulta.Text.ValidarDecimal();
                 Especialidade.RemuneracaoConvenio = txtRemuneracaoConvenio.Text.ValidarPorcentagemDecimal();
                 Especialidade.RemuneracaoParticular = txtRemuneracaoParticular.Text.ValidarPorcentagemDecimal();
             }
@@ -140,7 +141,7 @@ namespace SistemaAtendimentoMedico.View
                     throw new Exception("Já existe Especialidade com o Nome informado");
 
                 EspecialidadeDao.Insert(Especialidade);
-                lstEspecialidades.Add(Especialidade);
+                lstEspecialidades = EspecialidadeDao.Select(null);
 
                 MessageBox.Show(this, "Especialidade incluida com sucesso", "Especialidade");
 
@@ -205,6 +206,7 @@ namespace SistemaAtendimentoMedico.View
                 if (Especialidade == null) return;
 
                 txtNome.Text = Especialidade.Nome;
+                txtValorConsulta.Text = Especialidade.ValorConsulta.ToString();
                 txtRemuneracaoConvenio.Text = Especialidade.RemuneracaoConvenio.ToString();
                 txtRemuneracaoParticular.Text = Especialidade.RemuneracaoParticular.ToString();
             }

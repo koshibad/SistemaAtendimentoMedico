@@ -37,7 +37,7 @@ namespace SistemaAtendimentoMedico.View
             dgResultado.Enabled = enabled;
         }
 
-        private void formOnEndTask()
+        public void formOnEndTask()
         {
             visibilityMainButtons(true);
             enableSearchComponents(true);
@@ -151,7 +151,7 @@ namespace SistemaAtendimentoMedico.View
 
                 MedicoDao.Insert(Medico);
                 dgResultado.DataSource = null;
-                lstMedicos.Add(Medico);
+                lstMedicos = MedicoDao.Select(null);
 
                 MessageBox.Show(this, "Medico incluido com sucesso", "Medico");
 

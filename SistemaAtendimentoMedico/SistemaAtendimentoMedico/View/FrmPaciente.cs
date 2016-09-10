@@ -32,7 +32,7 @@ namespace SistemaAtendimentoMedico.View
             dgResultado.Enabled = enabled;
         }
 
-        private void formOnEndTask()
+        public void formOnEndTask()
         {
             visibilityMainButtons(true);
             enableSearchComponents(true);
@@ -145,7 +145,7 @@ namespace SistemaAtendimentoMedico.View
 
                 PacienteDao.Insert(paciente);
                 dgResultado.DataSource = null;
-                lstPacientes.Add(paciente);
+                lstPacientes = PacienteDao.Select(null);
 
                 MessageBox.Show(this, "Paciente alterado com sucesso", "Paciente");
 

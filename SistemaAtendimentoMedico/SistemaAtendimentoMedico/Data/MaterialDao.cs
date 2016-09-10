@@ -13,17 +13,12 @@ namespace SistemaAtendimentoMedico.Data
         {
             try
             {
-                try
-                {
-                    OpenConnection();
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = "DELETE FROM Material WHERE ID=@ID";
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@ID", ID);
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception) { throw; }
-                finally { CloseConnection(); }
+                OpenConnection();
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = "DELETE FROM Material WHERE ID=@ID";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@ID", ID);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception) { throw; }
             finally { CloseConnection(); }
@@ -36,22 +31,14 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "INSERT INTO Material " +
-                    "(CPF,Nome,UF,Municipio,CEP,Logradouro,Numero,Complemento,Bairro,Telefone,Celular,Email,DataNascimento) " +
-                    "VALUES (@CPF,@Nome,@UF,@Municipio,@CEP,@Logradouro,@Numero,@Complemento,@Bairro,@Telefone,@Celular,@Email,@DataNascimento)";
+                    "(Nome,IDCategoria,IDFinalidade,IDFabricante,ValorUnitario) " +
+                    "VALUES (@Nome,@IDCategoria,@IDFinalidade,@IDFabricante,@ValorUnitario)";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@CPF", Material.CPF);
                 cmd.Parameters.AddWithValue("@Nome", Material.Nome);
-                cmd.Parameters.AddWithValue("@UF", Material.UF);
-                cmd.Parameters.AddWithValue("@Municipio", Material.Municipio);
-                cmd.Parameters.AddWithValue("@CEP", Material.CEP);
-                cmd.Parameters.AddWithValue("@Logradouro", Material.Logradouro);
-                cmd.Parameters.AddWithValue("@Numero", Material.Numero);
-                cmd.Parameters.AddWithValue("@Complemento", Material.Complemento);
-                cmd.Parameters.AddWithValue("@Bairro", Material.Bairro);
-                cmd.Parameters.AddWithValue("@Telefone", Material.Telefone);
-                cmd.Parameters.AddWithValue("@Celular", Material.Celular);
-                cmd.Parameters.AddWithValue("@Email", Material.Email);
-                cmd.Parameters.AddWithValue("@DataNascimento", Material.DataNascimento.ToShortDateString());
+                cmd.Parameters.AddWithValue("@IDCategoria", Material.IDCategoria);
+                cmd.Parameters.AddWithValue("@IDFinalidade", Material.IDFinalidade);
+                cmd.Parameters.AddWithValue("@IDFabricante", Material.IDFabricante);
+                cmd.Parameters.AddWithValue("@ValorUnitario", Material.ValorUnitario);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception) { throw; }
@@ -60,7 +47,7 @@ namespace SistemaAtendimentoMedico.Data
 
         public override List<Material> Select(List<Tuple<string, object, string>> whereParameters)
         {
-            List<Material> Materials = new List<Material>();
+            List<Material> Materiais = new List<Material>();
             List<string> lstParameters = new List<string>();
 
             try
@@ -85,27 +72,19 @@ namespace SistemaAtendimentoMedico.Data
                 {
                     Material p = new Material();
                     p.ID = Convert.ToInt32(reader["ID"]);
-                    p.CPF = reader["CPF"].ToString();
                     p.Nome = reader["Nome"].ToString();
-                    p.UF = reader["UF"].ToString();
-                    p.Municipio = reader["Municipio"].ToString();
-                    p.CEP = reader["CEP"].ToString();
-                    p.Logradouro = reader["Logradouro"].ToString();
-                    p.Numero = Convert.ToInt32(reader["Numero"]);
-                    p.Complemento = reader["Complemento"].ToString();
-                    p.Bairro = reader["Bairro"].ToString();
-                    p.Telefone = reader["Telefone"].ToString();
-                    p.Celular = reader["Celular"].ToString();
-                    p.Email = reader["Email"].ToString();
-                    p.DataNascimento = Convert.ToDateTime(reader["DataNascimento"].ToString());
-                    Materials.Add(p);
+                    p.IDCategoria = Convert.ToInt32(reader["IDCategoria"]);
+                    p.IDFinalidade = Convert.ToInt32(reader["IDFinalidade"]);
+                    p.IDFabricante = Convert.ToInt32(reader["IDFabricante"]);
+                    p.ValorUnitario = Convert.ToDouble(reader["ValorUnitario"]);
+                    Materiais.Add(p);
                 }
             }
             catch (Exception) { throw; }
             finally
             { CloseConnection(); }
 
-            return Materials;
+            return Materiais;
         }
 
         public override void Update(Material Material)
@@ -115,28 +94,134 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "UPDATE Material SET " +
-                    "CPF=@CPF,Nome=@Nome,UF=@UF,Municipio=@Municipio,CEP=@CEP,Logradouro=@Logradouro,Numero=@Numero," +
-                    "Complemento=@Complemento,Bairro=@Bairro,Telefone=@Telefone,Celular=@Celular,Email=@Email," +
-                    "DataNascimento=@DataNascimento WHERE ID=@ID";
+                    "Nome=@Nome,IDCategoria=@IDCategoria,IDFinalidade=@IDFinalidade," +
+                    "IDFabricante=@IDFabricante,ValorUnitario=@ValorUnitario WHERE ID=@ID";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@CPF", Material.CPF);
                 cmd.Parameters.AddWithValue("@Nome", Material.Nome);
-                cmd.Parameters.AddWithValue("@UF", Material.UF);
-                cmd.Parameters.AddWithValue("@Municipio", Material.Municipio);
-                cmd.Parameters.AddWithValue("@CEP", Material.CEP);
-                cmd.Parameters.AddWithValue("@Logradouro", Material.Logradouro);
-                cmd.Parameters.AddWithValue("@Numero", Material.Numero);
-                cmd.Parameters.AddWithValue("@Complemento", Material.Complemento);
-                cmd.Parameters.AddWithValue("@Bairro", Material.Bairro);
-                cmd.Parameters.AddWithValue("@Telefone", Material.Telefone);
-                cmd.Parameters.AddWithValue("@Celular", Material.Celular);
-                cmd.Parameters.AddWithValue("@Email", Material.Email);
-                cmd.Parameters.AddWithValue("@DataNascimento", Material.DataNascimento.ToShortDateString());
+                cmd.Parameters.AddWithValue("@IDCategoria", Material.IDCategoria);
+                cmd.Parameters.AddWithValue("@IDFinalidade", Material.IDFinalidade);
+                cmd.Parameters.AddWithValue("@IDFabricante", Material.IDFabricante);
+                cmd.Parameters.AddWithValue("@ValorUnitario", Material.ValorUnitario);
                 cmd.Parameters.AddWithValue("@ID", Material.ID);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception) { throw; }
             finally { CloseConnection(); }
+        }
+
+        public List<Categoria> SelectCategoria(List<Tuple<string, object, string>> whereParameters)
+        {
+            List<Categoria> Categorias = new List<Categoria>();
+            List<string> lstParameters = new List<string>();
+
+            try
+            {
+                OpenConnection();
+                cmd.CommandText = "SELECT * FROM Categoria";
+                cmd.Parameters.Clear();
+
+                if (whereParameters != null)
+                    foreach (var item in whereParameters)
+                    {
+                        cmd.Parameters.AddWithValue("@" + item.Item1, item.Item2);
+                        lstParameters.Add(item.Item1 + item.Item3 + "@" + item.Item1);
+                    }
+
+                if (lstParameters.Count > 0)
+                    cmd.CommandText += " WHERE " + string.Join(" AND ", lstParameters.ToArray());
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Categoria p = new Categoria();
+                    p.ID = Convert.ToInt32(reader["ID"]);
+                    p.Nome = reader["Nome"].ToString();
+                    Categorias.Add(p);
+                }
+            }
+            catch (Exception) { throw; }
+            finally
+            { CloseConnection(); }
+
+            return Categorias;
+        }
+
+        public List<Finalidade> SelectFinalidade(List<Tuple<string, object, string>> whereParameters)
+        {
+            List<Finalidade> Finalidades = new List<Finalidade>();
+            List<string> lstParameters = new List<string>();
+
+            try
+            {
+                OpenConnection();
+                cmd.CommandText = "SELECT * FROM Finalidade";
+                cmd.Parameters.Clear();
+
+                if (whereParameters != null)
+                    foreach (var item in whereParameters)
+                    {
+                        cmd.Parameters.AddWithValue("@" + item.Item1, item.Item2);
+                        lstParameters.Add(item.Item1 + item.Item3 + "@" + item.Item1);
+                    }
+
+                if (lstParameters.Count > 0)
+                    cmd.CommandText += " WHERE " + string.Join(" AND ", lstParameters.ToArray());
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Finalidade p = new Finalidade();
+                    p.ID = Convert.ToInt32(reader["ID"]);
+                    p.Nome = reader["Nome"].ToString();
+                    p.IDCategoria = Convert.ToInt32(reader["IDCategoria"]);
+                    Finalidades.Add(p);
+                }
+            }
+            catch (Exception) { throw; }
+            finally
+            { CloseConnection(); }
+
+            return Finalidades;
+        }
+
+        public List<Fabricante> SelectFabricante(List<Tuple<string, object, string>> whereParameters)
+        {
+            List<Fabricante> Fabricantes = new List<Fabricante>();
+            List<string> lstParameters = new List<string>();
+
+            try
+            {
+                OpenConnection();
+                cmd.CommandText = "SELECT * FROM Fabricante";
+                cmd.Parameters.Clear();
+
+                if (whereParameters != null)
+                    foreach (var item in whereParameters)
+                    {
+                        cmd.Parameters.AddWithValue("@" + item.Item1, item.Item2);
+                        lstParameters.Add(item.Item1 + item.Item3 + "@" + item.Item1);
+                    }
+
+                if (lstParameters.Count > 0)
+                    cmd.CommandText += " WHERE " + string.Join(" AND ", lstParameters.ToArray());
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Fabricante p = new Fabricante();
+                    p.ID = Convert.ToInt32(reader["ID"]);
+                    p.Nome = reader["Nome"].ToString();
+                    Fabricantes.Add(p);
+                }
+            }
+            catch (Exception) { throw; }
+            finally
+            { CloseConnection(); }
+
+            return Fabricantes;
         }
     }
 }

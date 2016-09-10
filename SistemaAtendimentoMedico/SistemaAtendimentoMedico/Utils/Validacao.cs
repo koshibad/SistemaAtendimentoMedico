@@ -69,11 +69,25 @@ namespace SistemaAtendimentoMedico.Utils
             }
         }
 
-        public static double ValidarPorcentagemDecimal(this string txt)
+        public static double ValidarDecimal(this string txt)
         {
             try
             {
                 return Convert.ToDouble(txt);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Informe um número válido.");
+            }
+        }
+
+        public static double ValidarPorcentagemDecimal(this string txt)
+        {
+            try
+            {
+                double n = Convert.ToDouble(txt);
+                if (n < 0 || n > 100) throw new Exception();
+                return n;
             }
             catch (Exception)
             {

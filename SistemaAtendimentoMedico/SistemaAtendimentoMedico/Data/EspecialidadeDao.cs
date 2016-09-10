@@ -31,10 +31,11 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "INSERT INTO Especialidade " +
-                    "(Nome,RemuneracaoConvenio,RemuneracaoParticular) " +
-                    "VALUES (@Nome,@RemuneracaoConvenio,@RemuneracaoParticular)";
+                    "(Nome,ValorConsulta,RemuneracaoConvenio,RemuneracaoParticular) " +
+                    "VALUES (@Nome,@ValorConsulta,@RemuneracaoConvenio,@RemuneracaoParticular)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@Nome", Especialidade.Nome);
+                cmd.Parameters.AddWithValue("@ValorConsulta", Especialidade.ValorConsulta);
                 cmd.Parameters.AddWithValue("@RemuneracaoConvenio", Especialidade.RemuneracaoConvenio);
                 cmd.Parameters.AddWithValue("@RemuneracaoParticular", Especialidade.RemuneracaoParticular);
                 cmd.ExecuteNonQuery();
@@ -71,6 +72,7 @@ namespace SistemaAtendimentoMedico.Data
                     Especialidade p = new Especialidade();
                     p.ID = Convert.ToInt32(reader["ID"]);
                     p.Nome = reader["Nome"].ToString();
+                    p.ValorConsulta = Convert.ToDouble(reader["ValorConsulta"]);
                     p.RemuneracaoConvenio = Convert.ToDouble(reader["RemuneracaoConvenio"]);
                     p.RemuneracaoParticular = Convert.ToDouble(reader["RemuneracaoParticular"]);
                     Especialidades.Add(p);
@@ -90,11 +92,13 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "UPDATE Especialidade SET " +
-                    "Nome=@Nome,RemuneracaoConvenio=@RemuneracaoConvenio," +
+                    "Nome=@Nome,ValorConsulta=@ValorConsulta," +
+                    "RemuneracaoConvenio=@RemuneracaoConvenio," +
                     "RemuneracaoParticular=@RemuneracaoParticular " +
                     "WHERE ID=@ID";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@Nome", Especialidade.Nome);
+                cmd.Parameters.AddWithValue("@ValorConsulta", Especialidade.ValorConsulta);
                 cmd.Parameters.AddWithValue("@RemuneracaoConvenio", Especialidade.RemuneracaoConvenio);
                 cmd.Parameters.AddWithValue("@RemuneracaoParticular", Especialidade.RemuneracaoParticular);
                 cmd.Parameters.AddWithValue("@ID", Especialidade.ID);

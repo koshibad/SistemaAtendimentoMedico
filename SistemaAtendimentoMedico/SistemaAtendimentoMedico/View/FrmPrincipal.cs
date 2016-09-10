@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaAtendimentoMedico.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,152 +31,174 @@ namespace SistemaAtendimentoMedico.View
 
         private void InitializeTabPages()
         {
-            int index = 0;
+            try
+            {
+                int index = 0;
 
-            #region Tab Inicio
+                #region Tab Inicio
 
-            FrmInicio = new FrmInicio();
-            FrmInicio.TopLevel = false;
-            FrmInicio.Visible = true;
-            FrmInicio.Dock = DockStyle.None;
-            index = tcFormularios.TabPages.IndexOf(tpInicio);
-            tcFormularios.TabPages[index].Controls.Add(FrmInicio);
+                FrmInicio = new FrmInicio();
+                FrmInicio.TopLevel = false;
+                FrmInicio.Visible = true;
+                FrmInicio.Dock = DockStyle.None;
+                index = tcFormularios.TabPages.IndexOf(tpInicio);
+                tcFormularios.TabPages[index].Controls.Add(FrmInicio);
 
-            #endregion
+                #endregion
 
-            #region Tab Convenio
+                #region Tab Convenio
 
-            FrmConvenio = new FrmConvenio();
-            FrmConvenio.TopLevel = false;
-            FrmConvenio.Visible = true;
-            FrmConvenio.Dock = DockStyle.None;
-            index = tcFormularios.TabPages.IndexOf(tpConvenio);
-            tcFormularios.TabPages[index].Controls.Add(FrmConvenio);
+                FrmConvenio = new FrmConvenio();
+                FrmConvenio.TopLevel = false;
+                FrmConvenio.Visible = true;
+                FrmConvenio.Dock = DockStyle.None;
+                index = tcFormularios.TabPages.IndexOf(tpConvenio);
+                tcFormularios.TabPages[index].Controls.Add(FrmConvenio);
 
-            #endregion
+                #endregion
 
-            #region Tab Medico
+                #region Tab Medico
 
-            FrmMedico = new FrmMedico();
-            FrmMedico.TopLevel = false;
-            FrmMedico.Visible = true;
-            FrmMedico.Dock = DockStyle.None;
-            index = tcFormularios.TabPages.IndexOf(tpMedico);
-            tcFormularios.TabPages[index].Controls.Add(FrmMedico);
+                FrmMedico = new FrmMedico();
+                FrmMedico.TopLevel = false;
+                FrmMedico.Visible = true;
+                FrmMedico.Dock = DockStyle.None;
+                index = tcFormularios.TabPages.IndexOf(tpMedico);
+                tcFormularios.TabPages[index].Controls.Add(FrmMedico);
 
-            #endregion
+                #endregion
 
-            #region Tab Paciente
+                #region Tab Paciente
 
-            FrmPaciente = new FrmPaciente();
-            FrmPaciente.TopLevel = false;
-            FrmPaciente.Visible = true;
-            FrmPaciente.Dock = DockStyle.None;
-            index = tcFormularios.TabPages.IndexOf(tpPaciente);
-            tcFormularios.TabPages[index].Controls.Add(FrmPaciente);
+                FrmPaciente = new FrmPaciente();
+                FrmPaciente.TopLevel = false;
+                FrmPaciente.Visible = true;
+                FrmPaciente.Dock = DockStyle.None;
+                index = tcFormularios.TabPages.IndexOf(tpPaciente);
+                tcFormularios.TabPages[index].Controls.Add(FrmPaciente);
 
-            #endregion
+                #endregion
 
-            #region Tab Material
+                #region Tab Material
 
-            FrmMaterial = new FrmMaterial();
-            FrmMaterial.TopLevel = false;
-            FrmMaterial.Visible = true;
-            FrmMaterial.Dock = DockStyle.None;
-            index = tcFormularios.TabPages.IndexOf(tpMaterial);
-            tcFormularios.TabPages[index].Controls.Add(FrmMaterial);
+                FrmMaterial = new FrmMaterial();
+                FrmMaterial.TopLevel = false;
+                FrmMaterial.Visible = true;
+                FrmMaterial.Dock = DockStyle.None;
+                index = tcFormularios.TabPages.IndexOf(tpMaterial);
+                tcFormularios.TabPages[index].Controls.Add(FrmMaterial);
 
-            #endregion
+                #endregion
 
-            #region Tab Agendamento
+                #region Tab Agendamento
 
-            FrmAgendamento = new FrmAgendamento();
-            FrmAgendamento.TopLevel = false;
-            FrmAgendamento.Visible = true;
-            FrmAgendamento.Dock = DockStyle.None;
-            index = tcFormularios.TabPages.IndexOf(tpAgendamento);
-            tcFormularios.TabPages[index].Controls.Add(FrmAgendamento);
+                FrmAgendamento = new FrmAgendamento();
+                FrmAgendamento.TopLevel = false;
+                FrmAgendamento.Visible = true;
+                FrmAgendamento.Dock = DockStyle.None;
+                index = tcFormularios.TabPages.IndexOf(tpAgendamento);
+                tcFormularios.TabPages[index].Controls.Add(FrmAgendamento);
 
-            #endregion
+                #endregion
 
-            #region Tab Atendimento
+                #region Tab Atendimento
 
-            FrmAtendimento = new FrmAtendimento();
-            FrmAtendimento.TopLevel = false;
-            FrmAtendimento.Visible = true;
-            FrmAtendimento.Dock = DockStyle.None;
-            index = tcFormularios.TabPages.IndexOf(tpAtendimento);
-            tcFormularios.TabPages[index].Controls.Add(FrmAtendimento);
+                FrmAtendimento = new FrmAtendimento();
+                FrmAtendimento.TopLevel = false;
+                FrmAtendimento.Visible = true;
+                FrmAtendimento.Dock = DockStyle.None;
+                index = tcFormularios.TabPages.IndexOf(tpAtendimento);
+                tcFormularios.TabPages[index].Controls.Add(FrmAtendimento);
 
-            #endregion
+                #endregion
 
-            #region Tab Especialidade
+                #region Tab Especialidade
 
-            FrmEspecialidade = new FrmEspecialidade();
-            FrmEspecialidade.TopLevel = false;
-            FrmEspecialidade.Visible = true;
-            FrmEspecialidade.Dock = DockStyle.None;
-            index = tcFormularios.TabPages.IndexOf(tpEspecialidade);
-            tcFormularios.TabPages[index].Controls.Add(FrmEspecialidade);
+                FrmEspecialidade = new FrmEspecialidade();
+                FrmEspecialidade.TopLevel = false;
+                FrmEspecialidade.Visible = true;
+                FrmEspecialidade.Dock = DockStyle.None;
+                index = tcFormularios.TabPages.IndexOf(tpEspecialidade);
+                tcFormularios.TabPages[index].Controls.Add(FrmEspecialidade);
 
-            #endregion
+                #endregion
 
-            #region Tab Faturamento
+                #region Tab Faturamento
 
-            FrmFaturamento = new FrmFaturamento();
-            FrmFaturamento.TopLevel = false;
-            FrmFaturamento.Visible = true;
-            FrmFaturamento.Dock = DockStyle.None;
-            index = tcFormularios.TabPages.IndexOf(tpFaturamento);
-            tcFormularios.TabPages[index].Controls.Add(FrmFaturamento);
+                FrmFaturamento = new FrmFaturamento();
+                FrmFaturamento.TopLevel = false;
+                FrmFaturamento.Visible = true;
+                FrmFaturamento.Dock = DockStyle.None;
+                index = tcFormularios.TabPages.IndexOf(tpFaturamento);
+                tcFormularios.TabPages[index].Controls.Add(FrmFaturamento);
 
-            #endregion
+                #endregion
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void tcFormularios_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var tabPage = tcFormularios.SelectedTab;
-
-            if (tabPage == tpInicio)
+            try
             {
-                FrmInicio.timerRelogio.Start();
-                FrmInicio.lbHorario.Text = DateTime.Now.ToString("HH:mm:ss");
-                FrmInicio.lbData.Text = DateTime.Now.ToLongDateString();
-            }
-            else
-            {
-                FrmInicio.timerRelogio.Stop();
+                var tabPage = tcFormularios.SelectedTab;
 
-                if (tabPage == tpConvenio)
+                if (tabPage == tpInicio)
                 {
-                    FrmConvenio.lstConvenios = FrmConvenio.ConvenioDao.Select(null);
-                    FrmConvenio.dgResultado.DataSource = null;
-                    FrmConvenio.dgResultado.DataSource = FrmConvenio.lstConvenios;
+                    FrmInicio.timerRelogio.Start();
+                    FrmInicio.lbHorario.Text = DateTime.Now.ToString("HH:mm:ss");
+                    FrmInicio.lbData.Text = DateTime.Now.ToLongDateString();
                 }
-                else if (tabPage == tpEspecialidade)
+                else
                 {
-                    FrmEspecialidade.lstEspecialidades = FrmEspecialidade.EspecialidadeDao.Select(null);
-                    FrmEspecialidade.dgResultado.DataSource = null;
-                    FrmEspecialidade.dgResultado.DataSource = FrmEspecialidade.lstEspecialidades;
-                }
-                else if (tabPage == tpMedico)
-                {
-                    FrmMedico.lstMedicos = FrmMedico.MedicoDao.Select(null);
-                    FrmMedico.dgResultado.DataSource = null;
-                    FrmMedico.dgResultado.DataSource = FrmMedico.lstMedicos;
-                    FrmMedico.cbEspecialidade.DataSource = null;
-                    FrmMedico.cbEspecialidade.DataSource = FrmEspecialidade.EspecialidadeDao.Select(null);
-                    FrmMedico.cbEspecialidade.DisplayMember = "Nome";
-                    FrmMedico.cbEspecialidade.ValueMember = "ID";
-                    FrmMedico.cbEspecialidade.SelectedIndex = -1;
-                }
-                else if (tabPage == tpPaciente)
-                {
-                    FrmPaciente.lstPacientes = FrmPaciente.PacienteDao.Select(null);
-                    FrmPaciente.dgResultado.DataSource = null;
-                    FrmPaciente.dgResultado.DataSource = FrmPaciente.lstPacientes;
+                    FrmInicio.timerRelogio.Stop();
+
+                    if (tabPage == tpConvenio)
+                    {
+                        FrmConvenio.lstConvenios = FrmConvenio.ConvenioDao.Select(null);
+                        FrmConvenio.dgResultado.DataSource = null;
+                        FrmConvenio.dgResultado.DataSource = FrmConvenio.lstConvenios;
+                        FrmConvenio.formOnEndTask();
+                    }
+                    else if (tabPage == tpEspecialidade)
+                    {
+                        FrmEspecialidade.lstEspecialidades = FrmEspecialidade.EspecialidadeDao.Select(null);
+                        FrmEspecialidade.dgResultado.DataSource = null;
+                        FrmEspecialidade.dgResultado.DataSource = FrmEspecialidade.lstEspecialidades;
+                        FrmEspecialidade.formOnEndTask();
+                    }
+                    else if (tabPage == tpMedico)
+                    {
+                        //TODO: mascara IDEspecialidade
+                        FrmMedico.lstMedicos = FrmMedico.MedicoDao.Select(null);
+                        FrmMedico.dgResultado.DataSource = null;
+                        FrmMedico.dgResultado.DataSource = FrmMedico.lstMedicos;
+                        Util.SetComboBox(FrmMedico.cbEspecialidade, FrmEspecialidade
+                            .EspecialidadeDao.Select(null));
+                        FrmMedico.formOnEndTask();
+                    }
+                    else if (tabPage == tpPaciente)
+                    {
+                        FrmPaciente.lstPacientes = FrmPaciente.PacienteDao.Select(null);
+                        FrmPaciente.dgResultado.DataSource = null;
+                        FrmPaciente.dgResultado.DataSource = FrmPaciente.lstPacientes;
+                        FrmPaciente.formOnEndTask();
+                    }
+                    else if (tabPage == tpMaterial)
+                    {
+                        //TODO: mascara IDCategoria, IDFinalidade, IDFabricante
+                        FrmMaterial.lstMateriais = FrmMaterial.MaterialDao.Select(null);
+                        FrmMaterial.dgResultado.DataSource = null;
+                        FrmMaterial.dgResultado.DataSource = FrmMaterial.lstMateriais;
+
+                        FrmMaterial.lstFinalidades = FrmMaterial.MaterialDao.SelectFinalidade(null);
+                        Util.SetComboBox(FrmMaterial.cbCategoria, FrmMaterial.MaterialDao.SelectCategoria(null));
+                        Util.SetComboBox(FrmMaterial.cbFabricante, FrmMaterial.MaterialDao.SelectFabricante(null));
+                        FrmMaterial.formOnEndTask();
+                    }
                 }
             }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

@@ -174,7 +174,7 @@
             // 
             this.txtBairro.Enabled = false;
             this.txtBairro.Location = new System.Drawing.Point(547, 185);
-            this.txtBairro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBairro.Margin = new System.Windows.Forms.Padding(4);
             this.txtBairro.MaxLength = 100;
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.Size = new System.Drawing.Size(297, 22);
@@ -194,7 +194,7 @@
             // 
             this.txtComplemento.Enabled = false;
             this.txtComplemento.Location = new System.Drawing.Point(215, 185);
-            this.txtComplemento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtComplemento.Margin = new System.Windows.Forms.Padding(4);
             this.txtComplemento.MaxLength = 11;
             this.txtComplemento.Name = "txtComplemento";
             this.txtComplemento.Size = new System.Drawing.Size(260, 22);
@@ -224,7 +224,7 @@
             // 
             this.txtMunicipio.Enabled = false;
             this.txtMunicipio.Location = new System.Drawing.Point(365, 108);
-            this.txtMunicipio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMunicipio.Margin = new System.Windows.Forms.Padding(4);
             this.txtMunicipio.MaxLength = 100;
             this.txtMunicipio.Name = "txtMunicipio";
             this.txtMunicipio.Size = new System.Drawing.Size(280, 22);
@@ -245,7 +245,7 @@
             this.txtUF.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtUF.Enabled = false;
             this.txtUF.Location = new System.Drawing.Point(215, 108);
-            this.txtUF.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUF.Margin = new System.Windows.Forms.Padding(4);
             this.txtUF.MaxLength = 2;
             this.txtUF.Name = "txtUF";
             this.txtUF.Size = new System.Drawing.Size(41, 22);
@@ -266,7 +266,7 @@
             // 
             this.txtNumero.Enabled = false;
             this.txtNumero.Location = new System.Drawing.Point(773, 145);
-            this.txtNumero.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNumero.Margin = new System.Windows.Forms.Padding(4);
             this.txtNumero.MaxLength = 6;
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(71, 22);
@@ -287,7 +287,7 @@
             // 
             this.txtLogradouro.Enabled = false;
             this.txtLogradouro.Location = new System.Drawing.Point(215, 145);
-            this.txtLogradouro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtLogradouro.Margin = new System.Windows.Forms.Padding(4);
             this.txtLogradouro.MaxLength = 100;
             this.txtLogradouro.Name = "txtLogradouro";
             this.txtLogradouro.Size = new System.Drawing.Size(497, 22);
@@ -307,7 +307,7 @@
             // 
             this.txtCelular.Enabled = false;
             this.txtCelular.Location = new System.Drawing.Point(448, 220);
-            this.txtCelular.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCelular.Margin = new System.Windows.Forms.Padding(4);
             this.txtCelular.Mask = "(99) 0000-0000";
             this.txtCelular.Name = "txtCelular";
             this.txtCelular.Size = new System.Drawing.Size(125, 22);
@@ -327,7 +327,7 @@
             // 
             this.txtTelefone.Enabled = false;
             this.txtTelefone.Location = new System.Drawing.Point(215, 220);
-            this.txtTelefone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTelefone.Margin = new System.Windows.Forms.Padding(4);
             this.txtTelefone.Mask = "(99) 0000-0000";
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Size = new System.Drawing.Size(125, 22);
@@ -347,7 +347,7 @@
             // 
             this.txtEmail.Enabled = false;
             this.txtEmail.Location = new System.Drawing.Point(215, 258);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtEmail.MaxLength = 100;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(260, 22);
@@ -367,7 +367,7 @@
             // 
             this.txtNome.Enabled = false;
             this.txtNome.Location = new System.Drawing.Point(475, 66);
-            this.txtNome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNome.Margin = new System.Windows.Forms.Padding(4);
             this.txtNome.MaxLength = 255;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(369, 22);
@@ -387,7 +387,7 @@
             // 
             this.txtCpf.Enabled = false;
             this.txtCpf.Location = new System.Drawing.Point(215, 66);
-            this.txtCpf.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCpf.Margin = new System.Windows.Forms.Padding(4);
             this.txtCpf.MaxLength = 11;
             this.txtCpf.Name = "txtCpf";
             this.txtCpf.Size = new System.Drawing.Size(180, 22);
@@ -408,7 +408,7 @@
             // 
             this.txtCep.Enabled = false;
             this.txtCep.Location = new System.Drawing.Point(696, 107);
-            this.txtCep.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCep.Margin = new System.Windows.Forms.Padding(4);
             this.txtCep.Mask = "00000-000";
             this.txtCep.Name = "txtCep";
             this.txtCep.Size = new System.Drawing.Size(148, 22);
@@ -423,7 +423,7 @@
             this.pnBusca.Controls.Add(this.txtPesquisaCpf);
             this.pnBusca.Controls.Add(this.label13);
             this.pnBusca.Location = new System.Drawing.Point(265, 313);
-            this.pnBusca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnBusca.Margin = new System.Windows.Forms.Padding(4);
             this.pnBusca.Name = "pnBusca";
             this.pnBusca.Size = new System.Drawing.Size(449, 71);
             this.pnBusca.TabIndex = 57;
@@ -431,7 +431,7 @@
             // txtPesquisaNome
             // 
             this.txtPesquisaNome.Location = new System.Drawing.Point(69, 39);
-            this.txtPesquisaNome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPesquisaNome.Margin = new System.Windows.Forms.Padding(4);
             this.txtPesquisaNome.MaxLength = 255;
             this.txtPesquisaNome.Name = "txtPesquisaNome";
             this.txtPesquisaNome.Size = new System.Drawing.Size(217, 22);
@@ -450,7 +450,7 @@
             // btnPesquisar
             // 
             this.btnPesquisar.Location = new System.Drawing.Point(311, 10);
-            this.btnPesquisar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPesquisar.Margin = new System.Windows.Forms.Padding(4);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(111, 50);
             this.btnPesquisar.TabIndex = 8;
@@ -461,7 +461,7 @@
             // txtPesquisaCpf
             // 
             this.txtPesquisaCpf.Location = new System.Drawing.Point(69, 10);
-            this.txtPesquisaCpf.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPesquisaCpf.Margin = new System.Windows.Forms.Padding(4);
             this.txtPesquisaCpf.MaxLength = 11;
             this.txtPesquisaCpf.Name = "txtPesquisaCpf";
             this.txtPesquisaCpf.Size = new System.Drawing.Size(217, 22);
@@ -500,7 +500,7 @@
             // 
             this.txtDataNasc.Enabled = false;
             this.txtDataNasc.Location = new System.Drawing.Point(696, 220);
-            this.txtDataNasc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDataNasc.Margin = new System.Windows.Forms.Padding(4);
             this.txtDataNasc.Mask = "00/00/0000";
             this.txtDataNasc.Name = "txtDataNasc";
             this.txtDataNasc.Size = new System.Drawing.Size(148, 22);
@@ -529,10 +529,12 @@
             // 
             // cbEspecialidade
             // 
+            this.cbEspecialidade.BackColor = System.Drawing.Color.White;
+            this.cbEspecialidade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEspecialidade.Enabled = false;
             this.cbEspecialidade.FormattingEnabled = true;
             this.cbEspecialidade.Location = new System.Drawing.Point(599, 258);
-            this.cbEspecialidade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbEspecialidade.Margin = new System.Windows.Forms.Padding(4);
             this.cbEspecialidade.Name = "cbEspecialidade";
             this.cbEspecialidade.Size = new System.Drawing.Size(245, 24);
             this.cbEspecialidade.TabIndex = 62;

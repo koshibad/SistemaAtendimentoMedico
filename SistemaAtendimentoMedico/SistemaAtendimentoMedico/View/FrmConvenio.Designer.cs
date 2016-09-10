@@ -208,7 +208,7 @@
             this.txtUF.Name = "txtUF";
             this.txtUF.Size = new System.Drawing.Size(41, 22);
             this.txtUF.TabIndex = 2;
-            this.txtUF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.txtUF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUF_KeyPress);
             // 
             // label7
             // 
@@ -390,6 +390,7 @@
             this.dgResultado.AllowUserToAddRows = false;
             this.dgResultado.AllowUserToDeleteRows = false;
             this.dgResultado.AllowUserToOrderColumns = true;
+            this.dgResultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgResultado.BackgroundColor = System.Drawing.Color.White;
             this.dgResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgResultado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;

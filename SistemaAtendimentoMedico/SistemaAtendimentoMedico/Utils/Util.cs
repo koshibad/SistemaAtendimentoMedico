@@ -31,5 +31,15 @@ namespace SistemaAtendimentoMedico.Utils
                 else if (control is ComboBox)
                     (control as ComboBox).Enabled = enabled;
         }
+
+        public static void SetComboBox(ComboBox comboBox, object dataSource,
+            string displayMember = "Nome", string valueMember = "ID")
+        {
+            comboBox.DataSource = null;
+            comboBox.DataSource = dataSource;
+            comboBox.DisplayMember = displayMember;
+            comboBox.ValueMember = valueMember;
+            comboBox.SelectedIndex = -1;
+        }
     }
 }

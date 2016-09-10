@@ -57,8 +57,11 @@
     <Compile Include="Data\PacienteDao.cs" />
     <Compile Include="Model\Agendamento.cs" />
     <Compile Include="Model\Atendimento.cs" />
+    <Compile Include="Model\Categoria.cs" />
     <Compile Include="Model\Convenio.cs" />
     <Compile Include="Model\Especialidade.cs" />
+    <Compile Include="Model\Fabricante.cs" />
+    <Compile Include="Model\Finalidade.cs" />
     <Compile Include="Model\Material.cs" />
     <Compile Include="Model\Medico.cs" />
     <Compile Include="Model\Paciente.cs" />

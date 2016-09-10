@@ -10,6 +10,7 @@ namespace SistemaAtendimentoMedico.Model
     {
         public int ID { get; set; }
         public string Nome { get; internal set; }
+        public double ValorConsulta { get; set; }
         public double RemuneracaoConvenio { get; set; }
         public double RemuneracaoParticular { get; set; }
     }

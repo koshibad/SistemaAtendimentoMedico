@@ -37,7 +37,7 @@ namespace SistemaAtendimentoMedico.View
             dgResultado.Enabled = enabled;
         }
 
-        private void formOnEndTask()
+        public void formOnEndTask()
         {
             visibilityMainButtons(true);
             enableSearchComponents(true);
@@ -118,7 +118,7 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 Convenio.CNPJ = txtCnpj.Text.ValidarTextoVazio("CNPJ");
-                Convenio.RegistroANS = Convert.ToInt32(txtRegistroAns.Text.ValidarTextoVazio("Registro ANS"));
+                Convenio.RegistroANS = txtRegistroAns.Text.ValidarTextoVazio("Registro ANS");
                 Convenio.UF = txtUF.Text.ValidarTextoVazio("UF");
                 Convenio.RazaoSocial = txtRazaoSocial.Text.ValidarTextoVazio("Razão Social");
                 Convenio.NomeFantasia = txtNomeFantasia.Text.ValidarTextoVazio("Nome Fantasia");
@@ -143,11 +143,10 @@ namespace SistemaAtendimentoMedico.View
                     throw new Exception("Já existe Convenio com o CNPJ informado");
 
                 ConvenioDao.Insert(Convenio);
-                lstConvenios.Add(Convenio);
+                dgResultado.DataSource = null;
+                lstConvenios = ConvenioDao.Select(null);
 
                 MessageBox.Show(this, "Convenio incluido com sucesso", "Convenio");
-
-                dgResultado.DataSource = null;
                 dgResultado.DataSource = lstConvenios;
                 formOnEndTask();
             }
@@ -193,7 +192,7 @@ namespace SistemaAtendimentoMedico.View
                 e.Handled = true;
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtUF_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
                 e.Handled = true;

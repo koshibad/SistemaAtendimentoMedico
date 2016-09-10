@@ -46,6 +46,8 @@
             this.dgResultado = new System.Windows.Forms.DataGridView();
             this.txtRemuneracaoParticular = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtValorConsulta = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tsMenus.SuspendLayout();
             this.pnBusca.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgResultado)).BeginInit();
@@ -149,18 +151,18 @@
             // txtRemuneracaoConvenio
             // 
             this.txtRemuneracaoConvenio.Enabled = false;
-            this.txtRemuneracaoConvenio.Location = new System.Drawing.Point(461, 140);
-            this.txtRemuneracaoConvenio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtRemuneracaoConvenio.Location = new System.Drawing.Point(461, 162);
+            this.txtRemuneracaoConvenio.Margin = new System.Windows.Forms.Padding(4);
             this.txtRemuneracaoConvenio.MaxLength = 6;
             this.txtRemuneracaoConvenio.Name = "txtRemuneracaoConvenio";
             this.txtRemuneracaoConvenio.Size = new System.Drawing.Size(71, 22);
-            this.txtRemuneracaoConvenio.TabIndex = 6;
+            this.txtRemuneracaoConvenio.TabIndex = 3;
             this.txtRemuneracaoConvenio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onlyNumber_KeyPress);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(263, 144);
+            this.label6.Location = new System.Drawing.Point(263, 166);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(190, 17);
@@ -171,7 +173,7 @@
             // 
             this.txtNome.Enabled = false;
             this.txtNome.Location = new System.Drawing.Point(313, 93);
-            this.txtNome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNome.Margin = new System.Windows.Forms.Padding(4);
             this.txtNome.MaxLength = 255;
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(369, 22);
@@ -193,8 +195,8 @@
             this.pnBusca.Controls.Add(this.txtPesquisaNome);
             this.pnBusca.Controls.Add(this.label14);
             this.pnBusca.Controls.Add(this.btnPesquisar);
-            this.pnBusca.Location = new System.Drawing.Point(260, 256);
-            this.pnBusca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnBusca.Location = new System.Drawing.Point(260, 266);
+            this.pnBusca.Margin = new System.Windows.Forms.Padding(4);
             this.pnBusca.Name = "pnBusca";
             this.pnBusca.Size = new System.Drawing.Size(449, 71);
             this.pnBusca.TabIndex = 57;
@@ -202,7 +204,7 @@
             // txtPesquisaNome
             // 
             this.txtPesquisaNome.Location = new System.Drawing.Point(69, 24);
-            this.txtPesquisaNome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPesquisaNome.Margin = new System.Windows.Forms.Padding(4);
             this.txtPesquisaNome.MaxLength = 255;
             this.txtPesquisaNome.Name = "txtPesquisaNome";
             this.txtPesquisaNome.Size = new System.Drawing.Size(217, 22);
@@ -221,7 +223,7 @@
             // btnPesquisar
             // 
             this.btnPesquisar.Location = new System.Drawing.Point(311, 10);
-            this.btnPesquisar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPesquisar.Margin = new System.Windows.Forms.Padding(4);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(111, 50);
             this.btnPesquisar.TabIndex = 8;
@@ -234,17 +236,18 @@
             this.dgResultado.AllowUserToAddRows = false;
             this.dgResultado.AllowUserToDeleteRows = false;
             this.dgResultado.AllowUserToOrderColumns = true;
+            this.dgResultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgResultado.BackgroundColor = System.Drawing.Color.White;
             this.dgResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgResultado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgResultado.Location = new System.Drawing.Point(122, 364);
+            this.dgResultado.Location = new System.Drawing.Point(122, 351);
             this.dgResultado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgResultado.MultiSelect = false;
             this.dgResultado.Name = "dgResultado";
             this.dgResultado.RowHeadersVisible = false;
             this.dgResultado.RowTemplate.Height = 24;
             this.dgResultado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgResultado.Size = new System.Drawing.Size(749, 189);
+            this.dgResultado.Size = new System.Drawing.Size(749, 202);
             this.dgResultado.TabIndex = 58;
             this.dgResultado.DataSourceChanged += new System.EventHandler(this.dgResultado_DataSourceChanged);
             this.dgResultado.CurrentCellChanged += new System.EventHandler(this.dgResultado_CurrentCellChanged);
@@ -252,23 +255,44 @@
             // txtRemuneracaoParticular
             // 
             this.txtRemuneracaoParticular.Enabled = false;
-            this.txtRemuneracaoParticular.Location = new System.Drawing.Point(461, 190);
+            this.txtRemuneracaoParticular.Location = new System.Drawing.Point(461, 197);
             this.txtRemuneracaoParticular.Margin = new System.Windows.Forms.Padding(4);
             this.txtRemuneracaoParticular.MaxLength = 6;
             this.txtRemuneracaoParticular.Name = "txtRemuneracaoParticular";
             this.txtRemuneracaoParticular.Size = new System.Drawing.Size(71, 22);
-            this.txtRemuneracaoParticular.TabIndex = 59;
+            this.txtRemuneracaoParticular.TabIndex = 4;
             this.txtRemuneracaoParticular.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onlyNumber_KeyPress);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(263, 194);
+            this.label1.Location = new System.Drawing.Point(263, 201);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(191, 17);
             this.label1.TabIndex = 60;
             this.label1.Text = "Remuneração Particular (%):";
+            // 
+            // txtValorConsulta
+            // 
+            this.txtValorConsulta.Enabled = false;
+            this.txtValorConsulta.Location = new System.Drawing.Point(461, 127);
+            this.txtValorConsulta.Margin = new System.Windows.Forms.Padding(4);
+            this.txtValorConsulta.MaxLength = 10;
+            this.txtValorConsulta.Name = "txtValorConsulta";
+            this.txtValorConsulta.Size = new System.Drawing.Size(71, 22);
+            this.txtValorConsulta.TabIndex = 2;
+            this.txtValorConsulta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onlyNumber_KeyPress);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(263, 131);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(129, 17);
+            this.label3.TabIndex = 62;
+            this.label3.Text = "Valor por Consulta:";
             // 
             // FrmEspecialidade
             // 
@@ -276,6 +300,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(999, 571);
+            this.Controls.Add(this.txtValorConsulta);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtRemuneracaoParticular);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgResultado);
@@ -320,5 +346,7 @@
         public System.Windows.Forms.DataGridView dgResultado;
         private System.Windows.Forms.TextBox txtRemuneracaoParticular;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtValorConsulta;
+        private System.Windows.Forms.Label label3;
     }
 }
