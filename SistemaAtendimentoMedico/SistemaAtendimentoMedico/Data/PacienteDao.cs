@@ -13,17 +13,12 @@ namespace SistemaAtendimentoMedico.Data
         {
             try
             {
-                try
-                {
-                    OpenConnection();
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = "DELETE FROM Paciente WHERE ID=@ID";
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@ID", ID);
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception) { throw; }
-                finally { CloseConnection(); }
+                OpenConnection();
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = "DELETE FROM Paciente WHERE ID=@ID";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@ID", ID);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception) { throw; }
             finally { CloseConnection(); }

@@ -98,13 +98,13 @@ namespace SistemaAtendimentoMedico.View
 
             try
             {
+                dgResultado.DataSource = null;
                 int index = lstEspecialidades.IndexOf(Especialidade);
                 lstEspecialidades.RemoveAt(index);
                 EspecialidadeDao.Delete(Especialidade.ID.ToString());
 
                 MessageBox.Show(this, "Especialidade incluido com sucesso", "Especialidade");
 
-                dgResultado.DataSource = null;
                 dgResultado.DataSource = lstEspecialidades;
                 formOnEndTask();
             }
@@ -118,19 +118,9 @@ namespace SistemaAtendimentoMedico.View
         {
             try
             {
-                Especialidade.CPF = txtCpf.Text.ValidarTextoVazio("CPF");
                 Especialidade.Nome = txtNome.Text.ValidarTextoVazio("Nome");
-                Especialidade.UF = txtUF.Text.ValidarTextoVazio("UF");
-                Especialidade.Municipio = txtMunicipio.Text.ValidarTextoVazio("Municipio");
-                Especialidade.CEP = txtCep.Text.ValidarNumeros(8, "CEP");
-                Especialidade.Logradouro = txtLogradouro.Text.ValidarTextoVazio("Logradouro");
-                Especialidade.Numero = txtNumero.Text.ValidarNumero();
-                Especialidade.Complemento = txtComplemento.Text;
-                Especialidade.Bairro = txtBairro.Text.ValidarTextoVazio("Bairro");
-                Especialidade.Telefone = txtTelefone.Text.ValidarNumeros(10, "telefone");
-                Especialidade.Celular = txtCelular.Text.ValidarNumeros(10, "celular", false);
-                Especialidade.Email = txtEmail.Text.ValidarEmail();
-                Especialidade.DataNascimento = txtDataNasc.Text.ValidarData();
+                Especialidade.RemuneracaoConvenio = txtRemuneracaoConvenio.Text.ValidarPorcentagemDecimal();
+                Especialidade.RemuneracaoParticular = txtRemuneracaoParticular.Text.ValidarPorcentagemDecimal();
             }
             catch (Exception)
             {
@@ -146,13 +136,13 @@ namespace SistemaAtendimentoMedico.View
                 validationInsertUpdate(Especialidade);
 
                 if (EspecialidadeDao.Select(new List<Tuple<string, object, string>>()
-                    { new Tuple<string, object, string>("CPF", Especialidade.CPF, "=") }).Count > 0)
-                    throw new Exception("Já existe Especialidade com o CPF informado");
+                    { new Tuple<string, object, string>("Nome", Especialidade.Nome, "=") }).Count > 0)
+                    throw new Exception("Já existe Especialidade com o Nome informado");
 
                 EspecialidadeDao.Insert(Especialidade);
                 lstEspecialidades.Add(Especialidade);
 
-                MessageBox.Show(this, "Especialidade incluido com sucesso", "Especialidade");
+                MessageBox.Show(this, "Especialidade incluida com sucesso", "Especialidade");
 
                 dgResultado.DataSource = null;
                 dgResultado.DataSource = lstEspecialidades;
@@ -173,16 +163,16 @@ namespace SistemaAtendimentoMedico.View
                 validationInsertUpdate(Especialidade);
 
                 if (EspecialidadeDao.Select(new List<Tuple<string, object, string>>(){
-                    new Tuple<string, object, string>("CPF", Especialidade.CPF, "="),
+                    new Tuple<string, object, string>("Nome", Especialidade.Nome, "="),
                     new Tuple<string, object, string>("ID",Especialidade.ID,"<>")
                     }).Count > 0)
-                    throw new Exception("Já existe Especialidade com o CPF informado");
+                    throw new Exception("Já existe Especialidade com o Nome informado");
 
                 lstEspecialidades.RemoveAt(index);
                 EspecialidadeDao.Update(Especialidade);
                 lstEspecialidades.Add(Especialidade);
                 lstEspecialidades = lstEspecialidades.OrderBy(x => x.ID).ToList();
-                MessageBox.Show(this, "Especialidade incluido com sucesso", "Especialidade");
+                MessageBox.Show(this, "Especialidade alterada com sucesso", "Especialidade");
 
                 dgResultado.DataSource = null;
                 dgResultado.DataSource = lstEspecialidades;
@@ -196,13 +186,8 @@ namespace SistemaAtendimentoMedico.View
 
         private void onlyNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar))
-                e.Handled = true;
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar) &&
+                (e.KeyChar == ',' && ((TextBox)sender).Text.Contains(",")))
                 e.Handled = true;
         }
 
@@ -219,19 +204,9 @@ namespace SistemaAtendimentoMedico.View
                 var Especialidade = dgResultado.CurrentRow.DataBoundItem as Especialidade;
                 if (Especialidade == null) return;
 
-                txtCpf.Text = Especialidade.CPF;
                 txtNome.Text = Especialidade.Nome;
-                txtLogradouro.Text = Especialidade.Logradouro;
-                txtUF.Text = Especialidade.UF;
-                txtMunicipio.Text = Especialidade.Municipio;
-                txtNumero.Text = Especialidade.Numero.ToString();
-                txtCep.Text = Especialidade.CEP;
-                txtComplemento.Text = Especialidade.Complemento;
-                txtBairro.Text = Especialidade.Bairro;
-                txtTelefone.Text = Especialidade.Telefone;
-                txtCelular.Text = Especialidade.Celular;
-                txtEmail.Text = Especialidade.Email;
-                txtDataNasc.Text = Especialidade.DataNascimento.ToShortDateString();
+                txtRemuneracaoConvenio.Text = Especialidade.RemuneracaoConvenio.ToString();
+                txtRemuneracaoParticular.Text = Especialidade.RemuneracaoParticular.ToString();
             }
             catch (Exception ex)
             {
@@ -243,8 +218,7 @@ namespace SistemaAtendimentoMedico.View
         {
             dgResultado.DataSource = null;
             dgResultado.DataSource = lstEspecialidades.Where(x =>
-                x.Nome.Contains(txtPesquisaNome.Text.Trim()) &&
-                x.CPF.Contains(txtPesquisaCpf.Text.Trim())).ToList();
+                x.Nome.Contains(txtPesquisaNome.Text.Trim())).ToList();
         }
 
         private void dgResultado_DataSourceChanged(object sender, EventArgs e)

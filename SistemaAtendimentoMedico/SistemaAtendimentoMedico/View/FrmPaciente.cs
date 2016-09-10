@@ -172,13 +172,13 @@ namespace SistemaAtendimentoMedico.View
                     }).Count > 0)
                     throw new Exception("Já existe paciente com o CPF informado");
 
+                dgResultado.DataSource = null;
                 lstPacientes.RemoveAt(index);
                 PacienteDao.Update(paciente);
                 lstPacientes.Add(paciente);
                 lstPacientes = lstPacientes.OrderBy(x => x.ID).ToList();
                 MessageBox.Show(this, "Paciente alterado com sucesso", "Paciente");
 
-                dgResultado.DataSource = null;
                 dgResultado.DataSource = lstPacientes;
                 formOnEndTask();
             }

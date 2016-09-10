@@ -13,17 +13,12 @@ namespace SistemaAtendimentoMedico.Data
         {
             try
             {
-                try
-                {
-                    OpenConnection();
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = "DELETE FROM Especialidade WHERE ID=@ID";
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@ID", ID);
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception) { throw; }
-                finally { CloseConnection(); }
+                OpenConnection();
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = "DELETE FROM Especialidade WHERE ID=@ID";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@ID", ID);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception) { throw; }
             finally { CloseConnection(); }
@@ -36,22 +31,12 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "INSERT INTO Especialidade " +
-                    "(CPF,Nome,UF,Municipio,CEP,Logradouro,Numero,Complemento,Bairro,Telefone,Celular,Email,DataNascimento) " +
-                    "VALUES (@CPF,@Nome,@UF,@Municipio,@CEP,@Logradouro,@Numero,@Complemento,@Bairro,@Telefone,@Celular,@Email,@DataNascimento)";
+                    "(Nome,RemuneracaoConvenio,RemuneracaoParticular) " +
+                    "VALUES (@Nome,@RemuneracaoConvenio,@RemuneracaoParticular)";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@CPF", Especialidade.CPF);
                 cmd.Parameters.AddWithValue("@Nome", Especialidade.Nome);
-                cmd.Parameters.AddWithValue("@UF", Especialidade.UF);
-                cmd.Parameters.AddWithValue("@Municipio", Especialidade.Municipio);
-                cmd.Parameters.AddWithValue("@CEP", Especialidade.CEP);
-                cmd.Parameters.AddWithValue("@Logradouro", Especialidade.Logradouro);
-                cmd.Parameters.AddWithValue("@Numero", Especialidade.Numero);
-                cmd.Parameters.AddWithValue("@Complemento", Especialidade.Complemento);
-                cmd.Parameters.AddWithValue("@Bairro", Especialidade.Bairro);
-                cmd.Parameters.AddWithValue("@Telefone", Especialidade.Telefone);
-                cmd.Parameters.AddWithValue("@Celular", Especialidade.Celular);
-                cmd.Parameters.AddWithValue("@Email", Especialidade.Email);
-                cmd.Parameters.AddWithValue("@DataNascimento", Especialidade.DataNascimento.ToShortDateString());
+                cmd.Parameters.AddWithValue("@RemuneracaoConvenio", Especialidade.RemuneracaoConvenio);
+                cmd.Parameters.AddWithValue("@RemuneracaoParticular", Especialidade.RemuneracaoParticular);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception) { throw; }
@@ -85,19 +70,9 @@ namespace SistemaAtendimentoMedico.Data
                 {
                     Especialidade p = new Especialidade();
                     p.ID = Convert.ToInt32(reader["ID"]);
-                    p.CPF = reader["CPF"].ToString();
                     p.Nome = reader["Nome"].ToString();
-                    p.UF = reader["UF"].ToString();
-                    p.Municipio = reader["Municipio"].ToString();
-                    p.CEP = reader["CEP"].ToString();
-                    p.Logradouro = reader["Logradouro"].ToString();
-                    p.Numero = Convert.ToInt32(reader["Numero"]);
-                    p.Complemento = reader["Complemento"].ToString();
-                    p.Bairro = reader["Bairro"].ToString();
-                    p.Telefone = reader["Telefone"].ToString();
-                    p.Celular = reader["Celular"].ToString();
-                    p.Email = reader["Email"].ToString();
-                    p.DataNascimento = Convert.ToDateTime(reader["DataNascimento"].ToString());
+                    p.RemuneracaoConvenio = Convert.ToDouble(reader["RemuneracaoConvenio"]);
+                    p.RemuneracaoParticular = Convert.ToDouble(reader["RemuneracaoParticular"]);
                     Especialidades.Add(p);
                 }
             }
@@ -115,23 +90,13 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "UPDATE Especialidade SET " +
-                    "CPF=@CPF,Nome=@Nome,UF=@UF,Municipio=@Municipio,CEP=@CEP,Logradouro=@Logradouro,Numero=@Numero," +
-                    "Complemento=@Complemento,Bairro=@Bairro,Telefone=@Telefone,Celular=@Celular,Email=@Email," +
-                    "DataNascimento=@DataNascimento WHERE ID=@ID";
+                    "Nome=@Nome,RemuneracaoConvenio=@RemuneracaoConvenio," +
+                    "RemuneracaoParticular=@RemuneracaoParticular " +
+                    "WHERE ID=@ID";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@CPF", Especialidade.CPF);
                 cmd.Parameters.AddWithValue("@Nome", Especialidade.Nome);
-                cmd.Parameters.AddWithValue("@UF", Especialidade.UF);
-                cmd.Parameters.AddWithValue("@Municipio", Especialidade.Municipio);
-                cmd.Parameters.AddWithValue("@CEP", Especialidade.CEP);
-                cmd.Parameters.AddWithValue("@Logradouro", Especialidade.Logradouro);
-                cmd.Parameters.AddWithValue("@Numero", Especialidade.Numero);
-                cmd.Parameters.AddWithValue("@Complemento", Especialidade.Complemento);
-                cmd.Parameters.AddWithValue("@Bairro", Especialidade.Bairro);
-                cmd.Parameters.AddWithValue("@Telefone", Especialidade.Telefone);
-                cmd.Parameters.AddWithValue("@Celular", Especialidade.Celular);
-                cmd.Parameters.AddWithValue("@Email", Especialidade.Email);
-                cmd.Parameters.AddWithValue("@DataNascimento", Especialidade.DataNascimento.ToShortDateString());
+                cmd.Parameters.AddWithValue("@RemuneracaoConvenio", Especialidade.RemuneracaoConvenio);
+                cmd.Parameters.AddWithValue("@RemuneracaoParticular", Especialidade.RemuneracaoParticular);
                 cmd.Parameters.AddWithValue("@ID", Especialidade.ID);
                 cmd.ExecuteNonQuery();
             }

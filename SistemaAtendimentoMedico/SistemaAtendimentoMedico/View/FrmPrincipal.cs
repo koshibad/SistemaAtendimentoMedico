@@ -152,6 +152,18 @@ namespace SistemaAtendimentoMedico.View
                     FrmConvenio.dgResultado.DataSource = null;
                     FrmConvenio.dgResultado.DataSource = FrmConvenio.lstConvenios;
                 }
+                else if (tabPage == tpEspecialidade)
+                {
+                    FrmEspecialidade.lstEspecialidades = FrmEspecialidade.EspecialidadeDao.Select(null);
+                    FrmEspecialidade.dgResultado.DataSource = null;
+                    FrmEspecialidade.dgResultado.DataSource = FrmEspecialidade.lstEspecialidades;
+                }
+                else if (tabPage == tpMedico)
+                {
+                    FrmMedico.lstMedicos = FrmMedico.MedicoDao.Select(null);
+                    FrmMedico.dgResultado.DataSource = null;
+                    FrmMedico.dgResultado.DataSource = FrmMedico.lstMedicos;
+                }
                 else if (tabPage == tpPaciente)
                 {
                     FrmPaciente.lstPacientes = FrmPaciente.PacienteDao.Select(null);

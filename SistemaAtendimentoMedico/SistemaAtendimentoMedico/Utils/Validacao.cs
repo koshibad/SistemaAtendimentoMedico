@@ -67,5 +67,17 @@ namespace SistemaAtendimentoMedico.Utils
                 throw new Exception("Informe uma data válida.");
             }
         }
+
+        public static double ValidarPorcentagemDecimal(this string txt)
+        {
+            try
+            {
+                return Convert.ToDouble(txt);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Informe uma porcentagem válida. O número deve estar entre 0 e 100.");
+            }
+        }
     }
 }

@@ -50,14 +50,14 @@
             this.txtCnpj = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pnBusca = new System.Windows.Forms.Panel();
+            this.txtPesquisaNomeFantasia = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtPesquisaRazaoSocial = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.txtPesquisaCnpj = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.dgResultado = new System.Windows.Forms.DataGridView();
-            this.txtPesquisaNomeFantasia = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.tsMenus.SuspendLayout();
             this.pnBusca.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgResultado)).BeginInit();
@@ -162,7 +162,7 @@
             // 
             this.txtNomeFantasia.Enabled = false;
             this.txtNomeFantasia.Location = new System.Drawing.Point(215, 150);
-            this.txtNomeFantasia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNomeFantasia.Margin = new System.Windows.Forms.Padding(4);
             this.txtNomeFantasia.MaxLength = 255;
             this.txtNomeFantasia.Name = "txtNomeFantasia";
             this.txtNomeFantasia.Size = new System.Drawing.Size(629, 22);
@@ -182,7 +182,7 @@
             // 
             this.txtRazaoSocial.Enabled = false;
             this.txtRazaoSocial.Location = new System.Drawing.Point(215, 110);
-            this.txtRazaoSocial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtRazaoSocial.Margin = new System.Windows.Forms.Padding(4);
             this.txtRazaoSocial.MaxLength = 255;
             this.txtRazaoSocial.Name = "txtRazaoSocial";
             this.txtRazaoSocial.Size = new System.Drawing.Size(629, 22);
@@ -203,7 +203,7 @@
             this.txtUF.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtUF.Enabled = false;
             this.txtUF.Location = new System.Drawing.Point(803, 67);
-            this.txtUF.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUF.Margin = new System.Windows.Forms.Padding(4);
             this.txtUF.MaxLength = 2;
             this.txtUF.Name = "txtUF";
             this.txtUF.Size = new System.Drawing.Size(41, 22);
@@ -224,7 +224,7 @@
             // 
             this.txtTelefone.Enabled = false;
             this.txtTelefone.Location = new System.Drawing.Point(215, 193);
-            this.txtTelefone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTelefone.Margin = new System.Windows.Forms.Padding(4);
             this.txtTelefone.Mask = "(99) 0000-0000";
             this.txtTelefone.Name = "txtTelefone";
             this.txtTelefone.Size = new System.Drawing.Size(125, 22);
@@ -244,7 +244,7 @@
             // 
             this.txtEmail.Enabled = false;
             this.txtEmail.Location = new System.Drawing.Point(428, 194);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtEmail.MaxLength = 255;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(416, 22);
@@ -264,7 +264,7 @@
             // 
             this.txtRegistroAns.Enabled = false;
             this.txtRegistroAns.Location = new System.Drawing.Point(537, 66);
-            this.txtRegistroAns.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtRegistroAns.Margin = new System.Windows.Forms.Padding(4);
             this.txtRegistroAns.MaxLength = 10;
             this.txtRegistroAns.Name = "txtRegistroAns";
             this.txtRegistroAns.Size = new System.Drawing.Size(200, 22);
@@ -284,7 +284,7 @@
             // 
             this.txtCnpj.Enabled = false;
             this.txtCnpj.Location = new System.Drawing.Point(215, 66);
-            this.txtCnpj.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCnpj.Margin = new System.Windows.Forms.Padding(4);
             this.txtCnpj.MaxLength = 14;
             this.txtCnpj.Name = "txtCnpj";
             this.txtCnpj.Size = new System.Drawing.Size(200, 22);
@@ -312,15 +312,34 @@
             this.pnBusca.Controls.Add(this.txtPesquisaCnpj);
             this.pnBusca.Controls.Add(this.label13);
             this.pnBusca.Location = new System.Drawing.Point(215, 278);
-            this.pnBusca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnBusca.Margin = new System.Windows.Forms.Padding(4);
             this.pnBusca.Name = "pnBusca";
             this.pnBusca.Size = new System.Drawing.Size(517, 106);
             this.pnBusca.TabIndex = 57;
             // 
+            // txtPesquisaNomeFantasia
+            // 
+            this.txtPesquisaNomeFantasia.Location = new System.Drawing.Point(133, 75);
+            this.txtPesquisaNomeFantasia.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPesquisaNomeFantasia.MaxLength = 255;
+            this.txtPesquisaNomeFantasia.Name = "txtPesquisaNomeFantasia";
+            this.txtPesquisaNomeFantasia.Size = new System.Drawing.Size(217, 22);
+            this.txtPesquisaNomeFantasia.TabIndex = 23;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(19, 78);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(107, 17);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Nome Fantasia:\t";
+            // 
             // txtPesquisaRazaoSocial
             // 
             this.txtPesquisaRazaoSocial.Location = new System.Drawing.Point(133, 42);
-            this.txtPesquisaRazaoSocial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPesquisaRazaoSocial.Margin = new System.Windows.Forms.Padding(4);
             this.txtPesquisaRazaoSocial.MaxLength = 255;
             this.txtPesquisaRazaoSocial.Name = "txtPesquisaRazaoSocial";
             this.txtPesquisaRazaoSocial.Size = new System.Drawing.Size(217, 22);
@@ -339,7 +358,7 @@
             // btnPesquisar
             // 
             this.btnPesquisar.Location = new System.Drawing.Point(381, 30);
-            this.btnPesquisar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPesquisar.Margin = new System.Windows.Forms.Padding(4);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(111, 50);
             this.btnPesquisar.TabIndex = 8;
@@ -350,7 +369,7 @@
             // txtPesquisaCnpj
             // 
             this.txtPesquisaCnpj.Location = new System.Drawing.Point(133, 10);
-            this.txtPesquisaCnpj.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPesquisaCnpj.Margin = new System.Windows.Forms.Padding(4);
             this.txtPesquisaCnpj.MaxLength = 11;
             this.txtPesquisaCnpj.Name = "txtPesquisaCnpj";
             this.txtPesquisaCnpj.Size = new System.Drawing.Size(217, 22);
@@ -373,6 +392,7 @@
             this.dgResultado.AllowUserToOrderColumns = true;
             this.dgResultado.BackgroundColor = System.Drawing.Color.White;
             this.dgResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgResultado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgResultado.Location = new System.Drawing.Point(12, 393);
             this.dgResultado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgResultado.MultiSelect = false;
@@ -384,25 +404,6 @@
             this.dgResultado.TabIndex = 58;
             this.dgResultado.DataSourceChanged += new System.EventHandler(this.dgResultado_DataSourceChanged);
             this.dgResultado.CurrentCellChanged += new System.EventHandler(this.dgResultado_CurrentCellChanged);
-            // 
-            // txtPesquisaNomeFantasia
-            // 
-            this.txtPesquisaNomeFantasia.Location = new System.Drawing.Point(133, 75);
-            this.txtPesquisaNomeFantasia.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPesquisaNomeFantasia.MaxLength = 255;
-            this.txtPesquisaNomeFantasia.Name = "txtPesquisaNomeFantasia";
-            this.txtPesquisaNomeFantasia.Size = new System.Drawing.Size(217, 22);
-            this.txtPesquisaNomeFantasia.TabIndex = 23;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 78);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 17);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "Nome Fantasia:\t";
             // 
             // FrmConvenio
             // 

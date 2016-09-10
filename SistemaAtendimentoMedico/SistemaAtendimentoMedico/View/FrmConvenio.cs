@@ -97,13 +97,13 @@ namespace SistemaAtendimentoMedico.View
 
             try
             {
+                dgResultado.DataSource = null;
                 int index = lstConvenios.IndexOf(Convenio);
                 lstConvenios.RemoveAt(index);
                 ConvenioDao.Delete(Convenio.ID.ToString());
 
                 MessageBox.Show(this, "Convenio incluido com sucesso", "Convenio");
 
-                dgResultado.DataSource = null;
                 dgResultado.DataSource = lstConvenios;
                 formOnEndTask();
             }
