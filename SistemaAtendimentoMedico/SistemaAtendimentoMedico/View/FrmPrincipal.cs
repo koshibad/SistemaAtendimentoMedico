@@ -163,6 +163,11 @@ namespace SistemaAtendimentoMedico.View
                     FrmMedico.lstMedicos = FrmMedico.MedicoDao.Select(null);
                     FrmMedico.dgResultado.DataSource = null;
                     FrmMedico.dgResultado.DataSource = FrmMedico.lstMedicos;
+                    FrmMedico.cbEspecialidade.DataSource = null;
+                    FrmMedico.cbEspecialidade.DataSource = FrmEspecialidade.EspecialidadeDao.Select(null);
+                    FrmMedico.cbEspecialidade.DisplayMember = "Nome";
+                    FrmMedico.cbEspecialidade.ValueMember = "ID";
+                    FrmMedico.cbEspecialidade.SelectedIndex = -1;
                 }
                 else if (tabPage == tpPaciente)
                 {

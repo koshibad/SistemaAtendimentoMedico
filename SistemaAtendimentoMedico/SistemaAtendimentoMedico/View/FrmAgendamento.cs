@@ -44,7 +44,7 @@ namespace SistemaAtendimentoMedico.View
             tbInserir.Visible = false;
             tbSalvar.Visible = false;
             tbCancelar.Visible = false;
-            Util.EnableAllTextBox(this, false);
+            Util.EnableAllControls(this, false);
         }
 
         private void tbNovo_Click(object sender, System.EventArgs e)
@@ -53,8 +53,8 @@ namespace SistemaAtendimentoMedico.View
             enableSearchComponents(false);
             tbInserir.Visible = true;
             tbCancelar.Visible = true;
-            Util.ClearAllTextBox(this);
-            Util.EnableAllTextBox(this, true);
+            Util.ClearAllControls(this);
+            Util.EnableAllControls(this, true);
         }
 
         private void tbAlterar_Click(object sender, System.EventArgs e)
@@ -73,7 +73,7 @@ namespace SistemaAtendimentoMedico.View
             enableSearchComponents(false);
             tbSalvar.Visible = true;
             tbCancelar.Visible = true;
-            Util.EnableAllTextBox(this, true);
+            Util.EnableAllControls(this, true);
         }
 
         private void tbCancelar_Click(object sender, System.EventArgs e)
@@ -211,7 +211,7 @@ namespace SistemaAtendimentoMedico.View
             {
                 if (dgResultado.CurrentRow == null)
                 {
-                    Util.ClearAllTextBox(this);
+                    Util.ClearAllControls(this);
                     return;
                 }
 

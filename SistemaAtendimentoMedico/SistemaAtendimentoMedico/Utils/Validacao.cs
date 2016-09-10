@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SistemaAtendimentoMedico.Utils
 {
@@ -77,6 +78,18 @@ namespace SistemaAtendimentoMedico.Utils
             catch (Exception)
             {
                 throw new Exception("Informe uma porcentagem válida. O número deve estar entre 0 e 100.");
+            }
+        }
+
+        public static int ValidarItemSelecionado(this ComboBox cb, string informacao)
+        {
+            try
+            {
+                return Convert.ToInt32(cb.SelectedValue.ToString());
+            }
+            catch (Exception)
+            {
+                throw new Exception("Selecione um(a) " + informacao);
             }
         }
     }

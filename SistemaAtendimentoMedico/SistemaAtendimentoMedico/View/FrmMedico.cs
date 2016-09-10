@@ -44,7 +44,7 @@ namespace SistemaAtendimentoMedico.View
             tbInserir.Visible = false;
             tbSalvar.Visible = false;
             tbCancelar.Visible = false;
-            Util.EnableAllTextBox(this, false);
+            Util.EnableAllControls(this, false);
         }
 
         private void tbNovo_Click(object sender, System.EventArgs e)
@@ -53,8 +53,8 @@ namespace SistemaAtendimentoMedico.View
             enableSearchComponents(false);
             tbInserir.Visible = true;
             tbCancelar.Visible = true;
-            Util.ClearAllTextBox(this);
-            Util.EnableAllTextBox(this, true);
+            Util.ClearAllControls(this);
+            Util.EnableAllControls(this, true);
         }
 
         private void tbAlterar_Click(object sender, System.EventArgs e)
@@ -73,7 +73,7 @@ namespace SistemaAtendimentoMedico.View
             enableSearchComponents(false);
             tbSalvar.Visible = true;
             tbCancelar.Visible = true;
-            Util.EnableAllTextBox(this, true);
+            Util.EnableAllControls(this, true);
         }
 
         private void tbCancelar_Click(object sender, System.EventArgs e)
@@ -97,13 +97,13 @@ namespace SistemaAtendimentoMedico.View
 
             try
             {
+                dgResultado.DataSource = null;
                 int index = lstMedicos.IndexOf(Medico);
                 lstMedicos.RemoveAt(index);
                 MedicoDao.Delete(Medico.ID.ToString());
 
                 MessageBox.Show(this, "Medico incluido com sucesso", "Medico");
 
-                dgResultado.DataSource = null;
                 dgResultado.DataSource = lstMedicos;
                 formOnEndTask();
             }
@@ -130,6 +130,7 @@ namespace SistemaAtendimentoMedico.View
                 Medico.Celular = txtCelular.Text.ValidarNumeros(10, "celular", false);
                 Medico.Email = txtEmail.Text.ValidarEmail();
                 Medico.DataNascimento = txtDataNasc.Text.ValidarData();
+                Medico.IDEspecialidade = cbEspecialidade.ValidarItemSelecionado("Especialidade");
             }
             catch (Exception)
             {
@@ -149,11 +150,11 @@ namespace SistemaAtendimentoMedico.View
                     throw new Exception("Já existe Medico com o CPF informado");
 
                 MedicoDao.Insert(Medico);
+                dgResultado.DataSource = null;
                 lstMedicos.Add(Medico);
 
                 MessageBox.Show(this, "Medico incluido com sucesso", "Medico");
 
-                dgResultado.DataSource = null;
                 dgResultado.DataSource = lstMedicos;
                 formOnEndTask();
             }
@@ -181,7 +182,7 @@ namespace SistemaAtendimentoMedico.View
                 MedicoDao.Update(Medico);
                 lstMedicos.Add(Medico);
                 lstMedicos = lstMedicos.OrderBy(x => x.ID).ToList();
-                MessageBox.Show(this, "Medico incluido com sucesso", "Medico");
+                MessageBox.Show(this, "Medico alterado com sucesso", "Medico");
 
                 dgResultado.DataSource = null;
                 dgResultado.DataSource = lstMedicos;
@@ -211,7 +212,7 @@ namespace SistemaAtendimentoMedico.View
             {
                 if (dgResultado.CurrentRow == null)
                 {
-                    Util.ClearAllTextBox(this);
+                    Util.ClearAllControls(this);
                     return;
                 }
 
@@ -231,6 +232,7 @@ namespace SistemaAtendimentoMedico.View
                 txtCelular.Text = Medico.Celular;
                 txtEmail.Text = Medico.Email;
                 txtDataNasc.Text = Medico.DataNascimento.ToShortDateString();
+                cbEspecialidade.SelectedValue = Medico.IDEspecialidade;
             }
             catch (Exception ex)
             {

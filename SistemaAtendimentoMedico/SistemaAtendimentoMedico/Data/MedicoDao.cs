@@ -13,17 +13,12 @@ namespace SistemaAtendimentoMedico.Data
         {
             try
             {
-                try
-                {
-                    OpenConnection();
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.CommandText = "DELETE FROM Medico WHERE ID=@ID";
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@ID", ID);
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception) { throw; }
-                finally { CloseConnection(); }
+                OpenConnection();
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = "DELETE FROM Medico WHERE ID=@ID";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@ID", ID);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception) { throw; }
             finally { CloseConnection(); }
@@ -36,8 +31,10 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "INSERT INTO Medico " +
-                    "(CPF,Nome,UF,Municipio,CEP,Logradouro,Numero,Complemento,Bairro,Telefone,Celular,Email,DataNascimento) " +
-                    "VALUES (@CPF,@Nome,@UF,@Municipio,@CEP,@Logradouro,@Numero,@Complemento,@Bairro,@Telefone,@Celular,@Email,@DataNascimento)";
+                    "(CPF,Nome,UF,Municipio,CEP,Logradouro,Numero,Complemento,Bairro," +
+                    "Telefone,Celular,Email,DataNascimento,IDEspecialidade) " +
+                    "VALUES (@CPF,@Nome,@UF,@Municipio,@CEP,@Logradouro,@Numero,@Complemento,@Bairro,"
+                    + "@Telefone,@Celular,@Email,@DataNascimento,@IDEspecialidade)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@CPF", Medico.CPF);
                 cmd.Parameters.AddWithValue("@Nome", Medico.Nome);
@@ -52,6 +49,7 @@ namespace SistemaAtendimentoMedico.Data
                 cmd.Parameters.AddWithValue("@Celular", Medico.Celular);
                 cmd.Parameters.AddWithValue("@Email", Medico.Email);
                 cmd.Parameters.AddWithValue("@DataNascimento", Medico.DataNascimento.ToShortDateString());
+                cmd.Parameters.AddWithValue("@IDEspecialidade", Medico.IDEspecialidade);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception) { throw; }
@@ -98,6 +96,7 @@ namespace SistemaAtendimentoMedico.Data
                     p.Celular = reader["Celular"].ToString();
                     p.Email = reader["Email"].ToString();
                     p.DataNascimento = Convert.ToDateTime(reader["DataNascimento"].ToString());
+                    p.IDEspecialidade = Convert.ToInt32(reader["IDEspecialidade"]);
                     Medicos.Add(p);
                 }
             }
@@ -117,7 +116,7 @@ namespace SistemaAtendimentoMedico.Data
                 cmd.CommandText = "UPDATE Medico SET " +
                     "CPF=@CPF,Nome=@Nome,UF=@UF,Municipio=@Municipio,CEP=@CEP,Logradouro=@Logradouro,Numero=@Numero," +
                     "Complemento=@Complemento,Bairro=@Bairro,Telefone=@Telefone,Celular=@Celular,Email=@Email," +
-                    "DataNascimento=@DataNascimento WHERE ID=@ID";
+                    "DataNascimento=@DataNascimento,IDEspecialidade=@IDEspecialidade WHERE ID=@ID";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@CPF", Medico.CPF);
                 cmd.Parameters.AddWithValue("@Nome", Medico.Nome);
@@ -132,6 +131,7 @@ namespace SistemaAtendimentoMedico.Data
                 cmd.Parameters.AddWithValue("@Celular", Medico.Celular);
                 cmd.Parameters.AddWithValue("@Email", Medico.Email);
                 cmd.Parameters.AddWithValue("@DataNascimento", Medico.DataNascimento.ToShortDateString());
+                cmd.Parameters.AddWithValue("@IDEspecialidade", Medico.IDEspecialidade);
                 cmd.Parameters.AddWithValue("@ID", Medico.ID);
                 cmd.ExecuteNonQuery();
             }

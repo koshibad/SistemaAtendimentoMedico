@@ -39,7 +39,7 @@ namespace SistemaAtendimentoMedico.View
             tbInserir.Visible = false;
             tbSalvar.Visible = false;
             tbCancelar.Visible = false;
-            Util.EnableAllTextBox(this, false);
+            Util.EnableAllControls(this, false);
         }
 
         private void tbNovo_Click(object sender, System.EventArgs e)
@@ -48,8 +48,8 @@ namespace SistemaAtendimentoMedico.View
             enableSearchComponents(false);
             tbInserir.Visible = true;
             tbCancelar.Visible = true;
-            Util.ClearAllTextBox(this);
-            Util.EnableAllTextBox(this, true);
+            Util.ClearAllControls(this);
+            Util.EnableAllControls(this, true);
         }
 
         private void tbAlterar_Click(object sender, System.EventArgs e)
@@ -68,7 +68,7 @@ namespace SistemaAtendimentoMedico.View
             enableSearchComponents(false);
             tbSalvar.Visible = true;
             tbCancelar.Visible = true;
-            Util.EnableAllTextBox(this, true);
+            Util.EnableAllControls(this, true);
         }
 
         private void tbCancelar_Click(object sender, System.EventArgs e)
@@ -92,13 +92,13 @@ namespace SistemaAtendimentoMedico.View
 
             try
             {
+                dgResultado.DataSource = null;
                 int index = lstPacientes.IndexOf(paciente);
                 lstPacientes.RemoveAt(index);
                 PacienteDao.Delete(paciente.ID.ToString());
 
                 MessageBox.Show(this, "Paciente incluido com sucesso", "Paciente");
 
-                dgResultado.DataSource = null;
                 dgResultado.DataSource = lstPacientes;
                 formOnEndTask();
             }
@@ -144,11 +144,11 @@ namespace SistemaAtendimentoMedico.View
                     throw new Exception("Já existe paciente com o CPF informado");
 
                 PacienteDao.Insert(paciente);
+                dgResultado.DataSource = null;
                 lstPacientes.Add(paciente);
 
-                MessageBox.Show(this, "Paciente incluido com sucesso", "Paciente");
+                MessageBox.Show(this, "Paciente alterado com sucesso", "Paciente");
 
-                dgResultado.DataSource = null;
                 dgResultado.DataSource = lstPacientes;
                 formOnEndTask();
             }
@@ -206,7 +206,7 @@ namespace SistemaAtendimentoMedico.View
             {
                 if (dgResultado.CurrentRow == null)
                 {
-                    Util.ClearAllTextBox(this);
+                    Util.ClearAllControls(this);
                     return;
                 }
 
