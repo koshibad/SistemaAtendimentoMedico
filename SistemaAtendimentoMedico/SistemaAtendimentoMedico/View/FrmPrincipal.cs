@@ -146,7 +146,13 @@ namespace SistemaAtendimentoMedico.View
             {
                 FrmInicio.timerRelogio.Stop();
 
-                if (tabPage == tpPaciente)
+                if (tabPage == tpConvenio)
+                {
+                    FrmConvenio.lstConvenios = FrmConvenio.ConvenioDao.Select(null);
+                    FrmConvenio.dgResultado.DataSource = null;
+                    FrmConvenio.dgResultado.DataSource = FrmConvenio.lstConvenios;
+                }
+                else if (tabPage == tpPaciente)
                 {
                     FrmPaciente.lstPacientes = FrmPaciente.PacienteDao.Select(null);
                     FrmPaciente.dgResultado.DataSource = null;

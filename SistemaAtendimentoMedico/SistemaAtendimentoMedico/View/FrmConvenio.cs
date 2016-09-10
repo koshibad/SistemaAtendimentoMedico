@@ -117,19 +117,13 @@ namespace SistemaAtendimentoMedico.View
         {
             try
             {
-                Convenio.CPF = txtCpf.Text.ValidarTextoVazio("CPF");
-                Convenio.Nome = txtNome.Text.ValidarTextoVazio("Nome");
+                Convenio.CNPJ = txtCnpj.Text.ValidarTextoVazio("CNPJ");
+                Convenio.RegistroANS = Convert.ToInt32(txtRegistroAns.Text.ValidarTextoVazio("Registro ANS"));
                 Convenio.UF = txtUF.Text.ValidarTextoVazio("UF");
-                Convenio.Municipio = txtMunicipio.Text.ValidarTextoVazio("Municipio");
-                Convenio.CEP = txtCep.Text.ValidarNumeros(8, "CEP");
-                Convenio.Logradouro = txtLogradouro.Text.ValidarTextoVazio("Logradouro");
-                Convenio.Numero = txtNumero.Text.ValidarNumero();
-                Convenio.Complemento = txtComplemento.Text;
-                Convenio.Bairro = txtBairro.Text.ValidarTextoVazio("Bairro");
+                Convenio.RazaoSocial = txtRazaoSocial.Text.ValidarTextoVazio("Razão Social");
+                Convenio.NomeFantasia = txtNomeFantasia.Text.ValidarTextoVazio("Nome Fantasia");
                 Convenio.Telefone = txtTelefone.Text.ValidarNumeros(10, "telefone");
-                Convenio.Celular = txtCelular.Text.ValidarNumeros(10, "celular", false);
                 Convenio.Email = txtEmail.Text.ValidarEmail();
-                Convenio.DataNascimento = txtDataNasc.Text.ValidarData();
             }
             catch (Exception)
             {
@@ -145,8 +139,8 @@ namespace SistemaAtendimentoMedico.View
                 validationInsertUpdate(Convenio);
 
                 if (ConvenioDao.Select(new List<Tuple<string, object, string>>()
-                    { new Tuple<string, object, string>("CPF", Convenio.CPF, "=") }).Count > 0)
-                    throw new Exception("Já existe Convenio com o CPF informado");
+                    { new Tuple<string, object, string>("CNPJ", Convenio.CNPJ, "=") }).Count > 0)
+                    throw new Exception("Já existe Convenio com o CNPJ informado");
 
                 ConvenioDao.Insert(Convenio);
                 lstConvenios.Add(Convenio);
@@ -172,16 +166,16 @@ namespace SistemaAtendimentoMedico.View
                 validationInsertUpdate(Convenio);
 
                 if (ConvenioDao.Select(new List<Tuple<string, object, string>>(){
-                    new Tuple<string, object, string>("CPF", Convenio.CPF, "="),
+                    new Tuple<string, object, string>("CNPJ", Convenio.CNPJ, "="),
                     new Tuple<string, object, string>("ID",Convenio.ID,"<>")
                     }).Count > 0)
-                    throw new Exception("Já existe Convenio com o CPF informado");
+                    throw new Exception("Já existe Convenio com o CNPJ informado");
 
                 lstConvenios.RemoveAt(index);
                 ConvenioDao.Update(Convenio);
                 lstConvenios.Add(Convenio);
                 lstConvenios = lstConvenios.OrderBy(x => x.ID).ToList();
-                MessageBox.Show(this, "Convenio incluido com sucesso", "Convenio");
+                MessageBox.Show(this, "Convenio alterado com sucesso", "Convenio");
 
                 dgResultado.DataSource = null;
                 dgResultado.DataSource = lstConvenios;
@@ -218,19 +212,13 @@ namespace SistemaAtendimentoMedico.View
                 var Convenio = dgResultado.CurrentRow.DataBoundItem as Convenio;
                 if (Convenio == null) return;
 
-                txtCpf.Text = Convenio.CPF;
-                txtNome.Text = Convenio.Nome;
-                txtLogradouro.Text = Convenio.Logradouro;
+                txtCnpj.Text = Convenio.CNPJ;
+                txtRegistroAns.Text = Convenio.RegistroANS.ToString();
                 txtUF.Text = Convenio.UF;
-                txtMunicipio.Text = Convenio.Municipio;
-                txtNumero.Text = Convenio.Numero.ToString();
-                txtCep.Text = Convenio.CEP;
-                txtComplemento.Text = Convenio.Complemento;
-                txtBairro.Text = Convenio.Bairro;
+                txtRazaoSocial.Text = Convenio.RazaoSocial;
+                txtNomeFantasia.Text = Convenio.NomeFantasia;
                 txtTelefone.Text = Convenio.Telefone;
-                txtCelular.Text = Convenio.Celular;
                 txtEmail.Text = Convenio.Email;
-                txtDataNasc.Text = Convenio.DataNascimento.ToShortDateString();
             }
             catch (Exception ex)
             {
@@ -242,8 +230,9 @@ namespace SistemaAtendimentoMedico.View
         {
             dgResultado.DataSource = null;
             dgResultado.DataSource = lstConvenios.Where(x =>
-                x.Nome.Contains(txtPesquisaNome.Text.Trim()) &&
-                x.CPF.Contains(txtPesquisaCpf.Text.Trim())).ToList();
+                x.CNPJ.Contains(txtPesquisaRazaoSocial.Text.Trim()) &&
+                x.NomeFantasia.Contains(txtPesquisaRazaoSocial.Text.Trim()) &&
+                x.RazaoSocial.Contains(txtPesquisaCnpj.Text.Trim())).ToList();
         }
 
         private void dgResultado_DataSourceChanged(object sender, EventArgs e)

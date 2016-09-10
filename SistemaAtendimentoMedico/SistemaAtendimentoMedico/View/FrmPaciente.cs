@@ -176,7 +176,7 @@ namespace SistemaAtendimentoMedico.View
                 PacienteDao.Update(paciente);
                 lstPacientes.Add(paciente);
                 lstPacientes = lstPacientes.OrderBy(x => x.ID).ToList();
-                MessageBox.Show(this, "Paciente incluido com sucesso", "Paciente");
+                MessageBox.Show(this, "Paciente alterado com sucesso", "Paciente");
 
                 dgResultado.DataSource = null;
                 dgResultado.DataSource = lstPacientes;

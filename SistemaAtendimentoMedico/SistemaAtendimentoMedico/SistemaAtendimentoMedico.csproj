@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AgendamentoDao.cs" />
+    <Compile Include="Data\AtendimentoDao.cs" />
     <Compile Include="Data\ConvenioDao.cs" />
     <Compile Include="Data\Dao.cs" />
     <Compile Include="Data\EspecialidadeDao.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Data\MedicoDao.cs" />
     <Compile Include="Data\PacienteDao.cs" />
     <Compile Include="Model\Agendamento.cs" />
+    <Compile Include="Model\Atendimento.cs" />
     <Compile Include="Model\Convenio.cs" />
     <Compile Include="Model\Especialidade.cs" />
     <Compile Include="Model\Material.cs" />
@@ -129,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmEspecialidade.resx">
       <DependentUpon>FrmEspecialidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FrmFaturamento.resx">
+      <DependentUpon>FrmFaturamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FrmInicio.resx">
       <DependentUpon>FrmInicio.cs</DependentUpon>
