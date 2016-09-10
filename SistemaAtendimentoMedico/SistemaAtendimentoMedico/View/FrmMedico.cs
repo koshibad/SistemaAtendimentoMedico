@@ -21,6 +21,7 @@ namespace SistemaAtendimentoMedico.View
         public FrmMedico()
         {
             InitializeComponent();
+            Util.SetUFComboBox(cbUF);
             MedicoDao = new MedicoDao();
         }
 
@@ -118,8 +119,9 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 Medico.CPF = txtCpf.Text.ValidarTextoVazio("CPF");
+                Medico.CRM = txtCRM.Text;
                 Medico.Nome = txtNome.Text.ValidarTextoVazio("Nome");
-                Medico.UF = txtUF.Text.ValidarTextoVazio("UF");
+                Medico.UF = (cbUF.SelectedValue ?? "").ToString().ValidarTextoVazio("UF");
                 Medico.Municipio = txtMunicipio.Text.ValidarTextoVazio("Municipio");
                 Medico.CEP = txtCep.Text.ValidarNumeros(8, "CEP");
                 Medico.Logradouro = txtLogradouro.Text.ValidarTextoVazio("Logradouro");
@@ -148,6 +150,11 @@ namespace SistemaAtendimentoMedico.View
                 if (MedicoDao.Select(new List<Tuple<string, object, string>>()
                     { new Tuple<string, object, string>("CPF", Medico.CPF, "=") }).Count > 0)
                     throw new Exception("Já existe Medico com o CPF informado");
+
+                if (!String.IsNullOrEmpty(Medico.CRM) &&
+                    MedicoDao.Select(new List<Tuple<string, object, string>>()
+                    { new Tuple<string, object, string>("CRM", Medico.CRM, "=") }).Count > 0)
+                    throw new Exception("Já existe Medico com o CRM informado");
 
                 MedicoDao.Insert(Medico);
                 dgResultado.DataSource = null;
@@ -178,6 +185,13 @@ namespace SistemaAtendimentoMedico.View
                     }).Count > 0)
                     throw new Exception("Já existe Medico com o CPF informado");
 
+                if (!String.IsNullOrEmpty(Medico.CRM) &&
+                    MedicoDao.Select(new List<Tuple<string, object, string>>(){
+                    new Tuple<string, object, string>("CRM", Medico.CRM, "="),
+                    new Tuple<string, object, string>("ID",Medico.ID,"<>")
+                    }).Count > 0)
+                    throw new Exception("Já existe Medico com o CRM informado");
+
                 lstMedicos.RemoveAt(index);
                 MedicoDao.Update(Medico);
                 lstMedicos.Add(Medico);
@@ -200,12 +214,6 @@ namespace SistemaAtendimentoMedico.View
                 e.Handled = true;
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
-                e.Handled = true;
-        }
-
         private void dgResultado_CurrentCellChanged(object sender, EventArgs e)
         {
             try
@@ -220,9 +228,10 @@ namespace SistemaAtendimentoMedico.View
                 if (Medico == null) return;
 
                 txtCpf.Text = Medico.CPF;
+                txtCRM.Text = Medico.CRM;
                 txtNome.Text = Medico.Nome;
                 txtLogradouro.Text = Medico.Logradouro;
-                txtUF.Text = Medico.UF;
+                cbUF.SelectedItem = Medico.UF;
                 txtMunicipio.Text = Medico.Municipio;
                 txtNumero.Text = Medico.Numero.ToString();
                 txtCep.Text = Medico.CEP;

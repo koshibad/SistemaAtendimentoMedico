@@ -31,12 +31,13 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "INSERT INTO Medico " +
-                    "(CPF,Nome,UF,Municipio,CEP,Logradouro,Numero,Complemento,Bairro," +
+                    "(CPF,CRM,Nome,UF,Municipio,CEP,Logradouro,Numero,Complemento,Bairro," +
                     "Telefone,Celular,Email,DataNascimento,IDEspecialidade) " +
-                    "VALUES (@CPF,@Nome,@UF,@Municipio,@CEP,@Logradouro,@Numero,@Complemento,@Bairro,"
+                    "VALUES (@CPF,@CRM,@Nome,@UF,@Municipio,@CEP,@Logradouro,@Numero,@Complemento,@Bairro,"
                     + "@Telefone,@Celular,@Email,@DataNascimento,@IDEspecialidade)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@CPF", Medico.CPF);
+                cmd.Parameters.AddWithValue("@CRM", Medico.CRM);
                 cmd.Parameters.AddWithValue("@Nome", Medico.Nome);
                 cmd.Parameters.AddWithValue("@UF", Medico.UF);
                 cmd.Parameters.AddWithValue("@Municipio", Medico.Municipio);
@@ -84,6 +85,7 @@ namespace SistemaAtendimentoMedico.Data
                     Medico p = new Medico();
                     p.ID = Convert.ToInt32(reader["ID"]);
                     p.CPF = reader["CPF"].ToString();
+                    p.CRM = reader["CRM"].ToString();
                     p.Nome = reader["Nome"].ToString();
                     p.UF = reader["UF"].ToString();
                     p.Municipio = reader["Municipio"].ToString();
@@ -114,11 +116,12 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "UPDATE Medico SET " +
-                    "CPF=@CPF,Nome=@Nome,UF=@UF,Municipio=@Municipio,CEP=@CEP,Logradouro=@Logradouro,Numero=@Numero," +
+                    "CPF=@CPF,CRM=@CRM,Nome=@Nome,UF=@UF,Municipio=@Municipio,CEP=@CEP,Logradouro=@Logradouro,Numero=@Numero," +
                     "Complemento=@Complemento,Bairro=@Bairro,Telefone=@Telefone,Celular=@Celular,Email=@Email," +
                     "DataNascimento=@DataNascimento,IDEspecialidade=@IDEspecialidade WHERE ID=@ID";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@CPF", Medico.CPF);
+                cmd.Parameters.AddWithValue("@CRM", Medico.CRM);
                 cmd.Parameters.AddWithValue("@Nome", Medico.Nome);
                 cmd.Parameters.AddWithValue("@UF", Medico.UF);
                 cmd.Parameters.AddWithValue("@Municipio", Medico.Municipio);

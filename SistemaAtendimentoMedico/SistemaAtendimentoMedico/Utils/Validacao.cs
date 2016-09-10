@@ -23,7 +23,7 @@ namespace SistemaAtendimentoMedico.Utils
         public static string ValidarTextoVazio(this string txt, string nomeCampo)
         {
             if (String.IsNullOrEmpty(txt.Trim()))
-                throw new Exception("Informe um " + nomeCampo);
+                throw new Exception("Informe um(a) " + nomeCampo);
 
             return txt;
         }

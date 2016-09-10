@@ -43,7 +43,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtMunicipio = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtUF = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -69,6 +68,7 @@
             this.dgResultado = new System.Windows.Forms.DataGridView();
             this.txtDataNasc = new System.Windows.Forms.MaskedTextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.cbUF = new System.Windows.Forms.ComboBox();
             this.tsMenus.SuspendLayout();
             this.pnBusca.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgResultado)).BeginInit();
@@ -244,18 +244,6 @@
             this.label8.Size = new System.Drawing.Size(71, 17);
             this.label8.TabIndex = 49;
             this.label8.Text = "Município:";
-            // 
-            // txtUF
-            // 
-            this.txtUF.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtUF.Enabled = false;
-            this.txtUF.Location = new System.Drawing.Point(215, 108);
-            this.txtUF.Margin = new System.Windows.Forms.Padding(4);
-            this.txtUF.MaxLength = 2;
-            this.txtUF.Name = "txtUF";
-            this.txtUF.Size = new System.Drawing.Size(41, 22);
-            this.txtUF.TabIndex = 2;
-            this.txtUF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // label7
             // 
@@ -523,12 +511,25 @@
             this.label15.TabIndex = 60;
             this.label15.Text = "Data Nasc.:";
             // 
+            // cbUF
+            // 
+            this.cbUF.BackColor = System.Drawing.Color.White;
+            this.cbUF.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbUF.Enabled = false;
+            this.cbUF.FormattingEnabled = true;
+            this.cbUF.Location = new System.Drawing.Point(215, 105);
+            this.cbUF.Margin = new System.Windows.Forms.Padding(4);
+            this.cbUF.Name = "cbUF";
+            this.cbUF.Size = new System.Drawing.Size(58, 24);
+            this.cbUF.TabIndex = 64;
+            // 
             // FrmPaciente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(999, 571);
+            this.Controls.Add(this.cbUF);
             this.Controls.Add(this.txtDataNasc);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.dgResultado);
@@ -541,7 +542,6 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtMunicipio);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.txtUF);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtNumero);
             this.Controls.Add(this.label6);
@@ -589,7 +589,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtMunicipio;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtUF;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.Label label6;
@@ -615,5 +614,6 @@
         public System.Windows.Forms.DataGridView dgResultado;
         private System.Windows.Forms.MaskedTextBox txtDataNasc;
         private System.Windows.Forms.Label label15;
+        public System.Windows.Forms.ComboBox cbUF;
     }
 }

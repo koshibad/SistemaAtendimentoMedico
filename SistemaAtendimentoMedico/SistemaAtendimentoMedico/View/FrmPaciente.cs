@@ -16,6 +16,7 @@ namespace SistemaAtendimentoMedico.View
         public FrmPaciente()
         {
             InitializeComponent();
+            Util.SetUFComboBox(cbUF);
             PacienteDao = new PacienteDao();
         }
 
@@ -114,7 +115,7 @@ namespace SistemaAtendimentoMedico.View
             {
                 paciente.CPF = txtCpf.Text.ValidarTextoVazio("CPF");
                 paciente.Nome = txtNome.Text.ValidarTextoVazio("Nome");
-                paciente.UF = txtUF.Text.ValidarTextoVazio("UF");
+                paciente.UF = (cbUF.SelectedValue ?? "").ToString().ValidarTextoVazio("UF");
                 paciente.Municipio = txtMunicipio.Text.ValidarTextoVazio("Municipio");
                 paciente.CEP = txtCep.Text.ValidarNumeros(8, "CEP");
                 paciente.Logradouro = txtLogradouro.Text.ValidarTextoVazio("Logradouro");
@@ -216,7 +217,7 @@ namespace SistemaAtendimentoMedico.View
                 txtCpf.Text = paciente.CPF;
                 txtNome.Text = paciente.Nome;
                 txtLogradouro.Text = paciente.Logradouro;
-                txtUF.Text = paciente.UF;
+                cbUF.SelectedItem = paciente.UF;
                 txtMunicipio.Text = paciente.Municipio;
                 txtNumero.Text = paciente.Numero.ToString();
                 txtCep.Text = paciente.CEP;
