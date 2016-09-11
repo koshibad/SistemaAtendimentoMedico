@@ -66,6 +66,20 @@ namespace SistemaAtendimentoMedico.Model
             }
         }
         public string TipoConsulta { get; set; }
-        public int IDConvenio { get; set; }
+
+        private int _IDConvenio;
+        public int IDConvenio
+        {
+            get { return _IDConvenio; }
+            set
+            {
+                _IDConvenio = value;
+                if (Utils.Util.lstConvenios != null)
+                    Convenio = Utils.Util.lstConvenios.FirstOrDefault(x => x.ID == value);
+            }
+        }
+
+        [Browsable(false)]
+        public Convenio Convenio { get; set; }
     }
 }

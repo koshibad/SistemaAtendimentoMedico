@@ -229,6 +229,8 @@ namespace SistemaAtendimentoMedico.View
                         foreach (var item in Util.lstMateriais)
                             FrmAtendimento.lbTodosMateriais.Items.Add(item);
                     }
+                    else if (tabPage == tpFaturamento)
+                        FrmFaturamento.clearAllComponents();
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
