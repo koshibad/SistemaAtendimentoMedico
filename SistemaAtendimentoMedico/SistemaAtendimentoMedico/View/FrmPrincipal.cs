@@ -37,6 +37,8 @@ namespace SistemaAtendimentoMedico.View
             Util.lstMedicos = FrmMedico.MedicoDao.Select(null);
             Util.lstConvenios = FrmConvenio.ConvenioDao.Select(null);
             Util.lstAgendamentos = FrmAgendamento.AgendamentoDao.Select(null);
+            Util.lstFabricante = FrmMaterial.MaterialDao.SelectFabricante(null);
+            Util.lstMateriais = FrmMaterial.MaterialDao.Select(null);
         }
 
         private void InitializeTabPages()
@@ -197,14 +199,16 @@ namespace SistemaAtendimentoMedico.View
                     else if (tabPage == tpMaterial)
                     {
                         //TODO: mascara IDCategoria, IDFinalidade, IDFabricante
-                        FrmMaterial.lstMateriais = FrmMaterial.MaterialDao.Select(null);
-                        FrmMaterial.dgResultado.DataSource = null;
-                        FrmMaterial.dgResultado.DataSource = FrmMaterial.lstMateriais;
-
                         FrmMaterial.lstFinalidades = FrmMaterial.MaterialDao.SelectFinalidade(null);
                         Util.SetComboBox(FrmMaterial.cbCategoria, FrmMaterial.MaterialDao.SelectCategoria(null));
-                        Util.SetComboBox(FrmMaterial.cbFabricante, FrmMaterial.MaterialDao.SelectFabricante(null));
-                        FrmMaterial.formOnEndTask();
+                        Util.lstFabricante = FrmMaterial.MaterialDao.SelectFabricante(null);
+                        Util.SetComboBox(FrmMaterial.cbFabricante, Util.lstFabricante);
+
+                        Util.lstMateriais = FrmMaterial.MaterialDao.Select(null);
+                        FrmMaterial.dgResultado.DataSource = null;
+                        FrmMaterial.dgResultado.DataSource = Util.lstMateriais;
+
+                        FrmMaterial.tbCancelar_Click(null, null);
                     }
                     else if (tabPage == tpAgendamento)
                     {
@@ -221,6 +225,9 @@ namespace SistemaAtendimentoMedico.View
                         FrmAtendimento.dgResultado.DataSource = null;
                         FrmAtendimento.dgResultado.DataSource = FrmAtendimento.lstAtendimentos;
                         FrmAtendimento.formOnEndTask();
+                        FrmAtendimento.lbTodosMateriais.Items.Clear();
+                        foreach (var item in Util.lstMateriais)
+                            FrmAtendimento.lbTodosMateriais.Items.Add(item);
                     }
                 }
             }

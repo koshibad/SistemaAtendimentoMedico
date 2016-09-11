@@ -15,7 +15,6 @@ namespace SistemaAtendimentoMedico.View
 {
     public partial class FrmMaterial : Form
     {
-        public List<Material> lstMateriais = null;
         public List<Finalidade> lstFinalidades = null;
         public MaterialDao MaterialDao = null;
 
@@ -38,7 +37,7 @@ namespace SistemaAtendimentoMedico.View
             dgResultado.Enabled = enabled;
         }
 
-        public void formOnEndTask()
+        private void formOnEndTask()
         {
             visibilityMainButtons(true);
             enableSearchComponents(true);
@@ -78,7 +77,7 @@ namespace SistemaAtendimentoMedico.View
             Util.EnableAllControls(this, true);
         }
 
-        private void tbCancelar_Click(object sender, System.EventArgs e)
+        public void tbCancelar_Click(object sender, System.EventArgs e)
         {
             formOnEndTask();
             dgResultado_CurrentCellChanged(null, null);
@@ -99,14 +98,14 @@ namespace SistemaAtendimentoMedico.View
 
             try
             {
-                int index = lstMateriais.IndexOf(Material);
+                int index = Util.lstMateriais.IndexOf(Material);
                 MaterialDao.Delete(Material.ID.ToString());
 
                 MessageBox.Show(this, "Material excluido com sucesso", "Material");
 
                 dgResultado.DataSource = null;
-                lstMateriais.RemoveAt(index);
-                dgResultado.DataSource = lstMateriais;
+                Util.lstMateriais.RemoveAt(index);
+                dgResultado.DataSource = Util.lstMateriais;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -145,12 +144,12 @@ namespace SistemaAtendimentoMedico.View
                     throw new Exception("Já existe Material com o Nome e Fabricante informado");
 
                 MaterialDao.Insert(Material);
-                lstMateriais = MaterialDao.Select(null);
+                Util.lstMateriais = MaterialDao.Select(null);
 
                 MessageBox.Show(this, "Material incluido com sucesso", "Material");
 
                 dgResultado.DataSource = null;
-                dgResultado.DataSource = lstMateriais;
+                dgResultado.DataSource = Util.lstMateriais;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -164,7 +163,7 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 var Material = (Material)dgResultado.CurrentRow.DataBoundItem;
-                int index = lstMateriais.IndexOf(Material);
+                int index = Util.lstMateriais.IndexOf(Material);
                 validationInsertUpdate(Material);
 
                 if (MaterialDao.Select(new List<Tuple<string, object, string>>(){
@@ -174,14 +173,14 @@ namespace SistemaAtendimentoMedico.View
                     }).Count > 0)
                     throw new Exception("Já existe Material com o Nome e Fabricante informado");
 
-                lstMateriais.RemoveAt(index);
+                Util.lstMateriais.RemoveAt(index);
                 MaterialDao.Update(Material);
-                lstMateriais.Add(Material);
-                lstMateriais = lstMateriais.OrderBy(x => x.ID).ToList();
+                Util.lstMateriais.Add(Material);
+                Util.lstMateriais = Util.lstMateriais.OrderBy(x => x.ID).ToList();
                 MessageBox.Show(this, "Material alterado com sucesso", "Material");
 
                 dgResultado.DataSource = null;
-                dgResultado.DataSource = lstMateriais;
+                dgResultado.DataSource = Util.lstMateriais;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -192,9 +191,14 @@ namespace SistemaAtendimentoMedico.View
 
         private void onlyNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar) &&
-              (e.KeyChar == ',' && ((TextBox)sender).Text.Contains(",")))
-                e.Handled = true;
+            if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar))
+                if (e.KeyChar == ',')
+                {
+                    if (((TextBox)sender).Text.Contains(","))
+                        e.Handled = true;
+                }
+                else
+                    e.Handled = true;
         }
 
         private void dgResultado_CurrentCellChanged(object sender, EventArgs e)
@@ -225,7 +229,7 @@ namespace SistemaAtendimentoMedico.View
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             dgResultado.DataSource = null;
-            dgResultado.DataSource = lstMateriais.Where(x =>
+            dgResultado.DataSource = Util.lstMateriais.Where(x =>
                 x.Nome.Contains(txtPesquisaNome.Text.Trim())).ToList();
         }
 

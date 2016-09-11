@@ -196,6 +196,7 @@
             this.dgResultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgResultado.BackgroundColor = System.Drawing.Color.White;
             this.dgResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgResultado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgResultado.Location = new System.Drawing.Point(12, 393);
             this.dgResultado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgResultado.MultiSelect = false;
@@ -266,6 +267,7 @@
             this.lbTodosMateriais.Name = "lbTodosMateriais";
             this.lbTodosMateriais.Size = new System.Drawing.Size(151, 180);
             this.lbTodosMateriais.TabIndex = 63;
+            this.lbTodosMateriais.Visible = false;
             // 
             // lbMateriaisUtilizados
             // 
@@ -304,6 +306,8 @@
             this.btnAdicionar.TabIndex = 67;
             this.btnAdicionar.Text = ">>";
             this.btnAdicionar.UseVisualStyleBackColor = true;
+            this.btnAdicionar.Visible = false;
+            this.btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
             // btnRemover
             // 
@@ -313,6 +317,8 @@
             this.btnRemover.TabIndex = 68;
             this.btnRemover.Text = "<<";
             this.btnRemover.UseVisualStyleBackColor = true;
+            this.btnRemover.Visible = false;
+            this.btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
             // 
             // lblQtde
             // 
@@ -323,6 +329,7 @@
             this.lblQtde.Size = new System.Drawing.Size(47, 17);
             this.lblQtde.TabIndex = 69;
             this.lblQtde.Text = "Qtde.:";
+            this.lblQtde.Visible = false;
             // 
             // txtQtdeMaterial
             // 
@@ -333,6 +340,7 @@
             this.txtQtdeMaterial.Name = "txtQtdeMaterial";
             this.txtQtdeMaterial.Size = new System.Drawing.Size(55, 22);
             this.txtQtdeMaterial.TabIndex = 70;
+            this.txtQtdeMaterial.Visible = false;
             this.txtQtdeMaterial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onlyNumber_KeyPress);
             // 
             // btnProntuarios
@@ -343,6 +351,7 @@
             this.btnProntuarios.TabIndex = 71;
             this.btnProntuarios.Text = "Prontuários Antigos";
             this.btnProntuarios.UseVisualStyleBackColor = true;
+            this.btnProntuarios.Click += new System.EventHandler(this.btnProntuarios_Click);
             // 
             // FrmAtendimento
             // 
@@ -402,7 +411,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCpfPaciente;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox lbTodosMateriais;
         private System.Windows.Forms.ListBox lbMateriaisUtilizados;
         private System.Windows.Forms.Label lblMateriais;
         private System.Windows.Forms.Label label4;
@@ -411,5 +419,6 @@
         private System.Windows.Forms.Label lblQtde;
         private System.Windows.Forms.TextBox txtQtdeMaterial;
         private System.Windows.Forms.Button btnProntuarios;
+        public System.Windows.Forms.ListBox lbTodosMateriais;
     }
 }

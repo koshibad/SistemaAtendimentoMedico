@@ -188,9 +188,14 @@ namespace SistemaAtendimentoMedico.View
 
         private void onlyNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar) &&
-                (e.KeyChar == ',' && ((TextBox)sender).Text.Contains(",")))
-                e.Handled = true;
+            if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar))
+                if (e.KeyChar == ',')
+                {
+                    if (((TextBox)sender).Text.Contains(","))
+                        e.Handled = true;
+                }
+                else
+                    e.Handled = true;
         }
 
         private void dgResultado_CurrentCellChanged(object sender, EventArgs e)

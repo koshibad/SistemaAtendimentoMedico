@@ -15,13 +15,17 @@ namespace SistemaAtendimentoMedico.View
 {
     public partial class FrmAtendimento : Form
     {
+        private List<AtendimentoMaterial> lstMateriaisUtilizados = null;
         public List<Atendimento> lstAtendimentos = null;
         public AtendimentoDao AtendimentoDao = null;
+        public AtendimentoMaterialDao AtendimentoMaterialDao = null;
+        private int IDAtend = 0;
 
         public FrmAtendimento()
         {
             InitializeComponent();
             AtendimentoDao = new AtendimentoDao();
+            AtendimentoMaterialDao = new AtendimentoMaterialDao();
         }
 
         private void visibilityMainButtons(bool visible)
@@ -29,7 +33,6 @@ namespace SistemaAtendimentoMedico.View
             tbAlterar.Visible = visible;
             btnAdicionar.Visible = !visible;
             btnRemover.Visible = !visible;
-            btnProntuarios.Visible = !visible;
             txtQtdeMaterial.Visible = !visible;
             lblQtde.Visible = !visible;
             lbTodosMateriais.Visible = !visible;
@@ -50,6 +53,7 @@ namespace SistemaAtendimentoMedico.View
             tbSalvar.Visible = false;
             tbCancelar.Visible = false;
             Util.EnableAllControls(this, false);
+            lbMateriaisUtilizados.Items.Clear();
         }
 
         private void tbAlterar_Click(object sender, System.EventArgs e)
@@ -64,6 +68,7 @@ namespace SistemaAtendimentoMedico.View
                 return;
             }
 
+            IDAtend = Atendimento.ID;
             visibilityMainButtons(false);
             enableSearchComponents(false);
             tbSalvar.Visible = true;
@@ -71,6 +76,7 @@ namespace SistemaAtendimentoMedico.View
             Util.EnableAllControls(this, true);
             txtCpfPaciente.Enabled = false;
             txtNomePaciente.Enabled = false;
+            lstMateriaisUtilizados = new List<AtendimentoMaterial>(Atendimento.lstAtendimentoMaterial);
         }
 
         private void tbCancelar_Click(object sender, System.EventArgs e)
@@ -103,6 +109,10 @@ namespace SistemaAtendimentoMedico.View
                 dgResultado.DataSource = null;
                 lstAtendimentos.RemoveAt(index);
                 AtendimentoDao.Update(Atendimento);
+
+                insertUpdateDeleteAtendimentoMaterial();
+
+                Atendimento.ID = Atendimento.ID;
                 lstAtendimentos.Add(Atendimento);
                 lstAtendimentos = lstAtendimentos.OrderBy(x => x.ID).ToList();
                 MessageBox.Show(this, "Atendimento alterado com sucesso", "Atendimento");
@@ -116,11 +126,32 @@ namespace SistemaAtendimentoMedico.View
             }
         }
 
+        private void insertUpdateDeleteAtendimentoMaterial()
+        {
+            foreach (var item in lstMateriaisUtilizados)
+            {
+                if (item.Quantidade <= 0)
+                {
+                    if (item.Novo == AtendimentoMaterial.eNovo.nao)
+                        AtendimentoMaterialDao.Delete(item.ID.ToString());
+                }
+                else if (item.Novo == AtendimentoMaterial.eNovo.sim)
+                    AtendimentoMaterialDao.Insert(item);
+                else
+                    AtendimentoMaterialDao.Update(item);
+            }
+        }
+
         private void onlyNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar) &&
-              (e.KeyChar == ',' && ((TextBox)sender).Text.Contains(",")))
-                e.Handled = true;
+            if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar))
+                if (e.KeyChar == ',')
+                {
+                    if (((TextBox)sender).Text.Contains(","))
+                        e.Handled = true;
+                }
+                else
+                    e.Handled = true;
         }
 
         private void dgResultado_CurrentCellChanged(object sender, EventArgs e)
@@ -130,6 +161,7 @@ namespace SistemaAtendimentoMedico.View
                 if (dgResultado.CurrentRow == null)
                 {
                     Util.ClearAllControls(this);
+                    lbMateriaisUtilizados.Items.Clear();
                     return;
                 }
 
@@ -139,6 +171,9 @@ namespace SistemaAtendimentoMedico.View
                 txtCpfPaciente.Text = Atendimento.CpfPaciente;
                 txtNomePaciente.Text = Atendimento.NomePaciente;
                 txtTratamento.Text = Atendimento.Tratamento;
+                lbMateriaisUtilizados.Items.Clear();
+                foreach (var item in Atendimento.lstAtendimentoMaterial)
+                    lbMateriaisUtilizados.Items.Add(item);
             }
             catch (Exception ex)
             {
@@ -158,6 +193,91 @@ namespace SistemaAtendimentoMedico.View
         {
             if (dgResultado.DataSource != null && dgResultado.Columns.Count > 0)
                 dgResultado.Columns[0].Visible = false;
+        }
+
+        private void btnAdicionar_Click(object sender, EventArgs e)
+        {
+            addRemoveMaterial('+');
+        }
+
+        private void btnRemover_Click(object sender, EventArgs e)
+        {
+            addRemoveMaterial('-');
+        }
+
+        private void addRemoveMaterial(char operation)
+        {
+            try
+            {
+                double qtd = txtQtdeMaterial.Text.ValidarDecimal();
+                if (qtd <= 0) throw new Exception("Digite um número maior que 0 (zero)");
+                Material material = null;
+
+                switch (operation)
+                {
+                    case '+':
+                        if (lbTodosMateriais.SelectedItem == null)
+                            throw new Exception("Selecione um item da lista esquerda");
+
+                        material = lbTodosMateriais.SelectedItem as Material;
+                        if (material == null) return;
+                        var materialUtilizado = lstMateriaisUtilizados.FirstOrDefault(
+                            x => x.IDMaterial == material.ID);
+                        if (materialUtilizado != null)
+                            materialUtilizado.Quantidade += qtd;
+                        else
+                            lstMateriaisUtilizados.Add(new AtendimentoMaterial(IDAtend, material.ID, qtd));
+                        break;
+                    case '-':
+                        if (lbTodosMateriais.SelectedItem == null)
+                            throw new Exception("Selecione um item da lista direita");
+                        material = lbTodosMateriais.SelectedItem as Material;
+                        if (material == null) return;
+                        var materialRemover = lstMateriaisUtilizados.FirstOrDefault(
+                            x => x.IDMaterial == material.ID);
+                        if (materialRemover != null)
+                        {
+                            materialRemover.Quantidade -= qtd;
+                            if (materialRemover.Quantidade < 0)
+                                materialRemover.Quantidade = 0;
+                        }
+                        break;
+                }
+
+                lbMateriaisUtilizados.Items.Clear();
+                foreach (var item in lstMateriaisUtilizados)
+                    if (item.Quantidade != 0)
+                        lbMateriaisUtilizados.Items.Add(item);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnProntuarios_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Atendimento Atendimento = null;
+                if (dgResultado.CurrentRow == null ||
+                    (Atendimento = dgResultado.CurrentRow.DataBoundItem as Atendimento) == null)
+                {
+                    MessageBox.Show(this, "Selecione um Atendimento na lista para visualizar " +
+                        "os prontuários dos paciente.", "Atendimento",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    return;
+                }
+
+                FrmProntuarios FrmProntuarios = 
+                    new FrmProntuarios(Atendimento.Agendamento.IDPaciente);
+                FrmProntuarios.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

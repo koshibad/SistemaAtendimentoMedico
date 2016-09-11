@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Data\AgendamentoDao.cs" />
     <Compile Include="Data\AtendimentoDao.cs" />
+    <Compile Include="Data\AtendimentoMaterialDao.cs" />
     <Compile Include="Data\ConvenioDao.cs" />
     <Compile Include="Data\Dao.cs" />
     <Compile Include="Data\EspecialidadeDao.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Data\PacienteDao.cs" />
     <Compile Include="Model\Agendamento.cs" />
     <Compile Include="Model\Atendimento.cs" />
+    <Compile Include="Model\AtendimentoMaterial.cs" />
     <Compile Include="Model\Categoria.cs" />
     <Compile Include="Model\Convenio.cs" />
     <Compile Include="Model\Especialidade.cs" />
@@ -147,6 +149,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\FrmProntuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FrmProntuarios.Designer.cs">
+      <DependentUpon>FrmProntuarios.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\FrmAgendamento.resx">
       <DependentUpon>FrmAgendamento.cs</DependentUpon>
     </EmbeddedResource>

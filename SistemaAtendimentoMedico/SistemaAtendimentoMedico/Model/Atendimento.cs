@@ -9,7 +9,18 @@ namespace SistemaAtendimentoMedico.Model
 {
     public class Atendimento
     {
-        public int ID { get; set; }
+        private int _ID;
+        public int ID
+        {
+            get { return _ID; }
+            set
+            {
+                _ID = value;
+                lstAtendimentoMaterial = new Data.AtendimentoMaterialDao().Select(
+                    new List<Tuple<string, object, string>>() {
+                    new Tuple<string, object, string>("IDAtendimento",value,"=")});
+            }
+        }
 
         private int _IDAgendamento;
         public int IDAgendamento
@@ -43,5 +54,8 @@ namespace SistemaAtendimentoMedico.Model
         [Browsable(false)]
         public string Tratamento { get; set; }
         public DateTime? DataFinalizacaoAtendimento { get; set; }
+
+        [Browsable(false)]
+        public List<AtendimentoMaterial> lstAtendimentoMaterial { get; set; }
     }
 }
