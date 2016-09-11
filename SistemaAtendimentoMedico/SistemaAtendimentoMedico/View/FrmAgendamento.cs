@@ -15,7 +15,6 @@ namespace SistemaAtendimentoMedico.View
 {
     public partial class FrmAgendamento : Form
     {
-        public List<Agendamento> lstAgendamentos = null;
         public AgendamentoDao AgendamentoDao = null;
         private Paciente pacienteSelecionado = null;
         private Medico medicoSelecionado = null;
@@ -125,13 +124,13 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 dgResultado.DataSource = null;
-                int index = lstAgendamentos.IndexOf(Agendamento);
-                lstAgendamentos.RemoveAt(index);
+                int index = Util.lstAgendamentos.IndexOf(Agendamento);
+                Util.lstAgendamentos.RemoveAt(index);
                 AgendamentoDao.Delete(Agendamento.ID.ToString());
 
                 MessageBox.Show(this, "Agendamento excluido com sucesso", "Agendamento");
 
-                dgResultado.DataSource = lstAgendamentos;
+                dgResultado.DataSource = Util.lstAgendamentos;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -186,9 +185,9 @@ namespace SistemaAtendimentoMedico.View
 
                 MessageBox.Show(this, "Agendamento incluido com sucesso", "Agendamento");
 
-                lstAgendamentos = AgendamentoDao.Select(null);
+                Util.lstAgendamentos = AgendamentoDao.Select(null);
                 dgResultado.DataSource = null;
-                dgResultado.DataSource = lstAgendamentos;
+                dgResultado.DataSource = Util.lstAgendamentos;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -202,7 +201,7 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 var Agendamento = (Agendamento)dgResultado.CurrentRow.DataBoundItem;
-                int index = lstAgendamentos.IndexOf(Agendamento);
+                int index = Util.lstAgendamentos.IndexOf(Agendamento);
                 validationInsertUpdate(Agendamento);
 
                 if (AgendamentoDao.Select(new List<Tuple<string, object, string>>(){
@@ -213,13 +212,13 @@ namespace SistemaAtendimentoMedico.View
                     throw new Exception("Já existe Agendamento no horario informado com o Medico selecionado");
 
                 dgResultado.DataSource = null;
-                lstAgendamentos.RemoveAt(index);
+                Util.lstAgendamentos.RemoveAt(index);
                 AgendamentoDao.Update(Agendamento);
-                lstAgendamentos.Add(Agendamento);
-                lstAgendamentos = lstAgendamentos.OrderBy(x => x.ID).ToList();
+                Util.lstAgendamentos.Add(Agendamento);
+                Util.lstAgendamentos = Util.lstAgendamentos.OrderBy(x => x.ID).ToList();
                 MessageBox.Show(this, "Agendamento alterado com sucesso", "Agendamento");
 
-                dgResultado.DataSource = lstAgendamentos;
+                dgResultado.DataSource = Util.lstAgendamentos;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -276,7 +275,7 @@ namespace SistemaAtendimentoMedico.View
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             dgResultado.DataSource = null;
-            dgResultado.DataSource = lstAgendamentos.Where(x =>
+            dgResultado.DataSource = Util.lstAgendamentos.Where(x =>
                 x.NomePaciente.Contains(txtPesquisaNome.Text.Trim()) &&
                 x.Paciente.CPF.Contains(txtPesquisaCpf.Text.Trim())).ToList();
         }
@@ -284,7 +283,7 @@ namespace SistemaAtendimentoMedico.View
         private void dgResultado_DataSourceChanged(object sender, EventArgs e)
         {
             if (dgResultado.DataSource != null && dgResultado.Columns.Count > 0)
-                dgResultado.Columns[0].Visible = false;
+                dgResultado.Columns[0].Visible = dgResultado.Columns[1].Visible = false;
         }
 
         private void btnPesquisarPaciente_Click(object sender, EventArgs e)

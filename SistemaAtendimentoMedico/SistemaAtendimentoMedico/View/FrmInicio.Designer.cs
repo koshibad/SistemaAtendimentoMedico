@@ -38,10 +38,9 @@
             // lbMensagem
             // 
             this.lbMensagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMensagem.Location = new System.Drawing.Point(-2, 59);
-            this.lbMensagem.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbMensagem.Location = new System.Drawing.Point(-3, 73);
             this.lbMensagem.Name = "lbMensagem";
-            this.lbMensagem.Size = new System.Drawing.Size(752, 72);
+            this.lbMensagem.Size = new System.Drawing.Size(1003, 89);
             this.lbMensagem.TabIndex = 0;
             this.lbMensagem.Text = "Bem vindo ao Sistema de Atendimento Médico";
             this.lbMensagem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -55,35 +54,33 @@
             // lbData
             // 
             this.lbData.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbData.Location = new System.Drawing.Point(0, 250);
-            this.lbData.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbData.Location = new System.Drawing.Point(0, 308);
             this.lbData.Name = "lbData";
-            this.lbData.Size = new System.Drawing.Size(750, 31);
+            this.lbData.Size = new System.Drawing.Size(1000, 38);
             this.lbData.TabIndex = 1;
             this.lbData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbHorario
             // 
             this.lbHorario.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHorario.Location = new System.Drawing.Point(0, 302);
-            this.lbHorario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbHorario.Location = new System.Drawing.Point(0, 372);
             this.lbHorario.Name = "lbHorario";
-            this.lbHorario.Size = new System.Drawing.Size(750, 25);
+            this.lbHorario.Size = new System.Drawing.Size(1000, 31);
             this.lbHorario.TabIndex = 2;
             this.lbHorario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FrmInicio
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(749, 464);
+            this.ClientSize = new System.Drawing.Size(999, 571);
             this.Controls.Add(this.lbHorario);
             this.Controls.Add(this.lbData);
             this.Controls.Add(this.lbMensagem);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FrmInicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmInicio";

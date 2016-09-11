@@ -31,22 +31,12 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "INSERT INTO Atendimento " +
-                    "(CPF,Nome,UF,Municipio,CEP,Logradouro,Numero,Complemento,Bairro,Telefone,Celular,Email,DataNascimento) " +
-                    "VALUES (@CPF,@Nome,@UF,@Municipio,@CEP,@Logradouro,@Numero,@Complemento,@Bairro,@Telefone,@Celular,@Email,@DataNascimento)";
+                    "(IDAgendamento,Tratamento,DataFinalizacaoAtendimento) " +
+                    "VALUES (@IDAgendamento,@Tratamento,@DataFinalizacaoAtendimento)";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@CPF", Atendimento.CPF);
-                cmd.Parameters.AddWithValue("@Nome", Atendimento.Nome);
-                cmd.Parameters.AddWithValue("@UF", Atendimento.UF);
-                cmd.Parameters.AddWithValue("@Municipio", Atendimento.Municipio);
-                cmd.Parameters.AddWithValue("@CEP", Atendimento.CEP);
-                cmd.Parameters.AddWithValue("@Logradouro", Atendimento.Logradouro);
-                cmd.Parameters.AddWithValue("@Numero", Atendimento.Numero);
-                cmd.Parameters.AddWithValue("@Complemento", Atendimento.Complemento);
-                cmd.Parameters.AddWithValue("@Bairro", Atendimento.Bairro);
-                cmd.Parameters.AddWithValue("@Telefone", Atendimento.Telefone);
-                cmd.Parameters.AddWithValue("@Celular", Atendimento.Celular);
-                cmd.Parameters.AddWithValue("@Email", Atendimento.Email);
-                cmd.Parameters.AddWithValue("@DataNascimento", Atendimento.DataNascimento.ToShortDateString());
+                cmd.Parameters.AddWithValue("@IDAgendamento", Atendimento.IDAgendamento);
+                cmd.Parameters.AddWithValue("@Tratamento", Atendimento.Tratamento);
+                cmd.Parameters.AddWithValue("@DataFinalizacaoAtendimento", DBNull.Value);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception) { throw; }
@@ -80,19 +70,13 @@ namespace SistemaAtendimentoMedico.Data
                 {
                     Atendimento p = new Atendimento();
                     p.ID = Convert.ToInt32(reader["ID"]);
-                    p.CPF = reader["CPF"].ToString();
-                    p.Nome = reader["Nome"].ToString();
-                    p.UF = reader["UF"].ToString();
-                    p.Municipio = reader["Municipio"].ToString();
-                    p.CEP = reader["CEP"].ToString();
-                    p.Logradouro = reader["Logradouro"].ToString();
-                    p.Numero = Convert.ToInt32(reader["Numero"]);
-                    p.Complemento = reader["Complemento"].ToString();
-                    p.Bairro = reader["Bairro"].ToString();
-                    p.Telefone = reader["Telefone"].ToString();
-                    p.Celular = reader["Celular"].ToString();
-                    p.Email = reader["Email"].ToString();
-                    p.DataNascimento = Convert.ToDateTime(reader["DataNascimento"].ToString());
+                    p.IDAgendamento = Convert.ToInt32(reader["IDAgendamento"]);
+                    p.Tratamento = reader["Tratamento"].ToString();
+                    if (reader["DataFinalizacaoAtendimento"] == DBNull.Value)
+                        p.DataFinalizacaoAtendimento = null;
+                    else
+                        p.DataFinalizacaoAtendimento = Convert.ToDateTime(
+                            reader["DataFinalizacaoAtendimento"].ToString());
                     Atendimentos.Add(p);
                 }
             }
@@ -110,23 +94,14 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "UPDATE Atendimento SET " +
-                    "CPF=@CPF,Nome=@Nome,UF=@UF,Municipio=@Municipio,CEP=@CEP,Logradouro=@Logradouro,Numero=@Numero," +
-                    "Complemento=@Complemento,Bairro=@Bairro,Telefone=@Telefone,Celular=@Celular,Email=@Email," +
-                    "DataNascimento=@DataNascimento WHERE ID=@ID";
+                    "IDAgendamento=@IDAgendamento,Tratamento=@Tratamento," +
+                    "DataFinalizacaoAtendimento=@DataFinalizacaoAtendimento " +
+                    "WHERE ID=@ID";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@CPF", Atendimento.CPF);
-                cmd.Parameters.AddWithValue("@Nome", Atendimento.Nome);
-                cmd.Parameters.AddWithValue("@UF", Atendimento.UF);
-                cmd.Parameters.AddWithValue("@Municipio", Atendimento.Municipio);
-                cmd.Parameters.AddWithValue("@CEP", Atendimento.CEP);
-                cmd.Parameters.AddWithValue("@Logradouro", Atendimento.Logradouro);
-                cmd.Parameters.AddWithValue("@Numero", Atendimento.Numero);
-                cmd.Parameters.AddWithValue("@Complemento", Atendimento.Complemento);
-                cmd.Parameters.AddWithValue("@Bairro", Atendimento.Bairro);
-                cmd.Parameters.AddWithValue("@Telefone", Atendimento.Telefone);
-                cmd.Parameters.AddWithValue("@Celular", Atendimento.Celular);
-                cmd.Parameters.AddWithValue("@Email", Atendimento.Email);
-                cmd.Parameters.AddWithValue("@DataNascimento", Atendimento.DataNascimento.ToShortDateString());
+                cmd.Parameters.AddWithValue("@IDAgendamento", Atendimento.IDAgendamento);
+                cmd.Parameters.AddWithValue("@Tratamento", Atendimento.Tratamento);
+                cmd.Parameters.AddWithValue("@DataFinalizacaoAtendimento",
+                    Atendimento.DataFinalizacaoAtendimento);
                 cmd.Parameters.AddWithValue("@ID", Atendimento.ID);
                 cmd.ExecuteNonQuery();
             }

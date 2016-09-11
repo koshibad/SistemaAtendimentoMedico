@@ -15,6 +15,7 @@ namespace SistemaAtendimentoMedico.Utils
         public static List<Especialidade> lstEspecialidades = null;
         public static List<Medico> lstMedicos = null;
         public static List<Convenio> lstConvenios = null;
+        public static List<Agendamento> lstAgendamentos = null;
 
         public static void ClearAllControls(Form form)
         {

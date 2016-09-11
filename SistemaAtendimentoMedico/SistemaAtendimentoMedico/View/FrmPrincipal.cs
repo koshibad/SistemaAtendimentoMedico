@@ -36,6 +36,7 @@ namespace SistemaAtendimentoMedico.View
             Util.lstEspecialidades = FrmEspecialidade.EspecialidadeDao.Select(null);
             Util.lstMedicos = FrmMedico.MedicoDao.Select(null);
             Util.lstConvenios = FrmConvenio.ConvenioDao.Select(null);
+            Util.lstAgendamentos = FrmAgendamento.AgendamentoDao.Select(null);
         }
 
         private void InitializeTabPages()
@@ -207,10 +208,19 @@ namespace SistemaAtendimentoMedico.View
                     }
                     else if (tabPage == tpAgendamento)
                     {
-                        FrmAgendamento.lstAgendamentos = FrmAgendamento.AgendamentoDao.Select(null);
+                        Util.lstAgendamentos = FrmAgendamento.AgendamentoDao.Select(null);
                         FrmAgendamento.dgResultado.DataSource = null;
-                        FrmAgendamento.dgResultado.DataSource = FrmAgendamento.lstAgendamentos;
+                        FrmAgendamento.dgResultado.DataSource = Util.lstAgendamentos;
                         FrmAgendamento.formOnEndTask();
+                    }
+                    else if (tabPage == tpAtendimento)
+                    {
+                        FrmAtendimento.lstAtendimentos = FrmAtendimento.AtendimentoDao.Select(null);
+                        FrmAtendimento.lstAtendimentos = FrmAtendimento.lstAtendimentos
+                            .Where(x => x.Agendamento != null).ToList();
+                        FrmAtendimento.dgResultado.DataSource = null;
+                        FrmAtendimento.dgResultado.DataSource = FrmAtendimento.lstAtendimentos;
+                        FrmAtendimento.formOnEndTask();
                     }
                 }
             }

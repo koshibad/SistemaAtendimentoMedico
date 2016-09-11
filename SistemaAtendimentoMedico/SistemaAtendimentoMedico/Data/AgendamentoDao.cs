@@ -32,14 +32,17 @@ namespace SistemaAtendimentoMedico.Data
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "INSERT INTO Agendamento " +
                     "(IDPaciente,IDMedico,DataConsulta,IDTipoConsulta,IDConvenio) " +
-                    "VALUES (@IDPaciente,@IDMedico,@DataConsulta,@IDTipoConsulta,@IDConvenio)";
+                    "output INSERTED.ID " +
+                    "VALUES (@IDPaciente,@IDMedico,@DataConsulta,@IDTipoConsulta,@IDConvenio);";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@IDPaciente", Agendamento.IDPaciente);
                 cmd.Parameters.AddWithValue("@IDMedico", Agendamento.IDMedico);
                 cmd.Parameters.AddWithValue("@DataConsulta", Agendamento.DataConsulta);
                 cmd.Parameters.AddWithValue("@IDTipoConsulta", Agendamento.IDTipoConsulta);
                 cmd.Parameters.AddWithValue("@IDConvenio", Agendamento.IDConvenio);
-                cmd.ExecuteNonQuery();
+                int id = (int)cmd.ExecuteScalar();
+
+                new AtendimentoDao().Insert(new Atendimento() { IDAgendamento = id, Tratamento = "" });
             }
             catch (Exception) { throw; }
             finally { CloseConnection(); }
