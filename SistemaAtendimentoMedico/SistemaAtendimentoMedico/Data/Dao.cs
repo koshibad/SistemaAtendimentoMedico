@@ -15,11 +15,11 @@ namespace SistemaAtendimentoMedico.Data
         //                      Connect Timeout=30;
         //                      User Instance=True";
 
-        private String url = @"Persist Security Info=True;
-                               User ID=sa;
-                               Password=0000;
-                               Initial Catalog=AtendimentoMedico;
-                               Data Source=.";
+        //public static String url = @"Persist security info=true;
+        //                       user id=sa;
+        //                       password=0000;
+        //                       initial catalog=atendimentomedico;
+        //                       data source=.";
 
         protected SqlConnection cn;
         protected SqlCommand cmd;
@@ -38,7 +38,7 @@ namespace SistemaAtendimentoMedico.Data
         {
             try
             {
-                cn.ConnectionString = url;
+                cn.ConnectionString = Utils.Util.sqlConnection; //url;
                 cn.Open();
             }
             catch (Exception)

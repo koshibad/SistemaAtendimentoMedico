@@ -1,0 +1,5 @@
+Persist Security Info=True;
+User ID=sa;
+Password=0000;
+Initial Catalog=AtendimentoMedico;
+Data Source=.
