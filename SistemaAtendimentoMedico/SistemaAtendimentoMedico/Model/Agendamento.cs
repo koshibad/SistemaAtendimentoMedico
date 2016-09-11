@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,19 +9,63 @@ namespace SistemaAtendimentoMedico.Model
 {
     public class Agendamento
     {
+        public enum eTipoConsulta
+        {
+            Convenio = 0,
+            Particular = 1
+        }
+
         public int ID { get; set; }
-        public string CPF { get; set; }
-        public string Nome { get; set; }
-        public string UF { get; set; }
-        public string Municipio { get; set; }
-        public string CEP { get; set; }
-        public string Logradouro { get; set; }
-        public int Numero { get; set; }
-        public string Complemento { get; set; }
-        public string Bairro { get; set; }
-        public string Telefone { get; set; }
-        public string Celular { get; set; }
-        public string Email { get; set; }
-        public DateTime DataNascimento { get; set; }
+
+        private int _IDPaciente;
+        public int IDPaciente
+        {
+            get { return _IDPaciente; }
+            set
+            {
+                _IDPaciente = value;
+                if (Utils.Util.lstPacientes != null)
+                {
+                    Paciente = Utils.Util.lstPacientes.FirstOrDefault(x => x.ID == value);
+                    if (Paciente != null) NomePaciente = Paciente.Nome;
+                }
+            }
+        }
+        public string NomePaciente { get; set; }
+        [Browsable(false)]
+        public Paciente Paciente { get; set; }
+
+        private int _IDMedico;
+        public int IDMedico
+        {
+            get { return _IDMedico; }
+            set
+            {
+                _IDMedico = value;
+                if (Utils.Util.lstMedicos != null)
+                {
+                    Medico = Utils.Util.lstMedicos.FirstOrDefault(x => x.ID == value);
+                    if (Medico != null) NomeMedico = Medico.Nome;
+                }
+            }
+        }
+        public string NomeMedico { get; set; }
+        [Browsable(false)]
+        public Medico Medico { get; set; }
+
+        public DateTime DataConsulta { get; set; }
+
+        private int _IDTipoConsulta;
+        public int IDTipoConsulta
+        {
+            get { return _IDTipoConsulta; }
+            set
+            {
+                _IDTipoConsulta = value;
+                TipoConsulta = ((eTipoConsulta)value).ToString();
+            }
+        }
+        public string TipoConsulta { get; set; }
+        public int IDConvenio { get; set; }
     }
 }

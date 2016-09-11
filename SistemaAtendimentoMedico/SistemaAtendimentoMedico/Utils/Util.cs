@@ -14,6 +14,7 @@ namespace SistemaAtendimentoMedico.Utils
         public static List<Paciente> lstPacientes = null;
         public static List<Especialidade> lstEspecialidades = null;
         public static List<Medico> lstMedicos = null;
+        public static List<Convenio> lstConvenios = null;
 
         public static void ClearAllControls(Form form)
         {
@@ -56,6 +57,16 @@ namespace SistemaAtendimentoMedico.Utils
 
             comboBox.DataSource = null;
             comboBox.DataSource = lstUF;
+        }
+
+        public static IEnumerable<string> TimeSpanFromMinutes(int minutes)
+        {
+            var start = DateTime.Today;
+            var clockQuery = from offset in Enumerable.Range(0, (24 * 60) / minutes)
+                             select TimeSpan.FromMinutes(minutes * offset);
+
+            foreach (var time in clockQuery)
+                yield return (start + time).ToString("HH:mm");
         }
     }
 }

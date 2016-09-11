@@ -15,7 +15,6 @@ namespace SistemaAtendimentoMedico.View
 {
     public partial class FrmConvenio : Form
     {
-        public List<Convenio> lstConvenios = null;
         public ConvenioDao ConvenioDao = null;
 
         public FrmConvenio()
@@ -98,13 +97,13 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 dgResultado.DataSource = null;
-                int index = lstConvenios.IndexOf(Convenio);
-                lstConvenios.RemoveAt(index);
+                int index = Util.lstConvenios.IndexOf(Convenio);
+                Util.lstConvenios.RemoveAt(index);
                 ConvenioDao.Delete(Convenio.ID.ToString());
 
-                MessageBox.Show(this, "Convenio incluido com sucesso", "Convenio");
+                MessageBox.Show(this, "Convenio excluido com sucesso", "Convenio");
 
-                dgResultado.DataSource = lstConvenios;
+                dgResultado.DataSource = Util.lstConvenios;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -144,10 +143,10 @@ namespace SistemaAtendimentoMedico.View
 
                 ConvenioDao.Insert(Convenio);
                 dgResultado.DataSource = null;
-                lstConvenios = ConvenioDao.Select(null);
+                Util.lstConvenios = ConvenioDao.Select(null);
 
                 MessageBox.Show(this, "Convenio incluido com sucesso", "Convenio");
-                dgResultado.DataSource = lstConvenios;
+                dgResultado.DataSource = Util.lstConvenios;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -161,7 +160,7 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 var Convenio = (Convenio)dgResultado.CurrentRow.DataBoundItem;
-                int index = lstConvenios.IndexOf(Convenio);
+                int index = Util.lstConvenios.IndexOf(Convenio);
                 validationInsertUpdate(Convenio);
 
                 if (ConvenioDao.Select(new List<Tuple<string, object, string>>(){
@@ -170,14 +169,14 @@ namespace SistemaAtendimentoMedico.View
                     }).Count > 0)
                     throw new Exception("Já existe Convenio com o CNPJ informado");
 
-                lstConvenios.RemoveAt(index);
+                Util.lstConvenios.RemoveAt(index);
                 ConvenioDao.Update(Convenio);
-                lstConvenios.Add(Convenio);
-                lstConvenios = lstConvenios.OrderBy(x => x.ID).ToList();
+                Util.lstConvenios.Add(Convenio);
+                Util.lstConvenios = Util.lstConvenios.OrderBy(x => x.ID).ToList();
                 MessageBox.Show(this, "Convenio alterado com sucesso", "Convenio");
 
                 dgResultado.DataSource = null;
-                dgResultado.DataSource = lstConvenios;
+                dgResultado.DataSource = Util.lstConvenios;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -228,7 +227,7 @@ namespace SistemaAtendimentoMedico.View
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             dgResultado.DataSource = null;
-            dgResultado.DataSource = lstConvenios.Where(x =>
+            dgResultado.DataSource = Util.lstConvenios.Where(x =>
                 x.CNPJ.Contains(txtPesquisaRazaoSocial.Text.Trim()) &&
                 x.NomeFantasia.Contains(txtPesquisaRazaoSocial.Text.Trim()) &&
                 x.RazaoSocial.Contains(txtPesquisaCnpj.Text.Trim())).ToList();

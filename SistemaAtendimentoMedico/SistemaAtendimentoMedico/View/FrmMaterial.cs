@@ -229,12 +229,6 @@ namespace SistemaAtendimentoMedico.View
                 x.Nome.Contains(txtPesquisaNome.Text.Trim())).ToList();
         }
 
-        private void dgResultado_DataSourceChanged(object sender, EventArgs e)
-        {
-            if (dgResultado.DataSource != null && dgResultado.Columns.Count > 0)
-                dgResultado.Columns[0].Visible = false;
-        }
-
         private void cbCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             Categoria Categoria = null;

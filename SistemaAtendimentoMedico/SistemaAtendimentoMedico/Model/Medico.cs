@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace SistemaAtendimentoMedico.Model
 {
     public class Medico
     {
+        [Browsable(false)]
         public int ID { get; set; }
         public string CPF { get; set; }
         public string CRM { get; set; }
@@ -25,6 +27,7 @@ namespace SistemaAtendimentoMedico.Model
         public DateTime DataNascimento { get; set; }
 
         private int _IDEspecialidade;
+        [Browsable(false)]
         public int IDEspecialidade
         {
             get { return _IDEspecialidade; }
@@ -33,11 +36,14 @@ namespace SistemaAtendimentoMedico.Model
                 _IDEspecialidade = value;
                 if (Utils.Util.lstEspecialidades != null)
                 {
-                    var esp = Utils.Util.lstEspecialidades.FirstOrDefault(x => x.ID == value);
-                    if (esp != null) Especialidade = esp.Nome;
+                    Especialidade = Utils.Util.lstEspecialidades.FirstOrDefault(x => x.ID == value);
+                    if (Especialidade != null) NomeEspecialidade = Especialidade.Nome;
                 }
             }
         }
-        public string Especialidade { get; set; }
+
+        public string NomeEspecialidade { get; set; }
+        [Browsable(false)]
+        public Especialidade Especialidade { get; set; }
     }
 }

@@ -31,22 +31,14 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "INSERT INTO Agendamento " +
-                    "(CPF,Nome,UF,Municipio,CEP,Logradouro,Numero,Complemento,Bairro,Telefone,Celular,Email,DataNascimento) " +
-                    "VALUES (@CPF,@Nome,@UF,@Municipio,@CEP,@Logradouro,@Numero,@Complemento,@Bairro,@Telefone,@Celular,@Email,@DataNascimento)";
+                    "(IDPaciente,IDMedico,DataConsulta,IDTipoConsulta,IDConvenio) " +
+                    "VALUES (@IDPaciente,@IDMedico,@DataConsulta,@IDTipoConsulta,@IDConvenio)";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@CPF", Agendamento.CPF);
-                cmd.Parameters.AddWithValue("@Nome", Agendamento.Nome);
-                cmd.Parameters.AddWithValue("@UF", Agendamento.UF);
-                cmd.Parameters.AddWithValue("@Municipio", Agendamento.Municipio);
-                cmd.Parameters.AddWithValue("@CEP", Agendamento.CEP);
-                cmd.Parameters.AddWithValue("@Logradouro", Agendamento.Logradouro);
-                cmd.Parameters.AddWithValue("@Numero", Agendamento.Numero);
-                cmd.Parameters.AddWithValue("@Complemento", Agendamento.Complemento);
-                cmd.Parameters.AddWithValue("@Bairro", Agendamento.Bairro);
-                cmd.Parameters.AddWithValue("@Telefone", Agendamento.Telefone);
-                cmd.Parameters.AddWithValue("@Celular", Agendamento.Celular);
-                cmd.Parameters.AddWithValue("@Email", Agendamento.Email);
-                cmd.Parameters.AddWithValue("@DataNascimento", Agendamento.DataNascimento.ToShortDateString());
+                cmd.Parameters.AddWithValue("@IDPaciente", Agendamento.IDPaciente);
+                cmd.Parameters.AddWithValue("@IDMedico", Agendamento.IDMedico);
+                cmd.Parameters.AddWithValue("@DataConsulta", Agendamento.DataConsulta);
+                cmd.Parameters.AddWithValue("@IDTipoConsulta", Agendamento.IDTipoConsulta);
+                cmd.Parameters.AddWithValue("@IDConvenio", Agendamento.IDConvenio);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception) { throw; }
@@ -80,19 +72,11 @@ namespace SistemaAtendimentoMedico.Data
                 {
                     Agendamento p = new Agendamento();
                     p.ID = Convert.ToInt32(reader["ID"]);
-                    p.CPF = reader["CPF"].ToString();
-                    p.Nome = reader["Nome"].ToString();
-                    p.UF = reader["UF"].ToString();
-                    p.Municipio = reader["Municipio"].ToString();
-                    p.CEP = reader["CEP"].ToString();
-                    p.Logradouro = reader["Logradouro"].ToString();
-                    p.Numero = Convert.ToInt32(reader["Numero"]);
-                    p.Complemento = reader["Complemento"].ToString();
-                    p.Bairro = reader["Bairro"].ToString();
-                    p.Telefone = reader["Telefone"].ToString();
-                    p.Celular = reader["Celular"].ToString();
-                    p.Email = reader["Email"].ToString();
-                    p.DataNascimento = Convert.ToDateTime(reader["DataNascimento"].ToString());
+                    p.IDPaciente = Convert.ToInt32(reader["IDPaciente"]);
+                    p.IDMedico = Convert.ToInt32(reader["IDMedico"]);
+                    p.DataConsulta = Convert.ToDateTime(reader["DataConsulta"].ToString());
+                    p.IDTipoConsulta = Convert.ToInt32(reader["IDTipoConsulta"]);
+                    p.IDConvenio = Convert.ToInt32(reader["IDConvenio"]);
                     Agendamentos.Add(p);
                 }
             }
@@ -110,23 +94,14 @@ namespace SistemaAtendimentoMedico.Data
                 OpenConnection();
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = "UPDATE Agendamento SET " +
-                    "CPF=@CPF,Nome=@Nome,UF=@UF,Municipio=@Municipio,CEP=@CEP,Logradouro=@Logradouro,Numero=@Numero," +
-                    "Complemento=@Complemento,Bairro=@Bairro,Telefone=@Telefone,Celular=@Celular,Email=@Email," +
-                    "DataNascimento=@DataNascimento WHERE ID=@ID";
+                    "IDPaciente=@IDPaciente,IDMedico=@IDMedico,DataConsulta=@DataConsulta," +
+                    "IDConvenio=@IDConvenio WHERE ID=@ID";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@CPF", Agendamento.CPF);
-                cmd.Parameters.AddWithValue("@Nome", Agendamento.Nome);
-                cmd.Parameters.AddWithValue("@UF", Agendamento.UF);
-                cmd.Parameters.AddWithValue("@Municipio", Agendamento.Municipio);
-                cmd.Parameters.AddWithValue("@CEP", Agendamento.CEP);
-                cmd.Parameters.AddWithValue("@Logradouro", Agendamento.Logradouro);
-                cmd.Parameters.AddWithValue("@Numero", Agendamento.Numero);
-                cmd.Parameters.AddWithValue("@Complemento", Agendamento.Complemento);
-                cmd.Parameters.AddWithValue("@Bairro", Agendamento.Bairro);
-                cmd.Parameters.AddWithValue("@Telefone", Agendamento.Telefone);
-                cmd.Parameters.AddWithValue("@Celular", Agendamento.Celular);
-                cmd.Parameters.AddWithValue("@Email", Agendamento.Email);
-                cmd.Parameters.AddWithValue("@DataNascimento", Agendamento.DataNascimento.ToShortDateString());
+                cmd.Parameters.AddWithValue("@IDPaciente", Agendamento.IDPaciente);
+                cmd.Parameters.AddWithValue("@IDMedico", Agendamento.IDMedico);
+                cmd.Parameters.AddWithValue("@DataConsulta", Agendamento.DataConsulta);
+                cmd.Parameters.AddWithValue("@IDTipoConsulta", Agendamento.IDTipoConsulta);
+                cmd.Parameters.AddWithValue("@IDConvenio", Agendamento.IDConvenio);
                 cmd.Parameters.AddWithValue("@ID", Agendamento.ID);
                 cmd.ExecuteNonQuery();
             }

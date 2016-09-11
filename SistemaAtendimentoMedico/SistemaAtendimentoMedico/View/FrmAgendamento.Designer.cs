@@ -59,10 +59,10 @@
             this.cbTipoConsulta = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cbConvenio = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lbConvenio = new System.Windows.Forms.Label();
             this.pnPesquisaPessoas = new System.Windows.Forms.Panel();
-            this.btnPesquisarPaciente = new System.Windows.Forms.Button();
             this.btnPesquisarMedico = new System.Windows.Forms.Button();
+            this.btnPesquisarPaciente = new System.Windows.Forms.Button();
             this.tsMenus.SuspendLayout();
             this.pnBusca.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgResultado)).BeginInit();
@@ -168,7 +168,7 @@
             // 
             this.txtNomePaciente.Enabled = false;
             this.txtNomePaciente.Location = new System.Drawing.Point(517, 139);
-            this.txtNomePaciente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNomePaciente.Margin = new System.Windows.Forms.Padding(4);
             this.txtNomePaciente.MaxLength = 255;
             this.txtNomePaciente.Name = "txtNomePaciente";
             this.txtNomePaciente.Size = new System.Drawing.Size(369, 22);
@@ -188,7 +188,7 @@
             // 
             this.txtCpfPaciente.Enabled = false;
             this.txtCpfPaciente.Location = new System.Drawing.Point(285, 139);
-            this.txtCpfPaciente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCpfPaciente.Margin = new System.Windows.Forms.Padding(4);
             this.txtCpfPaciente.MaxLength = 11;
             this.txtCpfPaciente.Name = "txtCpfPaciente";
             this.txtCpfPaciente.Size = new System.Drawing.Size(110, 22);
@@ -213,16 +213,16 @@
             this.pnBusca.Controls.Add(this.btnPesquisar);
             this.pnBusca.Controls.Add(this.txtPesquisaCpf);
             this.pnBusca.Controls.Add(this.label13);
-            this.pnBusca.Location = new System.Drawing.Point(290, 313);
-            this.pnBusca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnBusca.Location = new System.Drawing.Point(270, 313);
+            this.pnBusca.Margin = new System.Windows.Forms.Padding(4);
             this.pnBusca.Name = "pnBusca";
-            this.pnBusca.Size = new System.Drawing.Size(449, 71);
+            this.pnBusca.Size = new System.Drawing.Size(493, 71);
             this.pnBusca.TabIndex = 57;
             // 
             // txtPesquisaNome
             // 
-            this.txtPesquisaNome.Location = new System.Drawing.Point(69, 39);
-            this.txtPesquisaNome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPesquisaNome.Location = new System.Drawing.Point(122, 39);
+            this.txtPesquisaNome.Margin = new System.Windows.Forms.Padding(4);
             this.txtPesquisaNome.MaxLength = 255;
             this.txtPesquisaNome.Name = "txtPesquisaNome";
             this.txtPesquisaNome.Size = new System.Drawing.Size(217, 22);
@@ -234,14 +234,14 @@
             this.label14.Location = new System.Drawing.Point(13, 42);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(49, 17);
+            this.label14.Size = new System.Drawing.Size(108, 17);
             this.label14.TabIndex = 20;
-            this.label14.Text = "Nome:";
+            this.label14.Text = "Nome Paciente:";
             // 
             // btnPesquisar
             // 
-            this.btnPesquisar.Location = new System.Drawing.Point(311, 10);
-            this.btnPesquisar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPesquisar.Location = new System.Drawing.Point(364, 10);
+            this.btnPesquisar.Margin = new System.Windows.Forms.Padding(4);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(111, 50);
             this.btnPesquisar.TabIndex = 8;
@@ -251,8 +251,8 @@
             // 
             // txtPesquisaCpf
             // 
-            this.txtPesquisaCpf.Location = new System.Drawing.Point(69, 10);
-            this.txtPesquisaCpf.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPesquisaCpf.Location = new System.Drawing.Point(122, 10);
+            this.txtPesquisaCpf.Margin = new System.Windows.Forms.Padding(4);
             this.txtPesquisaCpf.MaxLength = 11;
             this.txtPesquisaCpf.Name = "txtPesquisaCpf";
             this.txtPesquisaCpf.Size = new System.Drawing.Size(217, 22);
@@ -264,17 +264,19 @@
             this.label13.Location = new System.Drawing.Point(24, 14);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(38, 17);
+            this.label13.Size = new System.Drawing.Size(97, 17);
             this.label13.TabIndex = 18;
-            this.label13.Text = "CPF:";
+            this.label13.Text = "CPF Paciente:";
             // 
             // dgResultado
             // 
             this.dgResultado.AllowUserToAddRows = false;
             this.dgResultado.AllowUserToDeleteRows = false;
             this.dgResultado.AllowUserToOrderColumns = true;
+            this.dgResultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dgResultado.BackgroundColor = System.Drawing.Color.White;
             this.dgResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgResultado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgResultado.Location = new System.Drawing.Point(12, 393);
             this.dgResultado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgResultado.MultiSelect = false;
@@ -398,6 +400,7 @@
             this.cbTipoConsulta.Name = "cbTipoConsulta";
             this.cbTipoConsulta.Size = new System.Drawing.Size(149, 24);
             this.cbTipoConsulta.TabIndex = 70;
+            this.cbTipoConsulta.SelectedIndexChanged += new System.EventHandler(this.cbTipoConsulta_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -421,15 +424,15 @@
             this.cbConvenio.Size = new System.Drawing.Size(245, 24);
             this.cbConvenio.TabIndex = 72;
             // 
-            // label8
+            // lbConvenio
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(519, 252);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(71, 17);
-            this.label8.TabIndex = 71;
-            this.label8.Text = "Convenio:";
+            this.lbConvenio.AutoSize = true;
+            this.lbConvenio.Location = new System.Drawing.Point(519, 252);
+            this.lbConvenio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbConvenio.Name = "lbConvenio";
+            this.lbConvenio.Size = new System.Drawing.Size(71, 17);
+            this.lbConvenio.TabIndex = 71;
+            this.lbConvenio.Text = "Convenio:";
             // 
             // pnPesquisaPessoas
             // 
@@ -443,17 +446,6 @@
             this.pnPesquisaPessoas.TabIndex = 58;
             this.pnPesquisaPessoas.Visible = false;
             // 
-            // btnPesquisarPaciente
-            // 
-            this.btnPesquisarPaciente.Location = new System.Drawing.Point(40, 12);
-            this.btnPesquisarPaciente.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPesquisarPaciente.Name = "btnPesquisarPaciente";
-            this.btnPesquisarPaciente.Size = new System.Drawing.Size(162, 35);
-            this.btnPesquisarPaciente.TabIndex = 8;
-            this.btnPesquisarPaciente.Text = "Pesquisar Paciente";
-            this.btnPesquisarPaciente.UseVisualStyleBackColor = true;
-            this.btnPesquisarPaciente.Click += new System.EventHandler(this.btnPesquisarPaciente_Click);
-            // 
             // btnPesquisarMedico
             // 
             this.btnPesquisarMedico.Location = new System.Drawing.Point(250, 12);
@@ -465,6 +457,17 @@
             this.btnPesquisarMedico.UseVisualStyleBackColor = true;
             this.btnPesquisarMedico.Click += new System.EventHandler(this.btnPesquisarMedico_Click);
             // 
+            // btnPesquisarPaciente
+            // 
+            this.btnPesquisarPaciente.Location = new System.Drawing.Point(40, 12);
+            this.btnPesquisarPaciente.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPesquisarPaciente.Name = "btnPesquisarPaciente";
+            this.btnPesquisarPaciente.Size = new System.Drawing.Size(162, 35);
+            this.btnPesquisarPaciente.TabIndex = 8;
+            this.btnPesquisarPaciente.Text = "Pesquisar Paciente";
+            this.btnPesquisarPaciente.UseVisualStyleBackColor = true;
+            this.btnPesquisarPaciente.Click += new System.EventHandler(this.btnPesquisarPaciente_Click);
+            // 
             // FrmAgendamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -473,7 +476,7 @@
             this.ClientSize = new System.Drawing.Size(999, 571);
             this.Controls.Add(this.pnPesquisaPessoas);
             this.Controls.Add(this.cbConvenio);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lbConvenio);
             this.Controls.Add(this.cbTipoConsulta);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cbHorario);
@@ -542,7 +545,7 @@
         public System.Windows.Forms.ComboBox cbTipoConsulta;
         private System.Windows.Forms.Label label7;
         public System.Windows.Forms.ComboBox cbConvenio;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lbConvenio;
         private System.Windows.Forms.Panel pnPesquisaPessoas;
         private System.Windows.Forms.Button btnPesquisarMedico;
         private System.Windows.Forms.Button btnPesquisarPaciente;

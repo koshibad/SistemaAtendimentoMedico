@@ -35,6 +35,7 @@ namespace SistemaAtendimentoMedico.View
             Util.lstPacientes = FrmPaciente.PacienteDao.Select(null);
             Util.lstEspecialidades = FrmEspecialidade.EspecialidadeDao.Select(null);
             Util.lstMedicos = FrmMedico.MedicoDao.Select(null);
+            Util.lstConvenios = FrmConvenio.ConvenioDao.Select(null);
         }
 
         private void InitializeTabPages()
@@ -163,9 +164,9 @@ namespace SistemaAtendimentoMedico.View
 
                     if (tabPage == tpConvenio)
                     {
-                        FrmConvenio.lstConvenios = FrmConvenio.ConvenioDao.Select(null);
+                        Util.lstConvenios = FrmConvenio.ConvenioDao.Select(null);
                         FrmConvenio.dgResultado.DataSource = null;
-                        FrmConvenio.dgResultado.DataSource = FrmConvenio.lstConvenios;
+                        FrmConvenio.dgResultado.DataSource = Util.lstConvenios;
                         FrmConvenio.formOnEndTask();
                     }
                     else if (tabPage == tpEspecialidade)
@@ -177,12 +178,12 @@ namespace SistemaAtendimentoMedico.View
                     }
                     else if (tabPage == tpMedico)
                     {
-                        //TODO: mascara IDEspecialidade
                         Util.lstMedicos = FrmMedico.MedicoDao.Select(null);
+                        Util.SetComboBox(FrmMedico.cbEspecialidade, FrmEspecialidade
+                           .EspecialidadeDao.Select(null));
                         FrmMedico.dgResultado.DataSource = null;
                         FrmMedico.dgResultado.DataSource = Util.lstMedicos;
-                        Util.SetComboBox(FrmMedico.cbEspecialidade, FrmEspecialidade
-                            .EspecialidadeDao.Select(null));
+
                         FrmMedico.formOnEndTask();
                     }
                     else if (tabPage == tpPaciente)
@@ -203,6 +204,13 @@ namespace SistemaAtendimentoMedico.View
                         Util.SetComboBox(FrmMaterial.cbCategoria, FrmMaterial.MaterialDao.SelectCategoria(null));
                         Util.SetComboBox(FrmMaterial.cbFabricante, FrmMaterial.MaterialDao.SelectFabricante(null));
                         FrmMaterial.formOnEndTask();
+                    }
+                    else if (tabPage == tpAgendamento)
+                    {
+                        FrmAgendamento.lstAgendamentos = FrmAgendamento.AgendamentoDao.Select(null);
+                        FrmAgendamento.dgResultado.DataSource = null;
+                        FrmAgendamento.dgResultado.DataSource = FrmAgendamento.lstAgendamentos;
+                        FrmAgendamento.formOnEndTask();
                     }
                 }
             }

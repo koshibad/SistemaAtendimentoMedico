@@ -483,7 +483,6 @@
             this.dgResultado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgResultado.Size = new System.Drawing.Size(972, 160);
             this.dgResultado.TabIndex = 58;
-            this.dgResultado.DataSourceChanged += new System.EventHandler(this.dgResultado_DataSourceChanged);
             this.dgResultado.CurrentCellChanged += new System.EventHandler(this.dgResultado_CurrentCellChanged);
             // 
             // txtDataNasc

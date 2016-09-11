@@ -103,7 +103,7 @@ namespace SistemaAtendimentoMedico.View
                 Util.lstEspecialidades.RemoveAt(index);
                 EspecialidadeDao.Delete(Especialidade.ID.ToString());
 
-                MessageBox.Show(this, "Especialidade incluido com sucesso", "Especialidade");
+                MessageBox.Show(this, "Especialidade excluida com sucesso", "Especialidade");
 
                 dgResultado.DataSource = Util.lstEspecialidades;
                 formOnEndTask();

@@ -31,7 +31,7 @@ namespace SistemaAtendimentoMedico.View
                 x.Nome.Contains(txtPesquisaNome.Text.Trim()) &&
                 x.CPF.Contains(txtPesquisaCpf.Text.Trim()) &&
                 x.CRM.Contains(txtPesquisaCrm.Text.Trim()) &&
-                x.Especialidade.Contains(txtPesquisaEspecialidade.Text.Trim())
+                x.NomeEspecialidade.Contains(txtPesquisaEspecialidade.Text.Trim())
                 ).ToList();
         }
 

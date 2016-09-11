@@ -24,10 +24,16 @@ namespace SistemaAtendimentoMedico.View
         {
             InitializeComponent();
 
-            dtpData.MinDate = DateTime.Now;
             cbTipoConsulta.DataSource = null;
-            cbTipoConsulta.DataSource = new List<string>() { "Convenio", "Particular" };
+            cbTipoConsulta.DataSource = setComboBoxEnumString().ToList();
+            cbTipoConsulta.SelectedIndex = -1;
             AgendamentoDao = new AgendamentoDao();
+        }
+
+        private IEnumerable<string> setComboBoxEnumString()
+        {
+            foreach (var item in Enum.GetNames(typeof(Agendamento.eTipoConsulta)))
+                yield return item.ToString();
         }
 
         private void visibilityMainButtons(bool visible)
@@ -46,7 +52,7 @@ namespace SistemaAtendimentoMedico.View
             pnPesquisaPessoas.Visible = !enabled;
         }
 
-        private void formOnEndTask()
+        public void formOnEndTask()
         {
             visibilityMainButtons(true);
             enableSearchComponents(true);
@@ -54,6 +60,7 @@ namespace SistemaAtendimentoMedico.View
             tbSalvar.Visible = false;
             tbCancelar.Visible = false;
             EnableComponentsEditables(false);
+            dtpData.MinDate = DateTimePicker.MinimumDateTime;
         }
 
         private void EnableComponentsEditables(bool enabled)
@@ -72,6 +79,9 @@ namespace SistemaAtendimentoMedico.View
             tbCancelar.Visible = true;
             Util.ClearAllControls(this);
             EnableComponentsEditables(true);
+            pacienteSelecionado = null;
+            medicoSelecionado = null;
+            dtpData.MinDate = DateTime.Now;
         }
 
         private void tbAlterar_Click(object sender, System.EventArgs e)
@@ -114,13 +124,13 @@ namespace SistemaAtendimentoMedico.View
 
             try
             {
+                dgResultado.DataSource = null;
                 int index = lstAgendamentos.IndexOf(Agendamento);
                 lstAgendamentos.RemoveAt(index);
                 AgendamentoDao.Delete(Agendamento.ID.ToString());
 
-                MessageBox.Show(this, "Agendamento incluido com sucesso", "Agendamento");
+                MessageBox.Show(this, "Agendamento excluido com sucesso", "Agendamento");
 
-                dgResultado.DataSource = null;
                 dgResultado.DataSource = lstAgendamentos;
                 formOnEndTask();
             }
@@ -134,8 +144,24 @@ namespace SistemaAtendimentoMedico.View
         {
             try
             {
-                Agendamento.CPF = txtCpfPaciente.Text.ValidarTextoVazio("CPF");
-                Agendamento.Nome = txtNomePaciente.Text.ValidarTextoVazio("Nome");
+                if (pacienteSelecionado == null)
+                    throw new Exception("Selecione um paciente");
+                if (medicoSelecionado == null)
+                    throw new Exception("Selecione um medico");
+
+                Agendamento.IDPaciente = pacienteSelecionado.ID;
+                Agendamento.IDMedico = medicoSelecionado.ID;
+
+                Agendamento.DataConsulta = dtpData.Value.Date;
+                var dt = Convert.ToDateTime(cbHorario.SelectedValue);
+                var time = new TimeSpan(dt.Hour, dt.Minute, dt.Second);
+                Agendamento.DataConsulta += time;
+
+                if (cbTipoConsulta.SelectedIndex < 0) throw new Exception("Selecione um Tipo de Consulta");
+                Agendamento.IDTipoConsulta = cbTipoConsulta.SelectedIndex;
+                Agendamento.IDConvenio = 0;
+                if (cbConvenio.Visible)
+                    Agendamento.IDConvenio = cbConvenio.ValidarItemSelecionado("Convenio");
             }
             catch (Exception)
             {
@@ -150,15 +176,17 @@ namespace SistemaAtendimentoMedico.View
                 var Agendamento = new Agendamento();
                 validationInsertUpdate(Agendamento);
 
-                if (AgendamentoDao.Select(new List<Tuple<string, object, string>>()
-                    { new Tuple<string, object, string>("CPF", Agendamento.CPF, "=") }).Count > 0)
-                    throw new Exception("Já existe Agendamento com o CPF informado");
+                if (AgendamentoDao.Select(new List<Tuple<string, object, string>>() {
+                    new Tuple<string, object, string>("IDMedico", Agendamento.IDMedico, "="),
+                    new Tuple<string, object, string>("DataConsulta", Agendamento.DataConsulta, "=")
+                    }).Count > 0)
+                    throw new Exception("Já existe Agendamento no horario informado com o Medico selecionado");
 
                 AgendamentoDao.Insert(Agendamento);
-                lstAgendamentos.Add(Agendamento);
 
                 MessageBox.Show(this, "Agendamento incluido com sucesso", "Agendamento");
 
+                lstAgendamentos = AgendamentoDao.Select(null);
                 dgResultado.DataSource = null;
                 dgResultado.DataSource = lstAgendamentos;
                 formOnEndTask();
@@ -178,18 +206,19 @@ namespace SistemaAtendimentoMedico.View
                 validationInsertUpdate(Agendamento);
 
                 if (AgendamentoDao.Select(new List<Tuple<string, object, string>>(){
-                    new Tuple<string, object, string>("CPF", Agendamento.CPF, "="),
+                    new Tuple<string, object, string>("IDMedico", Agendamento.IDMedico, "="),
+                    new Tuple<string, object, string>("DataConsulta", Agendamento.DataConsulta, "="),
                     new Tuple<string, object, string>("ID",Agendamento.ID,"<>")
                     }).Count > 0)
-                    throw new Exception("Já existe Agendamento com o CPF informado");
+                    throw new Exception("Já existe Agendamento no horario informado com o Medico selecionado");
 
+                dgResultado.DataSource = null;
                 lstAgendamentos.RemoveAt(index);
                 AgendamentoDao.Update(Agendamento);
                 lstAgendamentos.Add(Agendamento);
                 lstAgendamentos = lstAgendamentos.OrderBy(x => x.ID).ToList();
-                MessageBox.Show(this, "Agendamento incluido com sucesso", "Agendamento");
+                MessageBox.Show(this, "Agendamento alterado com sucesso", "Agendamento");
 
-                dgResultado.DataSource = null;
                 dgResultado.DataSource = lstAgendamentos;
                 formOnEndTask();
             }
@@ -202,12 +231,6 @@ namespace SistemaAtendimentoMedico.View
         private void onlyNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar))
-                e.Handled = true;
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
                 e.Handled = true;
         }
 
@@ -224,8 +247,16 @@ namespace SistemaAtendimentoMedico.View
                 var Agendamento = dgResultado.CurrentRow.DataBoundItem as Agendamento;
                 if (Agendamento == null) return;
 
-                txtCpfPaciente.Text = Agendamento.CPF;
-                txtNomePaciente.Text = Agendamento.Nome;
+                pacienteSelecionado = Agendamento.Paciente;
+                txtCpfPaciente.Text = Agendamento.Paciente.CPF;
+                txtNomePaciente.Text = Agendamento.NomePaciente;
+                medicoSelecionado = Agendamento.Medico;
+                txtCrmMedico.Text = Agendamento.Medico.CRM;
+                txtEspecialidadeMedico.Text = Agendamento.Medico.Especialidade.Nome;
+                txtNomeMedico.Text = Agendamento.NomeMedico;
+                mostrarHorarioConsulta(Agendamento.DataConsulta);
+                cbTipoConsulta.SelectedIndex = Agendamento.IDTipoConsulta;
+                cbConvenio.SelectedValue = Agendamento.IDConvenio;
             }
             catch (Exception ex)
             {
@@ -233,12 +264,21 @@ namespace SistemaAtendimentoMedico.View
             }
         }
 
+        private void mostrarHorarioConsulta(DateTime dataConsulta)
+        {
+            dtpData.Value = dataConsulta;
+            cbHorario.DataSource = null;
+            cbHorario.DataSource = Util.TimeSpanFromMinutes(medicoSelecionado
+                .Especialidade.TempoConsulta).ToList();
+            cbHorario.SelectedItem = dataConsulta.ToString("HH:mm");
+        }
+
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             dgResultado.DataSource = null;
             dgResultado.DataSource = lstAgendamentos.Where(x =>
-                x.Nome.Contains(txtPesquisaNome.Text.Trim()) &&
-                x.CPF.Contains(txtPesquisaCpf.Text.Trim())).ToList();
+                x.NomePaciente.Contains(txtPesquisaNome.Text.Trim()) &&
+                x.Paciente.CPF.Contains(txtPesquisaCpf.Text.Trim())).ToList();
         }
 
         private void dgResultado_DataSourceChanged(object sender, EventArgs e)
@@ -267,8 +307,26 @@ namespace SistemaAtendimentoMedico.View
             if (medicoSelecionado != null)
             {
                 txtCrmMedico.Text = medicoSelecionado.CRM;
-                txtEspecialidadeMedico.Text = medicoSelecionado.Especialidade;
+                txtEspecialidadeMedico.Text = medicoSelecionado.NomeEspecialidade;
                 txtNomeMedico.Text = medicoSelecionado.Nome;
+                cbHorario.DataSource = null;
+                cbHorario.DataSource = Util.TimeSpanFromMinutes(medicoSelecionado
+                    .Especialidade.TempoConsulta).ToList();
+            }
+        }
+
+        private void cbTipoConsulta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = cbTipoConsulta.SelectedIndex;
+            if (index < 0) return;
+            cbConvenio.DataSource = null;
+
+            if (index == (int)Agendamento.eTipoConsulta.Particular)
+                lbConvenio.Visible = cbConvenio.Visible = false;
+            else
+            {
+                lbConvenio.Visible = cbConvenio.Visible = true;
+                Util.SetComboBox(cbConvenio, Util.lstConvenios, "NomeFantasia");
             }
         }
     }

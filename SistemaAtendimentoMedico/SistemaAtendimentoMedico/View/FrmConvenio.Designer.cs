@@ -269,6 +269,7 @@
             this.txtRegistroAns.Name = "txtRegistroAns";
             this.txtRegistroAns.Size = new System.Drawing.Size(200, 22);
             this.txtRegistroAns.TabIndex = 1;
+            this.txtRegistroAns.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onlyNumber_KeyPress);
             // 
             // label2
             // 

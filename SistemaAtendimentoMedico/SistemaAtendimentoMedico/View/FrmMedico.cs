@@ -102,7 +102,7 @@ namespace SistemaAtendimentoMedico.View
                 Util.lstMedicos.RemoveAt(index);
                 MedicoDao.Delete(Medico.ID.ToString());
 
-                MessageBox.Show(this, "Medico incluido com sucesso", "Medico");
+                MessageBox.Show(this, "Medico excluido com sucesso", "Medico");
 
                 dgResultado.DataSource = Util.lstMedicos;
                 formOnEndTask();
@@ -254,12 +254,6 @@ namespace SistemaAtendimentoMedico.View
             dgResultado.DataSource = Util.lstMedicos.Where(x =>
                 x.Nome.Contains(txtPesquisaNome.Text.Trim()) &&
                 x.CPF.Contains(txtPesquisaCpf.Text.Trim())).ToList();
-        }
-
-        private void dgResultado_DataSourceChanged(object sender, EventArgs e)
-        {
-            if (dgResultado.DataSource != null && dgResultado.Columns.Count > 0)
-                dgResultado.Columns[0].Visible = false;
         }
     }
 }

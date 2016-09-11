@@ -220,6 +220,7 @@
             this.dgResultado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgResultado.BackgroundColor = System.Drawing.Color.White;
             this.dgResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgResultado.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgResultado.Location = new System.Drawing.Point(12, 393);
             this.dgResultado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgResultado.MultiSelect = false;
@@ -229,7 +230,6 @@
             this.dgResultado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgResultado.Size = new System.Drawing.Size(972, 160);
             this.dgResultado.TabIndex = 58;
-            this.dgResultado.DataSourceChanged += new System.EventHandler(this.dgResultado_DataSourceChanged);
             this.dgResultado.CurrentCellChanged += new System.EventHandler(this.dgResultado_CurrentCellChanged);
             // 
             // cbCategoria

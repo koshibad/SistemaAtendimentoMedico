@@ -97,7 +97,7 @@ namespace SistemaAtendimentoMedico.View
                 Util.lstPacientes.RemoveAt(index);
                 PacienteDao.Delete(paciente.ID.ToString());
 
-                MessageBox.Show(this, "Paciente incluido com sucesso", "Paciente");
+                MessageBox.Show(this, "Paciente excluido com sucesso", "Paciente");
 
                 dgResultado.DataSource = Util.lstPacientes;
                 formOnEndTask();
@@ -194,12 +194,6 @@ namespace SistemaAtendimentoMedico.View
                 e.Handled = true;
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
-                e.Handled = true;
-        }
-
         private void dgResultado_CurrentCellChanged(object sender, EventArgs e)
         {
             try
@@ -239,12 +233,6 @@ namespace SistemaAtendimentoMedico.View
             dgResultado.DataSource = Util.lstPacientes.Where(x =>
                 x.Nome.Contains(txtPesquisaNome.Text.Trim()) &&
                 x.CPF.Contains(txtPesquisaCpf.Text.Trim())).ToList();
-        }
-
-        private void dgResultado_DataSourceChanged(object sender, EventArgs e)
-        {
-            if (dgResultado.DataSource != null && dgResultado.Columns.Count > 0)
-                dgResultado.Columns[0].Visible = false;
         }
     }
 }
