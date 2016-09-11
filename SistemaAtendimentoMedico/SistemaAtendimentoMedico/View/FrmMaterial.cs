@@ -150,7 +150,7 @@ namespace SistemaAtendimentoMedico.View
 
                 dgResultado.DataSource = null;
                 dgResultado.DataSource = Util.lstMateriais;
-                formOnEndTask();
+                tbCancelar_Click(null, null);
             }
             catch (Exception ex)
             {
@@ -181,7 +181,7 @@ namespace SistemaAtendimentoMedico.View
 
                 dgResultado.DataSource = null;
                 dgResultado.DataSource = Util.lstMateriais;
-                formOnEndTask();
+                tbCancelar_Click(null, null);
             }
             catch (Exception ex)
             {

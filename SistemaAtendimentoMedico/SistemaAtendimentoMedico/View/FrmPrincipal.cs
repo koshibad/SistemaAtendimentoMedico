@@ -39,6 +39,7 @@ namespace SistemaAtendimentoMedico.View
             Util.lstAgendamentos = FrmAgendamento.AgendamentoDao.Select(null);
             Util.lstFabricante = FrmMaterial.MaterialDao.SelectFabricante(null);
             Util.lstMateriais = FrmMaterial.MaterialDao.Select(null);
+            Util.lstAtendimentos = FrmAtendimento.AtendimentoDao.Select(null);
         }
 
         private void InitializeTabPages()
@@ -219,11 +220,10 @@ namespace SistemaAtendimentoMedico.View
                     }
                     else if (tabPage == tpAtendimento)
                     {
-                        FrmAtendimento.lstAtendimentos = FrmAtendimento.AtendimentoDao.Select(null);
-                        FrmAtendimento.lstAtendimentos = FrmAtendimento.lstAtendimentos
-                            .Where(x => x.Agendamento != null).ToList();
+                        Util.lstAtendimentos = FrmAtendimento.AtendimentoDao.Select(null);
+                        Util.lstAtendimentos = Util.lstAtendimentos.Where(x => x.Agendamento != null).ToList();
                         FrmAtendimento.dgResultado.DataSource = null;
-                        FrmAtendimento.dgResultado.DataSource = FrmAtendimento.lstAtendimentos;
+                        FrmAtendimento.dgResultado.DataSource = Util.lstAtendimentos;
                         FrmAtendimento.formOnEndTask();
                         FrmAtendimento.lbTodosMateriais.Items.Clear();
                         foreach (var item in Util.lstMateriais)

@@ -16,7 +16,6 @@ namespace SistemaAtendimentoMedico.View
     public partial class FrmAtendimento : Form
     {
         private List<AtendimentoMaterial> lstMateriaisUtilizados = null;
-        public List<Atendimento> lstAtendimentos = null;
         public AtendimentoDao AtendimentoDao = null;
         public AtendimentoMaterialDao AtendimentoMaterialDao = null;
         private int IDAtend = 0;
@@ -103,21 +102,21 @@ namespace SistemaAtendimentoMedico.View
             try
             {
                 var Atendimento = (Atendimento)dgResultado.CurrentRow.DataBoundItem;
-                int index = lstAtendimentos.IndexOf(Atendimento);
+                int index = Util.lstAtendimentos.IndexOf(Atendimento);
                 validationInsertUpdate(Atendimento);
 
                 dgResultado.DataSource = null;
-                lstAtendimentos.RemoveAt(index);
+                Util.lstAtendimentos.RemoveAt(index);
                 AtendimentoDao.Update(Atendimento);
 
                 insertUpdateDeleteAtendimentoMaterial();
 
                 Atendimento.ID = Atendimento.ID;
-                lstAtendimentos.Add(Atendimento);
-                lstAtendimentos = lstAtendimentos.OrderBy(x => x.ID).ToList();
+                Util.lstAtendimentos.Add(Atendimento);
+                Util.lstAtendimentos = Util.lstAtendimentos.OrderBy(x => x.ID).ToList();
                 MessageBox.Show(this, "Atendimento alterado com sucesso", "Atendimento");
 
-                dgResultado.DataSource = lstAtendimentos;
+                dgResultado.DataSource = Util.lstAtendimentos;
                 formOnEndTask();
             }
             catch (Exception ex)
@@ -184,7 +183,7 @@ namespace SistemaAtendimentoMedico.View
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             dgResultado.DataSource = null;
-            dgResultado.DataSource = lstAtendimentos.Where(x =>
+            dgResultado.DataSource = Util.lstAtendimentos.Where(x =>
                 x.NomePaciente.Contains(txtPesquisaNome.Text.Trim()) &&
                 x.CpfPaciente.Contains(txtPesquisaCpf.Text.Trim())).ToList();
         }
@@ -211,7 +210,6 @@ namespace SistemaAtendimentoMedico.View
             {
                 double qtd = txtQtdeMaterial.Text.ValidarDecimal();
                 if (qtd <= 0) throw new Exception("Digite um número maior que 0 (zero)");
-                Material material = null;
 
                 switch (operation)
                 {
@@ -219,7 +217,7 @@ namespace SistemaAtendimentoMedico.View
                         if (lbTodosMateriais.SelectedItem == null)
                             throw new Exception("Selecione um item da lista esquerda");
 
-                        material = lbTodosMateriais.SelectedItem as Material;
+                         Material material = lbTodosMateriais.SelectedItem as Material;
                         if (material == null) return;
                         var materialUtilizado = lstMateriaisUtilizados.FirstOrDefault(
                             x => x.IDMaterial == material.ID);
@@ -229,12 +227,12 @@ namespace SistemaAtendimentoMedico.View
                             lstMateriaisUtilizados.Add(new AtendimentoMaterial(IDAtend, material.ID, qtd));
                         break;
                     case '-':
-                        if (lbTodosMateriais.SelectedItem == null)
+                        if (lbMateriaisUtilizados.SelectedItem == null)
                             throw new Exception("Selecione um item da lista direita");
-                        material = lbTodosMateriais.SelectedItem as Material;
-                        if (material == null) return;
+                        AtendimentoMaterial atendMaterial = lbMateriaisUtilizados.SelectedItem as AtendimentoMaterial;
+                        if (atendMaterial == null) return;
                         var materialRemover = lstMateriaisUtilizados.FirstOrDefault(
-                            x => x.IDMaterial == material.ID);
+                            x => x.IDMaterial == atendMaterial.IDMaterial);
                         if (materialRemover != null)
                         {
                             materialRemover.Quantidade -= qtd;

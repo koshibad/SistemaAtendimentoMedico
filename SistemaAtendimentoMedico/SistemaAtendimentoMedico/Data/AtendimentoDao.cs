@@ -24,6 +24,22 @@ namespace SistemaAtendimentoMedico.Data
             finally { CloseConnection(); }
         }
 
+        public void Delete(Tuple<string, object> field)
+        {
+            try
+            {
+                OpenConnection();
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = "DELETE FROM Atendimento WHERE "
+                    + field.Item1 + "=@" + field.Item1;
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@" + field.Item1, field.Item2);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception) { throw; }
+            finally { CloseConnection(); }
+        }
+
         public override void Insert(Atendimento Atendimento)
         {
             try

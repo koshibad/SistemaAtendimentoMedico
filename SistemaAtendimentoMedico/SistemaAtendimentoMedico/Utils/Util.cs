@@ -18,6 +18,7 @@ namespace SistemaAtendimentoMedico.Utils
         public static List<Agendamento> lstAgendamentos = null;
         public static List<Fabricante> lstFabricante = null;
         public static List<Material> lstMateriais = null;
+        public static List<Atendimento> lstAtendimentos = null;
 
         public static void ClearAllControls(Form form)
         {

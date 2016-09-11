@@ -19,6 +19,8 @@ namespace SistemaAtendimentoMedico.Data
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@ID", ID);
                 cmd.ExecuteNonQuery();
+
+                new AtendimentoDao().Delete(new Tuple<string, object>("IDAgendamento", ID));
             }
             catch (Exception) { throw; }
             finally { CloseConnection(); }
